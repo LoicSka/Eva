@@ -1,0 +1,10 @@
+@mixin box-shadow {
+  -webkit-box-shadow: 0px 2px 0px 0px rgba(78,91,107,0.24);
+  -moz-box-shadow: 0px 2px 0px 0px rgba(78,91,107,0.24);
+  box-shadow: 0px 2px 0px 0px rgba(78,91,107,0.24);
+}
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}

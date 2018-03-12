@@ -1,0 +1,24 @@
+/*------------------------------------------
+                Fonts
+-------------------------------------------*/
+
+@font-face {
+	font-family: 'gotham-rounded-regular';
+	src: local('☺'), url('./fonts/GothamRoundedBook.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'gotham-rounded-bold';
+	font-weight: bold;
+	src: local('☺'), url('./fonts/GothamRoundedBold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'gotham-rounded-medium';
+	font-weight: medium;
+	src: local('☺'), url('./fonts/GothamRoundedMedium.ttf') format('truetype'); 
+}
+
+$gotham-round-med:       'gotham-rounded-medium',sans-serif;
+$gotham-round-reg:       'gotham-rounded-regular';
+$gotham-round-bold:      'gotham-rounded-bold', sans-serif;

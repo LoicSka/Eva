@@ -1,0 +1,61 @@
+/*===============================================
+                    EVA'S MOM
+ ===============================================*/
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/images";
+@import "node_modules/bootstrap/scss/code";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/buttons";
+@import "node_modules/bootstrap/scss/button-group";
+@import "node_modules/bootstrap/scss/input-group";
+@import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/utilities";
+/*------------------------------------------------*/
+@import 'partials/variables';
+@import 'layouts/fonts';
+@import 'modules/mixins';
+/*-------------------------------------------------
+                Colors
+---------------------------------------------------*/
+$primary:       $purple;
+$secondary:     $mate-dark-gray;
+$success:       $leaf-green;
+$danger:        $alizarin;
+$body-bg:       $purple-white;
+/*-------------------------------------------------
+                Fonts
+--------------------------------------------------*/
+$font-family-sans-serif: $gotham-round-reg;
+$font-family-monospace: $gotham-round-reg;
+$font-family-base: $gotham-round-reg;
+$headings-font-family: $gotham-round-med;
+
+body {
+  background: lighten($color: $mate-dark-gray, $amount: 60%);
+  font-family: $gotham-round-reg;
+  h2, h1, h3 {
+    color: $mate-dark-gray;
+  }
+}
+
+.panel-ctn {
+  height: 100vh;
+  background-color: $primary;
+}
+.panel {
+  background-color: white;
+  border-radius: $border-radius;
+  padding: 35px;
+  @include box-shadow;
+  h2 {
+    font-family: $gotham-round-med;
+    font-size: calculateRem(25px);
+    width: 100%;
+    text-align: center;
+  }
+}
+
