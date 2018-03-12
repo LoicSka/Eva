@@ -6,9 +6,23 @@ import configureStore from './store/configureStore'
 import { setCurrentUser } from'./actions'
 import jwtDecode from 'jwt-decode'
 import './styles/styles.css'
+import { initialize } from 'react-localize-redux';
+import { addTranslation } from 'react-localize-redux';
+
+const languages = [
+  { name: 'English', code: 'en' },
+  { name: 'Chinese', code: 'cn' }
+];
+
+const locales = require('./locales/global.json')
 
 const store = configureStore()
 
+// localization
+store.dispatch(initialize(languages, { defaultLanguage: 'cn' }))
+store.dispatch(addTranslation(locales))
+
+// authorization
 if (localStorage.jwtToken) {
   store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
 }

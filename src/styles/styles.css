@@ -3930,6 +3930,14 @@ a.text-dark:hover, a.text-dark:focus {
   font-weight: medium;
   src: local("☺"), url("./fonts/GothamRoundedMedium.ttf") format("truetype"); }
 
+@font-face {
+  font-family: 'reiji-cloud';
+  src: local("☺"), url("./fonts/ReijiCloud.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'jia-li-zhong';
+  src: local("☺"), url("./fonts/JiaLiZhong.ttf") format("truetype"); }
+
 /*-------------------------------------------------
                 Colors
 ---------------------------------------------------*/
@@ -3940,7 +3948,14 @@ body {
   background: #f4f5f7;
   font-family: "gotham-rounded-regular"; }
   body h2, body h1, body h3 {
-    color: #4E5B6B; }
+    color: #4E5B6B;
+    font-family: "gotham-rounded-bold", sans-serif; }
+
+.cn h2, .cn h1, .cn h3 {
+  font-family: "reiji-cloud", sans-serif; }
+
+.cn p, .cn a {
+  font-family: "jia-li-zhong", sans-serif; }
 
 .panel-ctn {
   height: 100vh;
@@ -3948,13 +3963,12 @@ body {
 
 .panel {
   background-color: white;
-  border-radius: 4px;
   padding: 35px;
-  -webkit-box-shadow: 0px 2px 0px 0px rgba(78, 91, 107, 0.24);
-  -moz-box-shadow: 0px 2px 0px 0px rgba(78, 91, 107, 0.24);
-  box-shadow: 0px 2px 0px 0px rgba(78, 91, 107, 0.24); }
+  -webkit-box-shadow: 0px 3px 0px 0px rgba(78, 91, 107, 0.24);
+  -moz-box-shadow: 0px 3px 0px 0px rgba(78, 91, 107, 0.24);
+  box-shadow: 0px 3px 0px 0px rgba(78, 91, 107, 0.24);
+  border-radius: 5px; }
   .panel h2 {
-    font-family: "gotham-rounded-medium", sans-serif;
-    font-size: 1.5625rem;
+    font-size: 1.5rem;
     width: 100%;
     text-align: center; }

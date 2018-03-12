@@ -2,6 +2,7 @@ import * as ActionTypes from '../actions'
 import merge from 'lodash/merge'
 // import paginate from './paginate'
 import auth from './authenticate'
+import { localeReducer } from 'react-localize-redux'
 
 import { combineReducers } from 'redux'
 
@@ -39,7 +40,7 @@ const errorMessage = (state = null, action) => {
 const rootReducer = combineReducers({
   auth,
   entities,
-  // pagination,
+  locale: localeReducer,
   errorMessage,
 })
 

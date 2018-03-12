@@ -19,6 +19,18 @@
 	src: local('☺'), url('./fonts/GothamRoundedMedium.ttf') format('truetype'); 
 }
 
+@font-face {
+	font-family: 'reiji-cloud';
+	src: local('☺'), url('./fonts/ReijiCloud.ttf') format('truetype'); 
+}
+
+@font-face {
+	font-family: 'jia-li-zhong';
+	src: local('☺'), url('./fonts/JiaLiZhong.ttf') format('truetype'); 
+}
+
+$reiji:									 'reiji-cloud', sans-serif;
+$jiali:					 				 'jia-li-zhong', sans-serif;
 $gotham-round-med:       'gotham-rounded-medium',sans-serif;
 $gotham-round-reg:       'gotham-rounded-regular';
 $gotham-round-bold:      'gotham-rounded-bold', sans-serif;

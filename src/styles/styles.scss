@@ -39,6 +39,16 @@ body {
   font-family: $gotham-round-reg;
   h2, h1, h3 {
     color: $mate-dark-gray;
+    font-family: $gotham-round-bold;
+  }
+}
+
+.cn {
+  h2, h1, h3 {
+    font-family: $reiji;
+  }
+  p, a {
+    font-family: $jiali;
   }
 }
 
@@ -48,12 +58,11 @@ body {
 }
 .panel {
   background-color: white;
-  border-radius: $border-radius;
   padding: 35px;
   @include box-shadow;
+  @include border-radius;
   h2 {
-    font-family: $gotham-round-med;
-    font-size: calculateRem(25px);
+    font-size: calculateRem(24px);
     width: 100%;
     text-align: center;
   }
