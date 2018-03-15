@@ -1,45 +1,181 @@
-/*===============================================
-                    EVA'S MOM
- ===============================================*/
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-@import "node_modules/bootstrap/scss/mixins";
-@import "node_modules/bootstrap/scss/reboot";
-@import "node_modules/bootstrap/scss/type";
-@import "node_modules/bootstrap/scss/images";
-@import "node_modules/bootstrap/scss/code";
-@import "node_modules/bootstrap/scss/grid";
-@import "node_modules/bootstrap/scss/buttons";
-@import "node_modules/bootstrap/scss/button-group";
-@import "node_modules/bootstrap/scss/input-group";
-@import "node_modules/bootstrap/scss/forms";
-@import "node_modules/bootstrap/scss/utilities";
-/*------------------------------------------------*/
-@import 'partials/variables';
-@import 'layouts/fonts';
+@import 'custom.scss';
 @import 'modules/mixins';
-/*-------------------------------------------------
-                Colors
----------------------------------------------------*/
-$primary:       $purple;
-$secondary:     $mate-dark-gray;
-$success:       $leaf-green;
-$danger:        $alizarin;
-$body-bg:       $purple-white;
-/*-------------------------------------------------
-                Fonts
---------------------------------------------------*/
-$font-family-sans-serif: $gotham-round-reg;
-$font-family-monospace: $gotham-round-reg;
-$font-family-base: $gotham-round-reg;
-$headings-font-family: $gotham-round-med;
 
 body {
-  background: lighten($color: $mate-dark-gray, $amount: 60%);
+  background: lighten($color: $secondary, $amount: 60%);
   font-family: $gotham-round-reg;
+  overflow-x: hidden !important;
+
   h2, h1, h3 {
-    color: $mate-dark-gray;
+    color: $secondary;
     font-family: $gotham-round-bold;
+  }
+
+  a, p {
+    font-family: $gotham-round-reg;
+  }
+
+  label {
+    font-family: $gotham-round-med;
+    font-size: calculateRem(15px);
+  }
+
+  button {
+    font-family: $gotham-round-reg;
+  }
+
+  .btn-success {
+    @include box-shadow-colored($success);
+    color: white;
+    &:active, &:hover {
+      @include box-shadow-colored(darken($success, 8%));
+      outline: none !important;
+    }
+  }
+
+  .btn-primary {
+    @include box-shadow-colored($primary);
+    color: white;
+    &:active, &:hover {
+      @include box-shadow-colored(darken($primary, 8%));
+      outline: none !important;
+    }
+  }
+
+  .btn-danger {
+    @include box-shadow-colored($danger);
+    color: white;
+    &:active, &:hover {
+      @include box-shadow-colored(darken($danger, 8%));
+      outline: none !important;
+    }
+  }
+
+  .btn-warning {
+    @include box-shadow-colored($warning);
+    color: white;
+    &:active, &:hover {
+      @include box-shadow-colored(darken($warning, 8%));
+      outline: none !important;
+    }
+  }
+
+}
+
+.secondary-container {
+  background-color: $primary;
+}
+
+.global-message-container {
+  position: fixed;
+  min-height: 50px;
+  padding: 20px;
+  width: 100%;
+  z-index: 100;
+  background: $success;
+  transition: $transition-fade;
+
+  &.error {
+    background-color: $danger;
+  }
+
+  &.success {
+    background-color: $success;
+  }
+
+  &.note {
+    background-color: white;
+    p, strong {
+      color: $success;
+    }
+  }
+
+  &.hidden {
+    opacity: 0;
+  }
+
+  &.shown {
+    opacity: 1;
+  }
+
+  &.success, &.error {
+    p, strong {
+      color: white;
+    }
+  }
+
+  strong {
+    font-family: $gotham-round-med;
+    font-size: calculateRem(17px);
+  }
+
+  @include media-breakpoint-up(md) {
+    p {
+      display: inline;
+    }
+  }
+
+  a.close-message {
+    float: right;
+    margin-top: 5px; 
+    background-image: url('./images/close.svg');
+    background-repeat: no-repeat;
+    color: transparent;
+    cursor: pointer;
+    &:hover {
+      color: transparent;
+    }
+  }
+}
+
+.panel-ctn {
+  margin-right: 0;
+  margin-left: 0;
+  height: 100vh;
+  background-color: $primary;
+}
+
+.panel {
+  background-color: white;
+  padding: 45px 20px 55px 20px;
+  @include box-shadow;
+  @include border-radius;
+  @include media-breakpoint-up(md) {
+    padding: 45px 35px 55px 35px;
+  }
+
+  h2 {
+    font-size: calculateRem(24px);
+    width: 100%;
+    text-align: center;
+    margin: 0 0 25px 0;
+  }
+
+  button[type="submit"] {
+    margin-top: 30px;
+    margin-bottom: 8px;
+  }
+  
+  form > span {
+    color: $accent;
+  }
+
+  span#terms, span#terms > a {
+    font-family: $gotham-round-light;
+    font-size: calulateRem(10px);
+  }
+}
+
+.form-group {
+  label {
+    margin: 0;
+  }
+
+  p.sub-label {
+    margin-bottom: 5px;
+    font-family: $gotham-round-light;
+    font-size: calculateRem(14px);
+    color: $accent;
   }
 }
 
@@ -47,24 +183,8 @@ body {
   h2, h1, h3 {
     font-family: $reiji;
   }
-  p, a {
+  span, p, a, label, button {
     font-family: $jiali;
-  }
-}
-
-.panel-ctn {
-  height: 100vh;
-  background-color: $primary;
-}
-.panel {
-  background-color: white;
-  padding: 35px;
-  @include box-shadow;
-  @include border-radius;
-  h2 {
-    font-size: calculateRem(24px);
-    width: 100%;
-    text-align: center;
   }
 }
 

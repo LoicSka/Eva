@@ -1,5 +1,5 @@
 import { normalize, schema } from 'normalizr'
-import { camelizeKeys, decamelizeKeys } from 'humps'
+import { camelizeKeys, decamelizeKeys, camelize } from 'humps'
 const queryString = require('query-string')
 
 const API_ROOT = 'http://localhost:3000/api/v1/'
@@ -16,7 +16,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
   let headers = new Headers()
   headers.append('Content-Type', 'application/json')
   if (localStorage.jwtToken) {
-    headers.append('Authorization', `Bearer ${localStorage.jwtToken}`);
+    headers.append('Authorization', `Bearer ${localStorage.jwtToken}`)
   }
   switch (method) {
     case 'POST':
@@ -28,12 +28,11 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
         headers
       }).then(response => response.json().then(json => {
         if (!response.ok) {
-          return Promise.reject(json)
+          return Promise.reject({message: 'server'})
         }
         if (json.status !== '22000') {
-          return Promise.reject({message: json.msg})
+          return Promise.reject({message: 'server'})
         }
-
         const camelizedJson = camelizeKeys(json.result)
         return Object.assign({},
           normalize(camelizedJson, schema)
@@ -41,7 +40,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
       }))
     default:
       if (data) {
-        let query = queryString.stringify(decamelizeKeys(data));
+        let query = queryString.stringify(decamelizeKeys(data))
         fullUrl = `${fullUrl}/?${query}`
       }
       return fetch(fullUrl, {
@@ -50,7 +49,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
       }).then(response =>
         response.json().then(json => {
           if (!response.ok) {
-            return Promise.reject(json)
+            return Promise.reject('server')
           }
 
           const camelizedJson = camelizeKeys(json.result)
@@ -135,7 +134,11 @@ export default store => next => action => {
     })),
     error => next(actionWith({
       type: failureType,
-      error: error.message || 'Something bad happened'
+      message: {
+        type: 'error',
+        title: 'errors.oops',
+        content: `errors.${camelize(error.message)}` || 'errors.badResponse'
+      }
     }))
   )
 }

@@ -1,4 +1,5 @@
 import { CALL_API, Schemas } from '../middleware/api'
+import { decamelizeKeys } from 'humps'
 
 export const USERS_REQUEST = 'USERS_REQUEST'
 export const USERS_SUCCESS = 'USERS_SUCCESS'
@@ -23,6 +24,24 @@ export const loadUsers = (pageNumber = null) => (dispatch, getState) => {
   dispatch(fetchUsers(nextPage))
 }
 
+export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
+export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE'
+
+const postSignUp = (signUpForm) => ({
+  [CALL_API]: {
+    types: [CREATE_USER_REQUEST, CREATE_USER_SUCCESS, CREATE_USER_FAILURE],
+    endpoint: 'users',
+    method: 'POST',
+    schema: Schemas.USER,
+    data: decamelizeKeys(signUpForm)
+  }
+})
+
+export const signUpUser = (signUpForm) => (dispatch, getState) => {
+  dispatch(postSignUp(signUpForm))
+}
+
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -34,10 +53,9 @@ const postLogin = (loginForm) => ({
     endpoint: 'login',
     method: 'POST',
     schema: Schemas.AUTH,
-    data: loginForm
+    data: decamelizeKeys(loginForm)
   }
 })
-
 
 export const loginUser = (loginForm) => (dispatch, getState) => {
   dispatch(postLogin(loginForm))
@@ -50,9 +68,9 @@ export function setCurrentUser(user) {
   };
 }
 
-export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE'
+export const RESET_MESSAGE = 'RESET_MESSAGE'
 
 // Resets the currently visible error message.
-export const resetErrorMessage = () => ({
-  type: RESET_ERROR_MESSAGE
+export const resetMessage = () => ({
+  type: RESET_MESSAGE
 })

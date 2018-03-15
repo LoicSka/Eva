@@ -4,5 +4,100 @@
       "Sign up and get started now!",
       "立即注册并开始使用!"
     ]
+  },
+  "userFields": {
+    "email": [
+      "Email",
+      "电子邮件"
+    ],
+    "firstName": [
+      "First name",
+      "名字"
+    ],
+    "lastName": [
+      "Last name",
+      "姓氏"
+    ],
+    "createPassword": [
+      "Create password",
+      "选择一个密码"
+    ],
+    "passwordDesc": [
+      "Passwords should be at least 6 characters long and should contain a mixture of letters, numbers, and other characters.",
+      "密码至少应为8个字符，并且应包含字母，数字和其他字符的混合。"
+    ]
+  },
+  "userActions": {
+    "signUp": [
+      "Sign up",
+      "注册。"
+    ],
+    "agreed": [
+      "Terms and Services.",
+      "条款和服务。"
+    ],
+    "terms": [
+      "Terms and Services.",
+      "条款和服务。"
+    ]
+  },
+  "navbar": {
+    "searchPlaceholder": [
+      "Search tutors",
+      "Search tutors"
+    ]
+  },
+  "errors": {
+    "server": [
+      "Something went horribly wrong.",
+      "Something went horribly wrong."
+    ],
+    "oops": [
+      "Oops",
+      "Oops"
+    ],
+    "failedToFetch": [
+      "Something went horribly wrong.",
+      "Something went horribly wrong."
+    ],
+    "badResponse": [
+      "Something Bad happened! try again.",
+      "Something Bad happened! try again."
+    ],
+    "user": {
+      "email": {
+        "invalid": [
+          "This doesn't look like an email.",
+          "错误的电子邮件。"
+        ],
+        "empty": [
+          "Please provide a valid email.",
+          "请提供有效的电子邮件。"
+        ]
+      },
+      "firstName": {
+        "empty": [
+          "Please provide a valid first name.",
+          "请提供有效的名字。"
+        ]
+      },
+      "lastName": {
+        "empty": [
+          "Please provide a valid last name.",
+          "请提供有效的姓氏。"
+        ]
+      }
+      ,
+      "password": {
+        "empty": [
+          "Please provide a valid password.",
+          "请提供有效的姓氏。"
+        ],
+        "invalid": [
+          "Your password needs to be at least 6 characters long.",
+          "您的密码至少需要6个字符。"
+        ]
+      }
+    }
   }
 }

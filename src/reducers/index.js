@@ -15,14 +15,14 @@ const entities = (state = { users: {}, tutorAccounts: {} }, action) => {
 }
 
 // Updates error message to notify about the failed fetches.
-const errorMessage = (state = null, action) => {
-  const { type, error } = action
-  if (type === ActionTypes.RESET_ERROR_MESSAGE) {
-    return null
-  } else if (error) {
-    return error
+const message = (state = null, action) => {
+  const { type, message } = action
+  if (type === ActionTypes.RESET_MESSAGE) {
+    return {}
+  } else if (message) {
+    return message
   }
-  return state
+  return {}
 }
 
 // Updates the pagination data for different actions.
@@ -41,7 +41,7 @@ const rootReducer = combineReducers({
   auth,
   entities,
   locale: localeReducer,
-  errorMessage,
+  message,
 })
 
 export default rootReducer

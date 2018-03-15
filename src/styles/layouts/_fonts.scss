@@ -4,6 +4,19 @@
 
 @font-face {
 	font-family: 'gotham-rounded-regular';
+	font-weight: normal;
+	src: local('☺'), url('./fonts/GothamRoundedBook.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'gotham-rounded-light';
+	font-weight: lighter;
+	src: local('☺'), url('./fonts/GothamRoundedLight.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'gotham-rounded-regular';
+	font-weight: regular;
 	src: local('☺'), url('./fonts/GothamRoundedBook.ttf') format('truetype');
 }
 
@@ -21,16 +34,19 @@
 
 @font-face {
 	font-family: 'reiji-cloud';
+	font-weight: normal;
 	src: local('☺'), url('./fonts/ReijiCloud.ttf') format('truetype'); 
 }
 
 @font-face {
 	font-family: 'jia-li-zhong';
+	font-weight: normal;
 	src: local('☺'), url('./fonts/JiaLiZhong.ttf') format('truetype'); 
 }
 
 $reiji:									 'reiji-cloud', sans-serif;
 $jiali:					 				 'jia-li-zhong', sans-serif;
 $gotham-round-med:       'gotham-rounded-medium',sans-serif;
-$gotham-round-reg:       'gotham-rounded-regular';
+$gotham-round-reg:       'gotham-rounded-regular',sans-serif;
 $gotham-round-bold:      'gotham-rounded-bold', sans-serif;
+$gotham-round-light:     'gotham-rounded-light', sans-serif;

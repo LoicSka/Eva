@@ -1,7 +1,13 @@
 @mixin box-shadow {
-  -webkit-box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24);
-  -moz-box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24);
-  box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24);
+  -webkit-box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24) !important;
+  -moz-box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24) !important;
+  box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24) !important;
+}
+
+@mixin box-shadow-colored($color) {
+  -webkit-box-shadow: 0px 3px 0px 0px darken($color, 7%) !important;
+  -moz-box-shadow: 0px 3px 0px 0px darken($color, 7%) !important;
+  box-shadow: 0px 3px 0px 0px darken($color, 7%) !important;
 }
 
 @mixin border-radius {

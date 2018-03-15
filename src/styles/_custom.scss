@@ -1,0 +1,88 @@
+/*------------------------------------------------*/
+@import 'partials/variables';
+@import 'layouts/fonts';
+
+/*-------------------------------------------------
+                Colors
+---------------------------------------------------*/
+$primary:       $purple;
+$secondary:     $mate-dark-gray;
+$accent:        $mate-light-gray;
+$success:       $leaf-green;
+$danger:        $alizarin;
+$body-bg:       $purple-white;
+$gray-600:      lighten($mate-dark-gray, 10%);
+$gray-700:      $mate-dark-gray;
+$gray-900:      $mate-dark-gray;
+
+/*-------------------------------------------------
+                Fonts
+--------------------------------------------------*/
+$font-family-sans-serif: $gotham-round-reg;
+$font-family-monospace: $gotham-round-reg;
+$font-family-base: $gotham-round-reg;
+$headings-font-family: $gotham-round-med;
+
+/*-------------------------------------------------
+                Inputs
+--------------------------------------------------*/
+$input-bg:                              $sky-blue;
+$input-border-radius:                   $border-radius;
+$input-border-radius-lg:                $border-radius;
+$input-border-radius-sm:                $border-radius;
+
+$input-focus-bg:                        $input-bg;
+$input-focus-border-color:              darken($sky-blue, 15%);
+$input-focus-color:                     $mate-dark-gray;
+$input-focus-box-shadow:                none !important;
+
+$input-placeholder-color:               $ash-gray;
+$input-border-color:                    darken($sky-blue, 7%);
+$input-border-width:                    $border-width;
+
+$input-btn-padding-y:         .54rem;
+
+$btn-box-shadow:              none;
+$btn-focus-box-shadow:        none;
+$btn-active-box-shadow:       none;
+$btn-border-width:            0; 
+
+$link-color:                darken($primary, 5%);
+$link-hover-color:          darken($link-color, 15%) !default;
+$link-hover-decoration:     none;
+
+$transition-base:             all .1s ease-in-out;
+$transition-fade:             opacity .1s linear;
+
+$spacer: 1.5rem;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1400px
+);
+
+$navbar-light-color:                $primary;
+$navbar-light-hover-color:          darken($primary, 5%);
+$navbar-light-active-color:         darken($primary, 5%);
+$navbar-light-disabled-color:       lighten($primary, 5%);
+$navbar-light-toggler-border-color: $primary;
+$light: white;
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/images";
+@import "node_modules/bootstrap/scss/media";
+@import "node_modules/bootstrap/scss/code";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/buttons";
+@import "node_modules/bootstrap/scss/button-group";
+@import "node_modules/bootstrap/scss/input-group";
+@import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/nav";
+@import "node_modules/bootstrap/scss/navbar";
