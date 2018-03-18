@@ -1,6 +1,7 @@
 /*------------------------------------------------*/
 @import 'partials/variables';
 @import 'layouts/fonts';
+@import 'modules/mixins';
 
 /*-------------------------------------------------
                 Colors
@@ -40,12 +41,12 @@ $input-placeholder-color:               $ash-gray;
 $input-border-color:                    darken($sky-blue, 7%);
 $input-border-width:                    $border-width;
 
-$input-btn-padding-y:         .54rem;
+$input-btn-padding-y:         .48rem;
 
 $btn-box-shadow:              none;
 $btn-focus-box-shadow:        none;
 $btn-active-box-shadow:       none;
-$btn-border-width:            0; 
+$btn-border-width:            $border-width; 
 
 $link-color:                darken($primary, 5%);
 $link-hover-color:          darken($link-color, 15%) !default;

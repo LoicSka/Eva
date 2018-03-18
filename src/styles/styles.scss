@@ -1,5 +1,4 @@
 @import 'custom.scss';
-@import 'modules/mixins';
 
 body {
   background: lighten($color: $secondary, $amount: 60%);
@@ -128,11 +127,30 @@ body {
   }
 }
 
+/*-------------------------------------------------
+                      Panel
+---------------------------------------------------*/
+
 .panel-ctn {
   margin-right: 0;
   margin-left: 0;
-  height: 100vh;
   background-color: $primary;
+  background-image: url('./images/bg.svg');
+  background-repeat: repeat;
+  min-height: calc(100vh - 70px);
+
+  .text-ctn {
+    @include media-breakpoint-up(md) {
+      padding-right: 60px;
+    } 
+    h1, p {
+      color: white;
+    }
+  }
+
+  h1 {
+    font-family: $gotham-round-med;
+  }
 }
 
 .panel {
@@ -178,6 +196,36 @@ body {
     color: $accent;
   }
 }
+.search-input {
+  transition: $transition-base;
+  &.expanded {
+    width: 260px;
+  }
+  &.static {
+    width: 200px;
+  }
+}
+
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 7px;
+  pointer-events: none;
+  width: calculateRem(37px);
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
 
 .cn {
   h2, h1, h3 {

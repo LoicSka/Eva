@@ -2,7 +2,8 @@ import React from 'react'
 import TextfieldGroup from '../components/TextfieldGroup'
 import validateSignUpInput from '../validations/signUpValidations'
 import PropTypes from 'prop-types'
-import omit from'lodash/omit'
+import omit from 'lodash/omit'
+import merge from 'lodash/merge'
 
 export default class SignUpForm extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ export default class SignUpForm extends React.Component {
   onSubmit(e) {
     e.preventDefault()
     const { submitUserForm } = this.props
+    this.setState({errors: {}})
     if (this.isValid()) {
       submitUserForm(omit(this.state,['isLoading', 'errors']))
     }
@@ -43,12 +45,14 @@ export default class SignUpForm extends React.Component {
   getTranslation = value => value ? this.props.translate(value) : null
 
   render() {
+    const { serverErrors } = this.props
     const { translate } = this.props
     const { email, firstName, lastName, password, errors, isLoading } = this.state
+    const combinedErrors = merge(serverErrors, errors)
     return (
       <form onSubmit={this.onSubmit}>
         <TextfieldGroup
-          error={this.getTranslation(errors.email)}
+          error={this.getTranslation(combinedErrors.email)}
           value={email}
           placeholder='123@example.com'
           onChange={this.onChange}
@@ -58,7 +62,7 @@ export default class SignUpForm extends React.Component {
         />
         <div className="form-row">
           <TextfieldGroup
-            error={this.getTranslation(errors.firstName)}
+            error={this.getTranslation(combinedErrors.firstName)}
             value={firstName}
             onChange={this.onChange}
             field='firstName'
@@ -67,7 +71,7 @@ export default class SignUpForm extends React.Component {
             layout={2}
           />
           <TextfieldGroup
-            error={this.getTranslation(errors.lastName)}
+            error={this.getTranslation(combinedErrors.lastName)}
             value={lastName}
             onChange={this.onChange}
             field='lastName'
@@ -77,7 +81,7 @@ export default class SignUpForm extends React.Component {
           />
         </div>
         <TextfieldGroup
-          error={this.getTranslation(errors.password)}
+          error={this.getTranslation(combinedErrors.password)}
           value={password}
           onChange={this.onChange}
           field='password'
@@ -90,7 +94,7 @@ export default class SignUpForm extends React.Component {
           className='btn btn-success btn-block'
           disabled={isLoading}>{isLoading ? 'Signing up...' : translate('userActions.signUp')}
         </button>
-        <span className="small" id="terms">You are agreeing to our <a href="https://google.com">Terms and Services</a></span>
+        <span className="small" id="terms">You are agreeing to our <a href="https://google.com">Terms of Services</a></span>
       </form>
     )
   }
@@ -98,5 +102,6 @@ export default class SignUpForm extends React.Component {
 
 SignUpForm.propTypes = {
   translate: PropTypes.func.isRequired,
+  serverErrors: PropTypes.object,
   submitUserForm: PropTypes.func.isRequired,
 }

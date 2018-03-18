@@ -3,6 +3,26 @@
     "header": [
       "Sign up and get started now!",
       "立即注册并开始使用!"
+    ],
+    "introTitle": [
+      "Find the best language tutors in your area for one on one lessons.",
+      "Find the best language tutors in your area for one on one lessons."
+    ],
+    "introSubtitle": [
+      "Browse the best language tutors in your area and get paired with the best match.",
+      "Browse the best language tutors in your area and get paired with the best match."
+    ],
+    "startTitle": [
+      "Let's get started!",
+      "Let's get started!"
+    ],
+    "helpUs": [
+      "Help us select the best tutor for you",
+      "Help us select the best tutor for you"
+    ],
+    "joiningAs": [
+      "I'm joiing Eva 妈妈 as a:",
+      "I'm joiing Eva 妈妈 as a:"
     ]
   },
   "userFields": {
@@ -48,10 +68,16 @@
     ]
   },
   "errors": {
-    "server": [
-      "Something went horribly wrong.",
-      "Something went horribly wrong."
-    ],
+    "server": {
+      "general": [
+        "Something went horribly wrong.",
+        "Something went horribly wrong."
+      ],
+      "isAlreadyTaken": [
+        "It seems someone is already using this email.",
+        "It seems someone is already using this email."
+      ]
+    },
     "oops": [
       "Oops",
       "Oops"

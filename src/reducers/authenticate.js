@@ -16,6 +16,7 @@ const auth = (state = authState, action) => {
         authenticating: true,
       }
     case ActionTypes.LOGIN_SUCCESS:
+    case ActionTypes.CREATE_USER_SUCCESS:
       localStorage.setItem('jwtToken', action.response.result)
       return {
         ...state,

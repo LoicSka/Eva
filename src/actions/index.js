@@ -33,7 +33,7 @@ const postSignUp = (signUpForm) => ({
     types: [CREATE_USER_REQUEST, CREATE_USER_SUCCESS, CREATE_USER_FAILURE],
     endpoint: 'users',
     method: 'POST',
-    schema: Schemas.USER,
+    schema: Schemas.AUTH,
     data: decamelizeKeys(signUpForm)
   }
 })

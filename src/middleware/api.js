@@ -1,5 +1,6 @@
 import { normalize, schema } from 'normalizr'
 import { camelizeKeys, decamelizeKeys, camelize } from 'humps'
+import forEach from 'lodash/forEach'
 const queryString = require('query-string')
 
 const API_ROOT = 'http://localhost:3000/api/v1/'
@@ -28,10 +29,14 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
         headers
       }).then(response => response.json().then(json => {
         if (!response.ok) {
-          return Promise.reject({message: 'server'})
+          return Promise.reject({ message: 'server.general'})
         }
         if (json.status !== '22000') {
-          return Promise.reject({message: 'server'})
+          const { validations } = json
+          forEach(validations, (value, key) => {
+            validations[key] = `errors.server.${camelize(value[0])}`
+          })
+          return Promise.reject({ message: 'server.general', validations: camelizeKeys(validations)})
         }
         const camelizedJson = camelizeKeys(json.result)
         return Object.assign({},
@@ -138,7 +143,8 @@ export default store => next => action => {
         type: 'error',
         title: 'errors.oops',
         content: `errors.${camelize(error.message)}` || 'errors.badResponse'
-      }
+      },
+      errors: error.validations
     }))
   )
 }

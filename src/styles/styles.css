@@ -1068,8 +1068,8 @@ pre {
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
-  border: 0 solid transparent;
-  padding: 0.54rem 0.75rem;
+  border: 2px solid transparent;
+  padding: 0.48rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 5px;
@@ -1522,7 +1522,7 @@ input[type="button"].btn-block {
   .btn-group-vertical .btn + .btn-group,
   .btn-group-vertical .btn-group + .btn,
   .btn-group-vertical .btn-group + .btn-group {
-    margin-left: 0; }
+    margin-left: -2px; }
 
 .btn-toolbar {
   display: flex;
@@ -1569,7 +1569,7 @@ input[type="button"].btn-block {
   .btn-group-vertical > .btn + .btn-group,
   .btn-group-vertical > .btn-group + .btn,
   .btn-group-vertical > .btn-group + .btn-group {
-    margin-top: 0;
+    margin-top: -2px;
     margin-left: 0; }
   .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),
   .btn-group-vertical > .btn-group:not(:last-child) > .btn {
@@ -1664,7 +1664,7 @@ input[type="button"].btn-block {
 .input-group-text {
   display: flex;
   align-items: center;
-  padding: 0.54rem 0.75rem;
+  padding: 0.48rem 0.75rem;
   margin-bottom: 0;
   font-size: 1rem;
   font-weight: 400;
@@ -1700,7 +1700,7 @@ input[type="button"].btn-block {
 .form-control {
   display: block;
   width: 100%;
-  padding: 0.54rem 0.75rem;
+  padding: 0.48rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #4E5B6B;
@@ -1726,7 +1726,7 @@ input[type="button"].btn-block {
     opacity: 1; }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.58rem + 4px); }
+  height: calc(2.46rem + 4px); }
 
 select.form-control:focus::-ms-value {
   color: #4E5B6B;
@@ -1738,8 +1738,8 @@ select.form-control:focus::-ms-value {
   width: 100%; }
 
 .col-form-label {
-  padding-top: calc(0.54rem + 2px);
-  padding-bottom: calc(0.54rem + 2px);
+  padding-top: calc(0.48rem + 2px);
+  padding-bottom: calc(0.48rem + 2px);
   margin-bottom: 0;
   font-size: inherit;
   line-height: 1.5; }
@@ -1759,8 +1759,8 @@ select.form-control:focus::-ms-value {
 .form-control-plaintext {
   display: block;
   width: 100%;
-  padding-top: 0.54rem;
-  padding-bottom: 0.54rem;
+  padding-top: 0.48rem;
+  padding-bottom: 0.48rem;
   margin-bottom: 0;
   line-height: 1.5;
   background-color: transparent;
@@ -4412,18 +4412,27 @@ body {
     .global-message-container a.close-message:hover {
       color: transparent; }
 
+/*-------------------------------------------------
+                      Panel
+---------------------------------------------------*/
 .panel-ctn {
   margin-right: 0;
   margin-left: 0;
-  height: 100vh;
-  background-color: #5C8CEB; }
+  background-color: #5C8CEB;
+  background-image: url("./images/bg.svg");
+  background-repeat: repeat;
+  min-height: calc(100vh - 70px); }
+  @media (min-width: 768px) {
+    .panel-ctn .text-ctn {
+      padding-right: 60px; } }
+  .panel-ctn .text-ctn h1, .panel-ctn .text-ctn p {
+    color: white; }
+  .panel-ctn h1 {
+    font-family: "gotham-rounded-medium", sans-serif; }
 
 .panel {
   background-color: white;
   padding: 45px 20px 55px 20px;
-  -webkit-box-shadow: 0px 3px 0px 0px rgba(78, 91, 107, 0.24) !important;
-  -moz-box-shadow: 0px 3px 0px 0px rgba(78, 91, 107, 0.24) !important;
-  box-shadow: 0px 3px 0px 0px rgba(78, 91, 107, 0.24) !important;
   border-radius: 5px; }
   @media (min-width: 768px) {
     .panel {
@@ -4450,6 +4459,38 @@ body {
   font-family: "gotham-rounded-light", sans-serif;
   font-size: 0.875rem;
   color: #8692a0; }
+
+.search-input {
+  transition: all 0.1s ease-in-out; }
+  .search-input.expanded {
+    width: 260px; }
+  .search-input.static {
+    width: 200px; }
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative; }
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 7px;
+  pointer-events: none;
+  width: 2.3125rem; }
+
+/* align icon */
+.left-addon .glyphicon {
+  left: 0px; }
+
+.right-addon .glyphicon {
+  right: 0px; }
+
+/* add padding  */
+.left-addon input {
+  padding-left: 30px; }
+
+.right-addon input {
+  padding-right: 30px; }
 
 .cn h2, .cn h1, .cn h3 {
   font-family: "reiji-cloud", sans-serif; }
