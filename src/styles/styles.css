@@ -4381,7 +4381,10 @@ body {
   width: 100%;
   z-index: 100;
   background: #45CB85;
-  transition: opacity 0.1s linear; }
+  transition: opacity 0.1s linear;
+  /*-------------------------------------------------
+                      Global Message
+  ---------------------------------------------------*/ }
   .global-message-container.error {
     background-color: #ff4d4d; }
   .global-message-container.success {
@@ -4451,6 +4454,9 @@ body {
     font-family: "gotham-rounded-light", sans-serif;
     font-size: calulateRem(10px); }
 
+/*-------------------------------------------------
+                      Form
+---------------------------------------------------*/
 .form-group label {
   margin: 0; }
 
@@ -4491,6 +4497,71 @@ body {
 
 .right-addon input {
   padding-right: 30px; }
+
+/*-------------------------------------------------
+                      Avatar input view
+---------------------------------------------------*/
+.avatar-container {
+  width: 100%; }
+
+.avatar-dropzone {
+  width: 84px;
+  border-radius: 42px;
+  position: relative;
+  cursor: pointer; }
+
+.outer-container {
+  width: 84px;
+  height: 84px; }
+
+div.image-container {
+  background-color: #aab5c1;
+  border: 2px solid white;
+  width: 78px;
+  height: 78px;
+  border-radius: 39px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(49, 50, 50, 0.3);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(49, 50, 50, 0.3);
+  box-shadow: 0px 0px 3px 0px rgba(49, 50, 50, 0.3); }
+  div.image-container img {
+    transition: opacity 0.1s linear;
+    width: 100%; }
+  div.image-container p {
+    opacity: 0;
+    width: 100%;
+    color: white;
+    position: absolute;
+    text-align: center;
+    transition: opacity 0.1s linear;
+    z-index: 1;
+    height: 15px;
+    font-size: 14px;
+    font-size: 0.875rem;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%); }
+  div.image-container:hover p {
+    opacity: 1; }
+  div.image-container:hover img {
+    opacity: 0.4; }
+
+.outer {
+  fill: transparent;
+  stroke-width: 2;
+  stroke-dasharray: 255;
+  stroke-dashoffset: 20;
+  transform: translate(42px, 42px);
+  /* firefox bug fix - won't rotate at 90deg angles
+  -moz-transform: rotate(-89deg) translate(42px, 42px);
+  */ }
+  .outer.success {
+    stroke: #45CB85; }
+  .outer.failed {
+    stroke: #ff4d4d; }
 
 .cn h2, .cn h1, .cn h3 {
   font-family: "reiji-cloud", sans-serif; }

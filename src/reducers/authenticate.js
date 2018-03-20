@@ -13,7 +13,7 @@ const auth = (state = authState, action) => {
     case ActionTypes.LOGIN_REQUEST:
       return {
         ...state,
-        authenticating: true,
+        authenticating: true
       }
     case ActionTypes.LOGIN_SUCCESS:
     case ActionTypes.CREATE_USER_SUCCESS:

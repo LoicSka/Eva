@@ -61,11 +61,30 @@ export const loginUser = (loginForm) => (dispatch, getState) => {
   dispatch(postLogin(loginForm))
 }
 
+
 export function setCurrentUser(user) {
   return {
     type: SET_CURRENT_USER,
     data: user
-  };
+  }
+}
+
+export const UPLOAD_FILE_REQUEST = 'UPLOAD_FILE_REQUEST'
+export const UPLOAD_FILE_PROGRESS = 'UPLOAD_FILE_PROGRESS'
+export const UPLOAD_FILE_SUCCESS = 'UPLOAD_FILE_SUCCESS'
+export const UPLOAD_FILE_FAILURE = 'UPLOAD_FILE_FAILURE'
+
+const uploadFileData = (data, endpoint, method, onUploadProgress) => ({
+  [CALL_API]: {
+    types: [UPLOAD_FILE_REQUEST, UPLOAD_FILE_SUCCESS, UPLOAD_FILE_FAILURE, UPLOAD_FILE_PROGRESS],
+    endpoint,
+    method,
+    data
+  }
+})
+
+export const uploadUserAvatar = (data, endpoint, onUploadProgress) => (dispatch, getState) => {
+  dispatch(uploadFileData(data, endpoint, 'PUT', onUploadProgress))
 }
 
 export const RESET_MESSAGE = 'RESET_MESSAGE'

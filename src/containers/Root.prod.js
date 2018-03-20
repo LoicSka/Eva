@@ -10,7 +10,7 @@ const Root = ({ store }) => (
       <SecondaryLayoutContainer exact path="/get-started" component={GetStarted} />
     </div>
   </Provider>
-);
+)
 
 Root.propTypes = {
   store: PropTypes.object.isRequired,
