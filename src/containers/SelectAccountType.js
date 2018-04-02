@@ -7,7 +7,7 @@ import ButtonGroupToggle from "../components/ButtonGroupToggle";
 
 class SelectAccountType extends Component {
   handleClick = (e) => {
-    this.props.history.push({pathname: `/set-up-${e.target.name}`, state: {}})
+    this.props.history.push({pathname: `/setup-${e.target.name}`, state: {}})
   }
   render() {
     const { translate, currentLanguage, isAuthenticated } = this.props
@@ -18,7 +18,7 @@ class SelectAccountType extends Component {
             <div className="row py-3 justify-content-center">
                 <h2 className="panel-title">{translate('getStarted.startTitle')}</h2>
                 <p className="py-1" style={{'width': '100%', 'textAlign': 'center'}} ><strong>{translate('getStarted.joiningAs')}</strong></p>
-              <ButtonGroupToggle handleClick={this.handleClick} buttons={[{ title: 'Learner'}, { title: 'Parent'}, { title: 'Tutor'}]} />
+                <ButtonGroupToggle handleClick={this.handleClick} buttons={[{ title: 'Learner'}, { title: 'Parent'}, { title: 'Tutor'}]} />
             </div>
           </div>
         </div>
@@ -34,7 +34,7 @@ SelectAccountType.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { isAuthenticated } = state.auth
+  const { isAuthenticated } = state.account
   return {
     isAuthenticated,
     currentLanguage: getActiveLanguage(state.locale).code,

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -14,9 +13,8 @@ class GetStarted extends Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: "/set-up" } }
-    const { translate, currentLanguage, signUpUser, isAuthenticated, errors } = this.props
-    console.log('erros', errors)
+    const { from } = this.props.location.state || { from: { pathname: "/setup" } }
+    const { translate, currentLanguage, signUpUser, isAuthenticated, errors, authenticating } = this.props
     if (isAuthenticated) {
       return <Redirect to={from} />
     }
@@ -29,7 +27,7 @@ class GetStarted extends Component {
           </div>
           <div className="panel col-11 col-md-5">
             <h2 className="panel-title">{translate('getStarted.header')}</h2>
-            <SignUpForm serverErrors={errors} submitUserForm={signUpUser} translate={translate} />
+            <SignUpForm serverErrors={errors} authenticating={authenticating} submitUserForm={signUpUser} translate={translate} />
           </div>
         </div>
       </div>
@@ -37,11 +35,18 @@ class GetStarted extends Component {
   }
 }
 
+GetStarted.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  authenticating: PropTypes.bool,
+  translate: PropTypes.func,
+  currentLanguage: PropTypes.string
+}
+
 const mapStateToProps = (state, ownProps) => {
-  const { isAuthenticated } = state.auth
-  const { errors } = state
+  const { account: {isAuthenticated, authenticating}, errors } = state
   return {
     isAuthenticated,
+    authenticating,
     errors,
     translate: getTranslate(state.locale),
     currentLanguage: getActiveLanguage(state.locale).code

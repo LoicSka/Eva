@@ -3,33 +3,37 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import Dropzone from 'react-dropzone'
-import pencil from '../styles/images/pencil.svg'
-import { uploadUserAvatar } from '../actions'
+import { uploadUserAvatar, displayGlobalMessage } from '../actions'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 
 class AvatarInputView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      imageUrl: null,
       imageFile: null,
       uploadProgress: 0,
       isUploading: false,
-      error: null
     }
+    this.onUploadProgress = this.onUploadProgress.bind(this)
+  }
+
+  onDrop = (acceptedFiles, RejectedFiles) => {
+    
   }
 
   uploadImageFile = imageFile => {
+    this.setState({isUploading: true})
     const { user, uploadUserAvatar } = this.props
-    console.log(imageFile)
-    const endpoint = `users/${user._id}`
     const data = { avatar: imageFile }
-    uploadUserAvatar(data, endpoint, this.onUploadProgress)
+    uploadUserAvatar(data, user.id, this.onUploadProgress)
   }
 
   onUploadProgress = (progressEvent) => {
-    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-    console.log(`${percentCompleted}%`)
+    const uploadProgress = Math.round((progressEvent.loaded * 255) / progressEvent.total)
+    this.setState({uploadProgress})
+    if (uploadProgress === 255) {
+      this.setState({isUploading: false})
+    }
   }
 
   onDropAccepted = selectedFiles => {
@@ -39,29 +43,36 @@ class AvatarInputView extends Component {
   }
 
   onDropRejected = imageFile => {
-    console.log(imageFile)
+    const { displayGlobalMessage } = this.props
+    displayGlobalMessage('errors.file.rejected', 'error', 'errors.oops')
   }
 
   render() {
-    const { error, imageUrl, isUploading } = this.state
+    const { 
+      user: { avatarUrl },
+      translate
+     } = this.props
+    const { isUploading, uploadProgress } = this.state
     return (
-      <div className="avatar-container">
+      <div className={classnames('avatar-container', )}>
         <Dropzone
           accept="image/jpeg, image/png, image/jpg"
           onDropAccepted={this.onDropAccepted.bind(this)}
           multiple={false}
-          maxSize={3000000}
+          maxSize={6000000}
           disabled={isUploading}
+          activeClassName="active"
+          disabledClassName="disabled"
           className="avatar-dropzone"
         >
           <svg className="outer-container">
-            <g className="outer success">
+            <g className="outer success" style={{ 'strokeDashoffset': 255 - uploadProgress}}>
               <circle cx="0" cy="0" r="40"></circle>
             </g>
           </svg>
           <div className="image-container">
-            <img src={imageUrl ? imageUrl : ''} />
-            <p>Edit</p>
+            <img alt="" src={avatarUrl ? avatarUrl : ''} />
+            <p>{isUploading ? '' : translate('userActions.edit')}</p>
           </div>
         </Dropzone>
       </div>
@@ -69,21 +80,22 @@ class AvatarInputView extends Component {
   }
 }
 
-// AvatarInputView.propTypes = {
-//   on
-// }
+AvatarInputView.prototypes = {
+  user: PropTypes.object,
+  translate: PropTypes.func,
+  currentLanguage: PropTypes.string
+}
 
 const mapStateToProps = (state, ownProps) => {
-  const { user } = state.auth
-  const { errors } = state
+  const { user } = state.account
   return {
     user,
-    errors,
     translate: getTranslate(state.locale),
     currentLanguage: getActiveLanguage(state.locale).code
   }
 }
 
 export default connect(mapStateToProps, {
-  uploadUserAvatar
+  uploadUserAvatar,
+  displayGlobalMessage
 })(AvatarInputView)

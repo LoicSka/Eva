@@ -2,7 +2,6 @@ import { normalize, schema } from 'normalizr'
 import { camelizeKeys, decamelizeKeys, camelize } from 'humps'
 import forEach from 'lodash/forEach'
 import axios from 'axios'
-import qs from 'qs'
 
 const queryString = require('query-string')
 
@@ -17,7 +16,7 @@ const getNextPage = response => {
 
 const callApi = (endpoint, schema, data = null, method = 'GET') => {
   var fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
-  let headers = new Headers()
+  var headers = new Headers()
   headers.append('Content-Type', 'application/json')
   if (localStorage.jwtToken) {
     headers.append('Authorization', `Bearer ${localStorage.jwtToken}`)
@@ -29,7 +28,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
       return fetch(fullUrl, {
         method,
         body,
-        headers
+        headers,
       }).then(response => response.json().then(json => {
         if (!response.ok) {
           return Promise.reject({ message: 'server.general'})
@@ -42,7 +41,8 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
           return Promise.reject({ message: 'server.general', validations: camelizeKeys(validations)})
         }
         const camelizedJson = camelizeKeys(json.result)
-        return Object.assign({},
+        return Object.assign(
+          {},
           normalize(camelizedJson, schema)
         )
       }))
@@ -59,10 +59,8 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
           if (!response.ok) {
             return Promise.reject('server')
           }
-
           const camelizedJson = camelizeKeys(json.result)
           const nextPage = getNextPage(response)
-
           return Object.assign({},
             normalize(camelizedJson, schema),
             { nextPage }
@@ -72,47 +70,60 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
   }
 }
 
-const uploadFile = (endpoint, data, method = 'PUT', onUploadProgress) => {
-
-  axios.defaults.headers.put['Content-Type'] = 'application/json';
-  if (localStorage.jwtToken) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.jwtToken}`
-  }
-
+const uploadFile = (endpoint, data, method = 'PUT', onUploadProgress, schema) => {
   var fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
   const formData = new FormData()
   forEach(data, (value, key) => {
     formData.append(key, value)
   })
+  
+  let headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  if (localStorage.jwtToken) {
+    headers.append('Authorization', `Bearer ${localStorage.jwtToken}`)
+  }
 
-  var options = {
+  var config = {
     method: method,
     url: fullUrl,
     data: formData,
-    config: {
-      onUploadProgress
-    },
-    headers: {
-      'Authorization': `Bearer ${localStorage.jwtToken}`,
-      'Content-Type': 'application/json;charset=UTF-8',
-      'Access-Control-Allow-Origin': '*',
-    },
+    onUploadProgress,
+    headers,
     json: true
-  };
+  }
 
-  axios(options).then( response => {
-    console.log('RESPONSE',response)
-  }).catch( error => {
-    console.log('ERROR', error)
+  return axios(config).then( response => {
+    const { data } = response
+    if (data.status !== '22000') {
+      const { validations } = data
+      forEach(validations, (value, key) => {
+        validations[key] = `errors.server.${camelize(value[0])}`
+      })
+      return Promise.reject({ message: 'server.general', validations: camelizeKeys(validations) })
+    }
+    const camelizedJson = camelizeKeys(data.result)
+    return Object.assign({},
+      normalize(camelizedJson, schema)
+    )
   })
 }
 
-const tutorAccountSchema = new schema.Entity('tutorAccounts', {}, {
+const regionSchema = new schema.Entity('regions', {}, {
+  idAttribute: region => region.id
+})
+
+const tutorAccountSchema = new schema.Entity('tutorAccounts', {
+  region: regionSchema
+}, {
   idAttribute: tutorAccount => tutorAccount.id
 })
 
-const authSchema = new schema.Entity('authToken',{},{
+const accountSchema = new schema.Entity('authToken',{},{
   idAttribute: auth => auth.jwt
+})
+
+const subjectSchema = new schema.Entity('subjects', {}, {
+  idAttribute: subject => subject.id
 })
 
 const userSchema = new schema.Entity('users', {
@@ -121,13 +132,32 @@ const userSchema = new schema.Entity('users', {
     idAttribute: user => user.id
 })
 
+const tagSchema = new schema.Entity('tags', {}, {
+  idAttribute: tag => tag.id
+})
+
+const courseSchema = new schema.Entity('courses', {
+  tags: [tagSchema],
+  subject: subjectSchema
+}, {
+  idAttribute: course => course.id
+})
+
 // Schemas for API responses.
 export const Schemas = {
   USER: userSchema,
-  AUTH: authSchema,
+  ACCOUNT: accountSchema,
   USER_ARRAY: [userSchema],
   TUTOR_ACCOUNT: tutorAccountSchema,
-  TUTOR_ACCOUNT_ARRAY: [tutorAccountSchema]
+  TUTOR_ACCOUNT_ARRAY: [tutorAccountSchema],
+  REGION: regionSchema,
+  REGION_ARRAY: [regionSchema],
+  TAG: tagSchema,
+  TAG_ARRAY: [tagSchema],
+  SUBJECT: subjectSchema,
+  SUBJECT_ARRAY: [subjectSchema],
+  COURSE: courseSchema,
+  COURSE_ARRAY: [courseSchema]
 }
 
 // Action key that carries API call info interpreted by this Redux middleware.
@@ -148,6 +178,7 @@ export default store => next => action => {
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState())
   }
+
   if (typeof endpoint !== 'string') {
     throw new Error('Specify a string endpoint URL.')
   }
@@ -155,6 +186,7 @@ export default store => next => action => {
   if (!Array.isArray(types) || types.length < 3) {
     throw new Error('Expected an array of three action types.')
   }
+
   if (!types.every(type => typeof type === 'string')) {
     throw new Error('Expected action types to be strings.')
   }
@@ -165,11 +197,24 @@ export default store => next => action => {
     return finalAction
   }
 
-  const [requestType, successType, failureType, progressType = null ] = types
+  const [requestType, successType, failureType] = types
   next(actionWith({ type: requestType }))
-  if (progressType) {
-    return uploadFile(endpoint, data, method, onUploadProgress)
-
+  if (onUploadProgress) {
+    return uploadFile(endpoint, data, method, onUploadProgress, schema).then(
+      response => next(actionWith({
+        response,
+        type: successType
+      })),
+      error => next(actionWith({
+        type: failureType,
+        message: {
+          type: 'error',
+          title: 'errors.oops',
+          content: `errors.${camelize(error.message)}` || 'errors.badResponse'
+        },
+        errors: error.validations
+      }))
+    )
   } else {
     return callApi(endpoint, schema, data, method).then(
       response => next(actionWith({

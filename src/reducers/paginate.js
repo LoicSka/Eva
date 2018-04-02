@@ -22,7 +22,7 @@ const paginate = ({ types, mapActionToKey }) => {
     ids: []
   }, action) => {
     switch (action.type) {
-      case requestType: 
+      case requestType:
         return {
           ...state,
           isFetching: true

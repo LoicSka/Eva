@@ -6,13 +6,16 @@ import GetStarted from './GetStarted'
 import SelectAccountType from './SelectAccountType'
 import SetUpTutorAccountPage from './SetUpTutorAccountPage'
 import SecondaryLayoutContainer from './SecondaryLayoutContainer'
+import SetupCoursesPage from './SetupCoursesPage'
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <div>
       <SecondaryLayoutContainer exact path="/get-started" component={GetStarted} />
-      <SecondaryLayoutContainer exact path="/set-up" component={SelectAccountType} />
-      <SecondaryLayoutContainer exact path="/set-up-tutor" component={SetUpTutorAccountPage} />
+      <SecondaryLayoutContainer exact path="/setup" component={SelectAccountType} />
+      <SecondaryLayoutContainer exact path="/setup-tutor" component={SetUpTutorAccountPage} />
+      <SecondaryLayoutContainer exact path="/setup-courses/" component={SetupCoursesPage} />
+      <SecondaryLayoutContainer exact path="/setup-courses/:courseId" component={SetupCoursesPage} />
       <DevTools />
     </div>
   </Provider>

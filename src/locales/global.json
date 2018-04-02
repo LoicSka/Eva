@@ -38,6 +38,38 @@
       "Last name",
       "姓氏"
     ],
+    "phoneNumber": [
+      "Phone number",
+      "Phone number"
+    ],
+    "intro": [
+      "Short intro",
+      "Short intro"
+    ],
+    "subIntro": [
+      "Write a short introduction of yourself, your background etc…",
+      "Write a short introduction of yourself, your background etc…"
+    ],
+    "weibo": [
+      "Your Weibo link",
+      "Your Weibo link"
+    ],
+    "wechatId": [
+      "Your Wechat Id",
+      "Your Wechat Id"
+    ],
+    "region": [
+      "Where do you live?",
+      "Where do you live?"
+    ],
+    "country": [
+      "Where are you from?",
+      "Where are you from?"
+    ],
+    "occupation": [
+      "Occupation",
+      "Occupation"
+    ],
     "createPassword": [
       "Create password",
       "选择一个密码"
@@ -47,14 +79,140 @@
       "密码至少应为8个字符，并且应包含字母，数字和其他字符的混合。"
     ]
   },
+  "courseFields": {
+    "title": [
+      "What is the title of your course?",
+      "What is the title of your course?"
+    ],
+    "titlePlaceholder": [
+      "Eg: Introduction to Spanish",
+      "What is the title of your course?"
+    ],
+    "subDescription": [
+      "Enter a short description of the course content (Optional)",
+      "Enter a short description of the course content (Optional)"
+    ],
+    "description": [
+      "Description",
+      "Description"
+    ],
+    "teachingExperience": [
+      "How long have you been teaching this course?",
+      "How long have you been teaching this course?"
+    ],
+    "expertise": [
+      "Expertise",
+      "Expertise"
+    ],
+    "language": [
+      "Language",
+      "Language"
+    ],
+    "ageGroup": [
+      "Preferred age group to teach",
+      "Preferred age group to teach"
+    ],
+    "tags": [
+      "Select tags",
+      "Select tags"
+    ],
+    "tagsSub": [
+      "Tags make it easier for users to find your courses.",
+      "Tags make it easier for users to find your courses."
+    ],
+    "hourlyRate": [
+      "How much do you charge per hour?",
+      "How much do you charge per hour?"
+    ]
+  },
+  "courses": {
+    "createHeader": [
+      "Add a new course to your arsenal",
+      "Add a new course to your arsenal"
+    ],
+    "period": {
+      "zero": [
+        "0-1 year",
+        "0-1 year"
+      ],
+      "one": [
+        "2-5 years",
+        "2-5 years"
+      ],
+      "two": [
+        "6-10 years",
+        "6-10 years"
+      ],
+      "three": [
+        "10+ years",
+        "10+ years"
+      ]
+    },
+    "ageGroup": {
+      "zero": [
+        "All ages",
+        "All ages"
+      ],
+      "one": [
+        "4-10 y/o",
+        "4-10 y/o"
+      ],
+      "two": [
+        "11-18 y/o",
+        "11-18 y/o"
+      ],
+      "three": [
+        "Adults",
+        "Adults"
+      ],
+      "four": [
+        "Seniors",
+        "Seniors"
+      ]
+    },
+    "expertise": {
+      "zero": [
+        "Certified tutor",
+        "Certified tutor"
+      ],
+      "one": [
+        "Native speaker",
+        "Native speaker"
+      ],
+      "two": [
+        "Second language",
+        "Second language"
+      ],
+      "three": [
+        "Hobysist",
+        "Hobysist"
+      ]
+    }
+  },
   "userActions": {
     "signUp": [
       "Sign up",
       "注册。"
     ],
+    "signingUp": [
+      "Signing up ...",
+      "Signing up ..."
+    ],
     "agreed": [
-      "Terms and Services.",
-      "条款和服务。"
+      "You are agreeing to our.",
+      "You are agreeing to our"
+    ],
+    "edit": [
+      "Edit",
+      "Edit"
+    ],
+    "save": [
+      "Save",
+      "Save"
+    ],
+    "saving": [
+      "Saving...",
+      "Saving..."
     ],
     "terms": [
       "Terms and Services.",
@@ -78,6 +236,12 @@
         "It seems someone is already using this email."
       ]
     },
+    "file": {
+      "rejected": [
+        "This file is invalid, please check its format and size",
+        "This file is invalid, please check its format and size"
+      ]
+    },
     "oops": [
       "Oops",
       "Oops"
@@ -90,6 +254,44 @@
       "Something Bad happened! try again.",
       "Something Bad happened! try again."
     ],
+    "course": {
+      "title": {
+        "empty": [
+          "Please provide a valid title.",
+          "Please provide a valid title."
+        ]
+      },
+      "subjectId": {
+        "empty": [
+          "Please select a valid languages.",
+          "Please select a valid languages."
+        ]
+      },
+      "ageGroup": {
+        "empty": [
+          "Please select a valid age group.",
+          "Please select a valid age group."
+        ]
+      },
+      "expertise": {
+        "empty": [
+          "Please select a valid expertise.",
+          "Please select a valid expertise."
+        ]
+      },
+      "teachingExperience": {
+        "empty": [
+          "Please select a time period.",
+          "Please select a time period."
+        ]
+      },
+      "hourlyRate": {
+        "empty": [
+          "Please specify an hourly rate.",
+          "Please specify an hourly rate."
+        ]
+      }
+    },
     "user": {
       "email": {
         "invalid": [
@@ -122,6 +324,34 @@
         "invalid": [
           "Your password needs to be at least 6 characters long.",
           "您的密码至少需要6个字符。"
+        ]
+      },
+      "introduction": {
+        "empty": [
+          "You have to provide a short introduction",
+          "You have to provide a short introduction"
+        ],
+        "invalid": [
+          "Your intoduction should be less than 500 charachters",
+          "Your intoduction should be less than 500 charachters"
+        ]
+      },
+      "phoneNumber": {
+        "empty": [ 
+        "You have to provide a valid phone number",
+        "You have to provide a valid phone number"
+        ]
+      },
+      "occupation": {
+        "empty": [
+          "Please select one of the options",
+          "Please select one of the options"
+        ]
+      },
+      "region": {
+        "empty": [
+          "Please select one of the regions",
+          "Please select one of the regions"
         ]
       }
     }

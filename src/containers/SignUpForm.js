@@ -13,14 +13,13 @@ export default class SignUpForm extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
-      isLoading: false,
       errors: {}
     }
-    
+
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
-
+  
   isValid() {
     const { errors, isValid } = validateSignUpInput(this.state)
     if (!isValid) {
@@ -29,26 +28,23 @@ export default class SignUpForm extends React.Component {
     return isValid
   }
 
-  onChange(e) {
-    this.setState({[[e.target.name]]: e.target.value });
-  }
+  onChange = (e) => this.setState({ [[e.target.name]]: e.target.value })
 
   onSubmit(e) {
     e.preventDefault()
     const { submitUserForm } = this.props
     this.setState({errors: {}})
     if (this.isValid()) {
-      submitUserForm(omit(this.state,['isLoading', 'errors']))
+      submitUserForm(omit(this.state,['errors']))
     }
   }
 
   getTranslation = value => value ? this.props.translate(value) : null
 
   render() {
-    const { serverErrors } = this.props
-    const { translate } = this.props
-    const { email, firstName, lastName, password, errors, isLoading } = this.state
-    const combinedErrors = merge(serverErrors, errors)
+    const { translate, serverErrors, authenticating } = this.props
+    const { email, firstName, lastName, password, errors } = this.state
+    const combinedErrors = merge(errors, serverErrors)
     return (
       <form onSubmit={this.onSubmit}>
         <TextfieldGroup
@@ -92,7 +88,7 @@ export default class SignUpForm extends React.Component {
         <button
           type='submit'
           className='btn btn-success btn-block'
-          disabled={isLoading}>{isLoading ? 'Signing up...' : translate('userActions.signUp')}
+          disabled={authenticating}>{authenticating ? translate('userActions.signingUp') : translate('userActions.signUp')}
         </button>
         <span className="small" id="terms">You are agreeing to our <a href="https://google.com">Terms of Services</a></span>
       </form>
@@ -103,5 +99,6 @@ export default class SignUpForm extends React.Component {
 SignUpForm.propTypes = {
   translate: PropTypes.func.isRequired,
   serverErrors: PropTypes.object,
-  submitUserForm: PropTypes.func.isRequired,
+  authenticating: PropTypes.bool,
+  submitUserForm: PropTypes.func.isRequired
 }

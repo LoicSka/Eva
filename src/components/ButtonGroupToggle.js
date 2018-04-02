@@ -17,7 +17,7 @@ class ButtonGroupToggle extends Component {
   }
 
   render() {
-    const { buttons, translate, handleClick } = this.props
+    const { buttons, handleClick } = this.props
     const { selectedValue } = this.state
     const buttonGroup = buttons.map((button) => {
       const clicked = (e) => {
