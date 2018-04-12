@@ -1,12 +1,21 @@
 import * as ActionTypes from '../actions'
 import merge from 'lodash/merge'
+import omit from 'lodash/omit'
+import keys from 'lodash/keys'
 import paginate from './paginate'
 import account from './account'
 import { localeReducer } from 'react-localize-redux'
 import { combineReducers } from 'redux'
 
 // Updates an entity cache in response to any action with response.entities.
-const entities = (state = { users: {}, tutorAccounts: {}, regions: {}, tags: {}, subjects: {} }, action) => {
+const entities = (state = { users: {}, tutorAccounts: {}, regions: {}, tags: {}, subjects: {}, courses: {} }, action) => {
+  console.log('STATE', state)
+  if (action.type === ActionTypes.DELETE_COURSES_SUCCESS) {
+    if (action.response && action.response.entities) {
+      state.courses = omit(state.courses, keys(action.response.entities.courses)[0])
+      return state
+    }
+  }
   if (action.response && action.response.entities) {
     return merge({}, state, action.response.entities)
   }

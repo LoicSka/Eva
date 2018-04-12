@@ -33,7 +33,9 @@ export default class SignUpForm extends React.Component {
   onSubmit(e) {
     e.preventDefault()
     const { submitUserForm } = this.props
-    this.setState({errors: {}})
+    // this.setState({errors: {}})
+    let valid = this.isValid()
+    console.log('VALID', valid)
     if (this.isValid()) {
       submitUserForm(omit(this.state,['errors']))
     }

@@ -58,10 +58,13 @@ class CourseList extends Component {
   }
 
   render() {
-    const { subjects } = this.props
+    const { subjects, deleteCourse } = this.props
     const courses = this.props.courses.map((course) => {
+      const handleDeleteCourse = () => {
+        deleteCourse(course)
+      }
       return (
-        <div className="card mb-3 border-0">
+        <div key={course.id} className="card mb-3 border-0">
           <div className="card-header text-white bg-secondary">
             <strong>{course.title}</strong>
           </div>
@@ -95,7 +98,7 @@ class CourseList extends Component {
               <p className="float-right" style={{ color: "#8692A0" }}>{course.acceptedBookings}</p>
             </div>
             <Link to={`/setup-courses/${course.id}`} className="card-link">Edit</Link>
-            <Link to={'/#'} className="card-link">Delete</Link>
+            <Link to='#' onClick={handleDeleteCourse} className="card-link">Delete</Link>
           </div>
         </div>
       )
@@ -112,6 +115,7 @@ CourseList.propTypes = {
   courses: PropTypes.array,
   subjects: PropTypes.array,
   translate: PropTypes.func,
+  deleteCourse: PropTypes.func,
   currentLanguage: PropTypes.string
 }
 

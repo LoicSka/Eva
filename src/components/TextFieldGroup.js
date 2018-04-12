@@ -27,7 +27,10 @@ TextfieldGroup.propTypes = {
   label: PropTypes.string,
   subLabel: PropTypes.string,
   layout: PropTypes.number,
-  value: PropTypes.string.isRequired,
+  value: 
+    PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number]),
   error: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,

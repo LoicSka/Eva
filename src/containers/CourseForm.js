@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom' 
 import SelectfieldGroup from '../components/SelectfieldGroup'
 import TextfieldGroup from '../components/TextfieldGroup'
 import TextareaGroup from '../components/TextareaGroup'
@@ -7,6 +8,8 @@ import PropTypes from 'prop-types'
 import omit from 'lodash/omit'
 import values from 'lodash/values'
 import merge from 'lodash/merge'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 import { updateCourse } from '../actions';
@@ -23,7 +26,7 @@ class CourseForm extends Component {
       expertise: null,
       teachingExperience: '',
       hourlyRate: null,
-      tags: [],
+      tagIds: [],
       errors: {},
       hasSetCurrent: false
     }
@@ -41,13 +44,25 @@ class CourseForm extends Component {
   onChange = (e) => this.setState({ [[e.target.name]]: e.target.value })
   getTranslation = value => value && typeof(value) !== 'undefined' ? this.props.translate(value) : null
 
-  handleSelectChange = tags => {
-    this.setState({ tags })
+  handleSelectChange = tagIds => {
+    this.setState({ tagIds })
   }
 
   componentDidMount() {
-    const { tutorAccountId } = this.props
+    const { tutorAccountId, resetCourse } = this.props
+    resetCourse()
     this.setState({ tutorAccountId })
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { currentCourse, tagOptions } = newProps
+    if (currentCourse) {
+      let { tags } = currentCourse
+      console.log(tags)
+      const tagIds = filter(tagOptions, (t) => { return (includes(tags, t.value)) })
+      console.log("TAGS", tags,)
+      this.setState({ tagIds })
+    }
   }
 
   /*
@@ -63,38 +78,41 @@ class CourseForm extends Component {
       teachingExperience: '',
       hourlyRate: null,
       updatedAt: '',
-      tags: [],
+      tagIds: [],
       errors: {},
-      hasSetCurrent: false,
+      hasSetCurrent: false
     })
-    const { resetCourse } = this.props
+    const { resetCourse, history } = this.props
     resetCourse()
+    history.push({ pathname: '/setup-courses'})
+    
   }
 
   onSubmit = (e) => {
     e.preventDefault()
     const { createCourse, updateCourse, currentCourse } = this.props
     if (true) {
-      var tags = this.state.tags.map((tag) => {
+      var tagIds = this.state.tagIds.map((tag) => {
         return tag.value
       })
-      currentCourse ? updateCourse(merge(omit(this.state, ['errors, tags']), { tags })) : createCourse(merge(omit(this.state, ['errors, tags']) ,{ tags }))
+      currentCourse ? updateCourse(merge(omit(this.state, ['errors', 'tags']), { tagIds })) : createCourse(merge(omit(this.state, ['errors', 'tags']), { tagIds }))
     }
   }
 
   render() {
     const { translate, currentLanguage, serverErrors, tagOptions, subjectOptions, submiting, success, currentCourse, resetCourse } = this.props
-    const { title, description, ageGroup, expertise, subject, errors, tags, hourlyRate, teachingExperience, hasSetCurrent, updatedAt } = this.state
+    const { title, description, ageGroup, expertise, subject, errors, tagIds, hourlyRate, teachingExperience, hasSetCurrent, updatedAt } = this.state
     const combinedErrors = merge(errors, serverErrors)
 
     if (currentCourse) {
       if (currentCourse.id !== this.state.id || updatedAt !== currentCourse.updatedAt) {
-        resetCourse()
+        // resetCourse()
         this.setState({ hasSetCurrent: false })
       }
-    } 
+    }
+
     if (hasSetCurrent === false && currentCourse) {
-      this.setState(currentCourse)
+      this.setState(omit(currentCourse, ['tags']));
       this.setState({ hasSetCurrent: true })
     }
 
@@ -102,11 +120,12 @@ class CourseForm extends Component {
     <div className="row">
         <h2 className="panel-title">{translate('courses.createHeader')}</h2>
         <div className="col-12 px-3 mt-2">
-          <button
-            className='btn btn-outline-primary btn-block'
-            onClick={this.handleAddNewCourse}>
+          <Link
+            onClick={this.handleAddNewCourse}
+            to='#'
+            className='btn btn-outline-primary btn-block'>
             Add a course
-          </button>
+          </Link>
           <button
             className='btn btn-success btn-block'>
             Finish
@@ -187,8 +206,8 @@ class CourseForm extends Component {
                 onChange={this.handleSelectChange}
                 options={tagOptions}
                 placeholder=""
-                name="tags"
-                value={tags}
+                name="tagIds"
+                value={tagIds}
                 className="select-form-control"
                 closeOnSelect={false}
               />
@@ -216,7 +235,8 @@ CourseForm.propTypes = {
   tutorAccountId: PropTypes.string,
   updateCourse: PropTypes.func,
   createCourse: PropTypes.func,
-  resetCourse: PropTypes.func
+  resetCourse: PropTypes.func,
+  currentCourse: PropTypes.object
 }
 
 export default CourseForm

@@ -46,6 +46,21 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
           normalize(camelizedJson, schema)
         )
       }))
+    case 'DELETE':
+      return fetch(fullUrl, {
+        method,
+        body,
+        headers,
+      }).then(response => response.json().then(json => {
+        if (!response.ok) {
+          return Promise.reject({ message: 'server.general' })
+        }
+        const camelizedJson = camelizeKeys(data)
+        return Object.assign(
+          {},
+          normalize(camelizedJson, schema)
+        )
+      }))
     default:
       if (data) {
         let query = queryString.stringify(decamelizeKeys(data))
@@ -59,7 +74,8 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
           if (!response.ok) {
             return Promise.reject('server')
           }
-          const camelizedJson = camelizeKeys(json.result)
+          const { result = null } = json
+          const camelizedJson = camelizeKeys(result ? result : {})
           const nextPage = getNextPage(response)
           return Object.assign({},
             normalize(camelizedJson, schema),
@@ -173,7 +189,7 @@ export default store => next => action => {
   }
   
   let { endpoint } = callAPI
-  const { schema, types, method, data, onUploadProgress = null } = callAPI
+  const { schema = null, types, method, data, onUploadProgress = null } = callAPI
 
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState())

@@ -2,25 +2,25 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getTranslate } from 'react-localize-redux'
-// import classnames from 'classnames'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import SearchTextForm from '../components/SearchTextForm'
 import evaLogo from '../styles/images/evasmomlogo.svg'
+import NavbarItem from '../components/NavbarItem'
 
 class MainNavBar extends Component {
   render() {
     const { translate } = this.props
     return(
-      <nav className="navbar navbar-expand flex-md-row navbar-light bg-light">
-        <Link to="/" className="navbar-brand ml-sm-4">
-          <img src={evaLogo} alt="Logo" />
-        </Link>
-        <SearchTextForm translate={translate} />
-        <div className=" navbar-collapse justify-content-end">
-          <div className="navbar-nav">
-            <Link to="/get-started" className="nav-item nav-link mr-sm-3">Help</Link>
-            <Link to="/get-started" className="nav-item nav-link mr-sm-3">Login</Link>
-            <Link to="/get-started" className="btn btn-primary mr-sm-4">Sign up</Link>
+      <nav className="navbar navbar-light bg-light">
+        <div className='container'>
+          <div className="bd-ctn">
+            <Link className='nav-icon' to="/">
+              <img src={evaLogo} alt="Logo" />
+            </Link>
+          </div>
+          <div className="reverse-md">
+            <SearchTextForm translate={translate} />
+            <NavbarItem />
           </div>
         </div>
       </nav>

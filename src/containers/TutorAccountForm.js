@@ -174,7 +174,7 @@ class TutorAccountForm extends Component {
                   error={this.getTranslation(combinedErrors.region)}
                   value={regionId}
                   onChange={this.onChange}
-                  field='region'
+                  field='regionId'
                   options={regions}
                   type='text'
                   label={translate('userFields.region')}

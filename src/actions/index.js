@@ -1,6 +1,8 @@
 import { CALL_API, Schemas } from '../middleware/api'
 import { decamelizeKeys } from 'humps'
 
+export * from './filter'
+
 export const USERS_REQUEST = 'USERS_REQUEST'
 export const USERS_SUCCESS = 'USERS_SUCCESS'
 export const USERS_FAILURE = 'USERS_FAILURE'
@@ -56,11 +58,6 @@ const postLogin = (loginForm) => ({
     data: decamelizeKeys(loginForm)
   }
 })
-
-export const loginUser = (loginForm) => (dispatch, getState) => {
-  dispatch(postLogin(loginForm))
-}
-
 
 export const setCurrentUser = user => {
   return {
@@ -273,4 +270,22 @@ const fetchCourses = (data) => ({
 
 export const loadCoursesForAccount = (tutorAccountId) => (dispatch) => {
   dispatch(fetchCourses({ tutorAccountId }))
+}
+
+export const DELETE_COURSES_REQUEST = 'DELETE_COURSES_REQUEST'
+export const DELETE_COURSES_SUCCESS = 'DELETE_COURSES_SUCCESS'
+export const DELETE_COURSES_FAILURE = 'DELETE_COURSES_FAILURE'
+
+const destroyCourse = (courseForm) => ({
+  [CALL_API]: {
+    types: [DELETE_COURSES_REQUEST, DELETE_COURSES_SUCCESS, DELETE_COURSES_FAILURE],
+    endpoint: `courses/${courseForm.id}`,
+    method: 'DELETE',
+    schema: Schemas.COURSE,
+    data: courseForm,
+  }
+})
+
+export const deleteCourse = (courseForm) => (dispatch) => {
+  dispatch(destroyCourse(courseForm))
 }

@@ -6,7 +6,9 @@ import GetStarted from './GetStarted'
 import SelectAccountType from './SelectAccountType'
 import SetUpTutorAccountPage from './SetUpTutorAccountPage'
 import SecondaryLayoutContainer from './SecondaryLayoutContainer'
+import PrimaryLayoutContainer from './PrimaryLayoutContainer'
 import SetupCoursesPage from './SetupCoursesPage'
+import HomeTutorListView from './HomeTutorListView'
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -16,6 +18,7 @@ const Root = ({ store }) => (
       <SecondaryLayoutContainer exact path="/setup-tutor" component={SetUpTutorAccountPage} />
       <SecondaryLayoutContainer exact path="/setup-courses/" component={SetupCoursesPage} />
       <SecondaryLayoutContainer exact path="/setup-courses/:courseId" component={SetupCoursesPage} />
+      <PrimaryLayoutContainer exact path="/" component={HomeTutorListView} />
       <DevTools />
     </div>
   </Provider>

@@ -9,7 +9,7 @@ const SelectfieldGroup = (
     const name = typeof(el) === 'object' ? el.name : el
     const value = typeof (el) === 'object' ? el.value : el
     return (
-      <option key={name} onChange={onChange} value={value}>{name}</option>
+      <option key={value} onChange={onChange} value={value}>{name}</option>
     )
   })
   
@@ -40,7 +40,10 @@ SelectfieldGroup.propTypes = {
   label: PropTypes.string,
   subLabel: PropTypes.string,
   layout: PropTypes.number,
-  value: PropTypes.string.isRequired,
+  value: 
+    PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number]),
   error: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
