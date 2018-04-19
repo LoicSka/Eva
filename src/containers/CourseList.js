@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
 import { CREATE_COURSE_FAILURE } from '../actions';
 
 class CourseList extends Component {

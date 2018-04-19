@@ -128,24 +128,12 @@ const regionSchema = new schema.Entity('regions', {}, {
   idAttribute: region => region.id
 })
 
-const tutorAccountSchema = new schema.Entity('tutorAccounts', {
-  region: regionSchema
-}, {
-  idAttribute: tutorAccount => tutorAccount.id
-})
-
 const accountSchema = new schema.Entity('authToken',{},{
   idAttribute: auth => auth.jwt
 })
 
 const subjectSchema = new schema.Entity('subjects', {}, {
   idAttribute: subject => subject.id
-})
-
-const userSchema = new schema.Entity('users', {
-  tutorAccount: tutorAccountSchema
-}, {
-    idAttribute: user => user.id
 })
 
 const tagSchema = new schema.Entity('tags', {}, {
@@ -157,6 +145,19 @@ const courseSchema = new schema.Entity('courses', {
   subject: subjectSchema
 }, {
   idAttribute: course => course.id
+})
+
+const tutorAccountSchema = new schema.Entity('tutorAccounts', {
+  region: regionSchema,
+  courses: [courseSchema]
+}, {
+  idAttribute: tutorAccount => tutorAccount.id
+})
+
+const userSchema = new schema.Entity('users', {
+  tutorAccount: tutorAccountSchema
+}, {
+  idAttribute: user => user.id
 })
 
 // Schemas for API responses.

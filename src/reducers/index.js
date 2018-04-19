@@ -3,6 +3,7 @@ import merge from 'lodash/merge'
 import omit from 'lodash/omit'
 import keys from 'lodash/keys'
 import paginate from './paginate'
+import tutorAccounts from './tutorAccounts'
 import account from './account'
 import { localeReducer } from 'react-localize-redux'
 import { combineReducers } from 'redux'
@@ -35,7 +36,7 @@ const message = (state = {}, action) => {
   const { type, message } = action
   if (type === ActionTypes.RESET_MESSAGE) {
     return {}
-  } else if (message) {
+  } else if (message){ 
     return message
   }
   return state
@@ -85,15 +86,39 @@ const pagination = combineReducers({
       ActionTypes.REGIONS_SUCCESS,
       ActionTypes.REGIONS_FAILURE
     ]
+  }),
+  tutorAccounts: paginate({
+    mapActionToKey: action => action.filterKey,
+    types: [
+      ActionTypes.FETCH_TUTOR_ACCOUNTS_REQUEST,
+      ActionTypes.FETCH_TUTOR_ACCOUNTS_SUCCESS, 
+      ActionTypes.FETCH_TUTOR_ACCOUNTS_SUCCESS
+    ]
   })
+
 })
+
+const navigation = (state = { isFilterNavHidden: true }, action) => {
+  const { type, payload } = action
+  switch (type) {
+    case ActionTypes.TOGGLE_FILTER_NAV:
+      return {
+        ...state,
+        isFilterNavHidden: payload
+      }
+    default:
+      return state
+  }
+}
 
 const rootReducer = combineReducers({
   account,
   entities,
   locale: localeReducer,
+  tutorAccounts,
   pagination,
   courseState,
+  navigation,
   message,
   errors
 })

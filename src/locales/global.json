@@ -355,5 +355,45 @@
         ]
       }
     }
+  },
+  "filterNav": {
+    "availability": [
+      "AVAILABITILTY",
+      "AVAILABITILTY"
+    ],
+    "priceRange": [
+      "💴 Price range (Rmb/Hour)",
+      "💴 Price range (Rmb/Hour)"
+    ],
+    "priceRangeSelect": [
+      "Rmb/Hour",
+      "Rmb/Hour"
+    ],
+    "dateFilterLabel": [
+      "📆 Select a day",
+      "📆 Select a day"
+    ],
+    "subjectFilterLabel": [
+      "🇬🇧 Select a language 🇩🇪",
+      "🇬🇧 Select a language 🇩🇪"
+    ],
+    "regionFilterLabel": [
+      "🌏 Select a city",
+      "🌏 Select a city"
+    ],
+    "ageGroup": [
+      "🎂 Age group",
+      "🎂 Age group"
+    ],
+    "sortBy": [
+      "👋 Sort by",
+      "👋 Sort by"
+    ]
+  },
+  "subNav": {
+    "clear": [
+      "clear",
+      "clear"
+    ]
   }
 }

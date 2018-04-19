@@ -31,7 +31,7 @@ class GetStarted extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 

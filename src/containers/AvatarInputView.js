@@ -16,9 +16,7 @@ class AvatarInputView extends Component {
     }
     this.onUploadProgress = this.onUploadProgress.bind(this)
   }
-
   onDrop = (acceptedFiles, RejectedFiles) => {
-    
   }
 
   uploadImageFile = imageFile => {

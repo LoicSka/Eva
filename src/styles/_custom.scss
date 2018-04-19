@@ -32,6 +32,12 @@ $input-border-radius:                   $border-radius;
 $input-border-radius-lg:                $border-radius;
 $input-border-radius-sm:                $border-radius;
 
+$input-btn-padding-y:         .3rem;
+$input-btn-padding-x:         .7rem;
+
+$navbar-padding-y:                  (1rem / 3);
+$navbar-padding-x:                  1rem;
+
 $input-focus-bg:                        $input-bg;
 $input-focus-border-color:              darken($sky-blue, 15%);
 $input-focus-color:                     $mate-dark-gray;
@@ -56,7 +62,7 @@ $link-hover-decoration:     none;
 $transition-base:             all .1s ease-in-out;
 $transition-fade:             opacity .1s linear;
 
-$spacer: 1.5rem;
+$spacer: 1rem;
 
 $container-max-widths: (
   sm: 540px,
@@ -71,6 +77,7 @@ $navbar-light-active-color:         darken($primary, 5%);
 $navbar-light-disabled-color:       lighten($primary, 5%);
 $navbar-light-toggler-border-color: $primary;
 $light: white;
+$nav-link-padding-x:                .25rem;
 
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";

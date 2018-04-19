@@ -2,6 +2,7 @@ import { CALL_API, Schemas } from '../middleware/api'
 import { decamelizeKeys } from 'humps'
 
 export * from './filter'
+export * from './navigation'
 
 export const USERS_REQUEST = 'USERS_REQUEST'
 export const USERS_SUCCESS = 'USERS_SUCCESS'

@@ -32,7 +32,7 @@ MainNavBar.propTypes = {
   translate: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     translate: getTranslate(state.locale),
   }

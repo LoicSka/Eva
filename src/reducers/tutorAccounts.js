@@ -4,11 +4,11 @@ import { camelizeKeys } from 'humps'
 const tutorAccountsState = {
   fetching: false,
   hasFetched: true,
-  lastFiltered: Date().getTime(),
-  lastFetched: Date().getTime(),
+  lastFiltered: new Date().getTime(),
+  lastFetched: new Date().getTime(),
   page: 1,
   filters: {},
-  tutorAccounts: {}
+  filterKey: 'All'
 }
 
 const tutorAccounts = (state = tutorAccountsState, action) => {
@@ -17,26 +17,33 @@ const tutorAccounts = (state = tutorAccountsState, action) => {
       return {
         ...state,
         hasFetched: false,
-        lastFetched: Date().getTime(),
+        lastFetched: new Date().getTime(),
+        filterKey: action.filterKey,
         fetching: true
       }
     case ActionTypes.FETCH_TUTOR_ACCOUNTS_SUCCESS:
       return {
         ...state,
         hasFetched: true,
-        fetching: true
+        fetching: false,
       }
-    case ActionTypes.FETCH_TUTOR_ACCOUNTS_REQUEST:
+    case ActionTypes.FETCH_TUTOR_ACCOUNTS_FAILURE:
       return {
         ...state,
         hasFetched: false,
-        fetching: true
+        fetching: false
       }
     case ActionTypes.SET_FILTERS:
       return {
         ...state,
-        lastFiltered: Date().getTime(),
+        lastFiltered: new Date().getTime(),
         filters: action.filters
+      }
+    case ActionTypes.CLEAR_FILTERS:
+      return {
+        ...state,
+        filters: {},
+        filterKey: 'All'
       }
     default:
       return state
