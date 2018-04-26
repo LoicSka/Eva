@@ -4,7 +4,11 @@
 @import 'modules/mixins';
 
 /*-------------------------------------------------
-                Colors
+                    Grid
+---------------------------------------------------*/
+$grid-gutter-width: 15px;
+/*-------------------------------------------------
+                    Colors
 ---------------------------------------------------*/
 $primary:       $purple;
 $secondary:     $mate-dark-gray;
@@ -17,7 +21,7 @@ $gray-700:      $mate-dark-gray;
 $gray-900:      $mate-dark-gray;
 
 /*-------------------------------------------------
-                Fonts
+                    Fonts
 --------------------------------------------------*/
 $font-family-sans-serif: $gotham-round-reg;
 $font-family-monospace: $gotham-round-reg;
@@ -25,7 +29,7 @@ $font-family-base: $gotham-round-reg;
 $headings-font-family: $gotham-round-med;
 
 /*-------------------------------------------------
-                Inputs
+                    Inputs
 --------------------------------------------------*/
 $input-bg:                              $sky-blue;
 $input-border-radius:                   $border-radius;

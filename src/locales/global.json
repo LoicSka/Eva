@@ -66,6 +66,10 @@
       "Where are you from?",
       "Where are you from?"
     ],
+    "district": [
+      "Which district?",
+      "Which district?"
+    ],
     "occupation": [
       "Occupation",
       "Occupation"
@@ -395,5 +399,47 @@
       "clear",
       "clear"
     ]
+  },
+  "tutorAccounts": {
+    "classes": [
+      "classes",
+      "classes"
+    ],
+    "course": [
+      "course",
+      "course"
+    ],
+    "experience": [
+      "experience",
+      "experience"
+    ],
+    "courses": [
+      "courses",
+      "courses"
+    ],
+    "bookMe": [
+      "BOOK ME",
+      "BOOK ME"
+    ]
+  },
+
+  "cities": {
+    "shanghai": [
+      "Shanghai",
+      "上海"
+    ],
+    "nanjing": [
+      "Nanjing",
+      "南京"
+    ],
+    "beijing": [
+      "Beijing",
+      "北京"
+    ],
+    "wuhan": [
+      "Wuhan",
+      "武汉"
+    ]
   }
+
 }

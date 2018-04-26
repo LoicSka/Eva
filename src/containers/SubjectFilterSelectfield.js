@@ -4,20 +4,16 @@ import { connect } from 'react-redux'
 import RadioButtonGroup from '../components/RadioButtonGroup'
 import { loadTutorAccounts, loadSubjects } from '../actions'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import values from 'lodash/values'
+import { values, find } from 'lodash'
 
 class SubjectFilterSelectfield extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      subject: null
-    }
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange = (option) => {
     const { handleFilter } = this.props
-    this.setState({ subject: option })
     handleFilter({ subject: option.value })
   }
 
@@ -27,8 +23,7 @@ class SubjectFilterSelectfield extends Component {
   }
 
   render() {
-    const { subjects, translate, title = null } = this.props
-    const { subject } = this.state
+    const { subjects, translate, title = null, selectedSubject } = this.props
 
     const subjectsArray = values(subjects).map((subject) => {
       return {
@@ -36,6 +31,7 @@ class SubjectFilterSelectfield extends Component {
         value: subject.id
       }
     })
+    const subject = selectedSubject ? find(subjectsArray, { 'value': selectedSubject }) : null
     return (
       <RadioButtonGroup title={title} activeOption={subject} options={subjectsArray} handleSelect={this.handleChange}/>
     )
@@ -44,6 +40,7 @@ class SubjectFilterSelectfield extends Component {
 
 SubjectFilterSelectfield.prototypes = {
   title: PropTypes.string,
+  selectedSubject: PropTypes.string,
   subjects: PropTypes.object,
   handleFilter: PropTypes.func,
   translate: PropTypes.func,

@@ -7,7 +7,6 @@ import LanguageSelectfield from '../containers/LanguageSelectfield'
 import HomeFilterView from '../containers/HomeFilterView'
 import ClearFiltersButton from './ClearFiltersButton'
 
-
 class SubNavBarItemRight extends Component {
   render() {
     return (

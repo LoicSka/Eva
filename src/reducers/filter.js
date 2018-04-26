@@ -1,17 +1,17 @@
 import * as ActionTypes from '../actions'
 import { camelizeKeys } from 'humps'
 
-const tutorAccountsState = {
+const filterState = {
   fetching: false,
   hasFetched: true,
   lastFiltered: new Date().getTime(),
   lastFetched: new Date().getTime(),
-  page: 1,
+  nextPage: 1,
   filters: {},
   filterKey: 'All'
 }
 
-const tutorAccounts = (state = tutorAccountsState, action) => {
+const filter = (state = filterState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_TUTOR_ACCOUNTS_REQUEST:
       return {
@@ -26,6 +26,7 @@ const tutorAccounts = (state = tutorAccountsState, action) => {
         ...state,
         hasFetched: true,
         fetching: false,
+        nextPage: state.nextPage + 1
       }
     case ActionTypes.FETCH_TUTOR_ACCOUNTS_FAILURE:
       return {
@@ -50,4 +51,4 @@ const tutorAccounts = (state = tutorAccountsState, action) => {
   }
 }
 
-export default tutorAccounts;
+export default filter;

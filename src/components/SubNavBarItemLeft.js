@@ -6,7 +6,6 @@ import SortTutorAccountSelect from '../containers/SortTutorAccountSelect'
 import HomeFilterView from '../containers/HomeFilterView'
 import ClearFiltersButton from './ClearFiltersButton'
 
-
 class SubNavBarItemLeft extends Component {
   render() {
     const { toggleFilterNav } = this.props

@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
+    "china-province-city-district": "^0.1.0",
     "classnames": "^2.2.5",
     "country-list": "^1.1.0",
     "jwt-decode": "^2.2.0",

@@ -76,10 +76,11 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
           }
           const { result = null } = json
           const camelizedJson = camelizeKeys(result ? result : {})
-          const nextPage = getNextPage(response)
+          // const nextPage = getNextPage(response)
+          console.log('RESPONSE', response)
           return Object.assign({},
             normalize(camelizedJson, schema),
-            { nextPage }
+            // { nextPage }
           )
         })
       )

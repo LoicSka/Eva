@@ -1,16 +1,13 @@
 import * as ActionTypes from '../actions'
-import merge from 'lodash/merge'
-import omit from 'lodash/omit'
-import keys from 'lodash/keys'
+import { merge, omit, keys } from 'lodash'
 import paginate from './paginate'
-import tutorAccounts from './tutorAccounts'
+import filter from './filter'
 import account from './account'
 import { localeReducer } from 'react-localize-redux'
 import { combineReducers } from 'redux'
 
 // Updates an entity cache in response to any action with response.entities.
 const entities = (state = { users: {}, tutorAccounts: {}, regions: {}, tags: {}, subjects: {}, courses: {} }, action) => {
-  console.log('STATE', state)
   if (action.type === ActionTypes.DELETE_COURSES_SUCCESS) {
     if (action.response && action.response.entities) {
       state.courses = omit(state.courses, keys(action.response.entities.courses)[0])
@@ -87,7 +84,7 @@ const pagination = combineReducers({
       ActionTypes.REGIONS_FAILURE
     ]
   }),
-  tutorAccounts: paginate({
+  paginatedTutorAccounts: paginate({
     mapActionToKey: action => action.filterKey,
     types: [
       ActionTypes.FETCH_TUTOR_ACCOUNTS_REQUEST,
@@ -115,7 +112,7 @@ const rootReducer = combineReducers({
   account,
   entities,
   locale: localeReducer,
-  tutorAccounts,
+  filter,
   pagination,
   courseState,
   navigation,

@@ -7,7 +7,7 @@ import { setCurrentUser } from'./actions'
 import jwtDecode from 'jwt-decode'
 import './styles/styles.css'
 import { initialize } from 'react-localize-redux'
-import { addTranslation } from 'react-localize-redux'
+import { addTranslation, setActiveLanguage } from 'react-localize-redux'
 import { camelizeKeys } from 'humps'
 
 const languages = [
@@ -23,6 +23,10 @@ store.dispatch(addTranslation(locales))
 // authorization
 if (localStorage.jwtToken) {
   store.dispatch(setCurrentUser(camelizeKeys(jwtDecode(localStorage.jwtToken))))
+}
+
+if (localStorage.locale) {
+  store.dispatch(setActiveLanguage(localStorage.locale))
 }
 
 render(

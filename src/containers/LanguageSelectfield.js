@@ -3,20 +3,21 @@ import { connect } from 'react-redux'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import PropTypes from 'prop-types'
 import SelectfieldGroup from '../components/SelectfieldGroup';
+import { setActiveLocale } from '../actions'
+import { filter, find } from 'lodash'
 
 class LanguageSelectfield extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: null
-    }
+  onChange = (e) => {
+    const { setActiveLocale } = this.props
+      console.log('LANGUAGES', e.target.value)
+    setActiveLocale(e.target.value)
   }
-  
-  onChange = (e) => this.setState({ [[e.target.name]]: e.target.value })
 
   render() {
-    const { translate } = this.props
-    const { value } = this.state
+      const { currentLanguage } = this.props
+    const localesArray = [{ name: '🇬🇧 En', value: 'en' }, { name: '🇨🇳 中文', value: 'cn' }]
+      const options = filter(localesArray, (locale) => locale.value !== currentLanguage)
+      const value = find(localesArray, { value: currentLanguage })
     return (
       <div className='sort-form-ctn'>
         <div style={{ marginTop: '17px' }}>
@@ -24,9 +25,9 @@ class LanguageSelectfield extends Component {
             classNames='sort-form'
             value={value}
             field='value'
-            defaultValue={{ name: '🇨🇳 中文', value: 'zh' }}
+            defaultValue={value}
             onChange={this.onChange}
-            options={[{ name: '🇺🇸 En', value: 'en' }]}
+            options={options}
             type='text'
           />
         </div>
@@ -36,6 +37,7 @@ class LanguageSelectfield extends Component {
 }
 
 LanguageSelectfield.propTypes = {
+  setActiveLocale: PropTypes.func,
   translate: PropTypes.func,
   currentLanguage: PropTypes.string
 }
@@ -47,4 +49,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(LanguageSelectfield)
+export default connect(mapStateToProps, { setActiveLocale})(LanguageSelectfield)

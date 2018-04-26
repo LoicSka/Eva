@@ -1,5 +1,4 @@
 import union from 'lodash/union'
-
 // Creates a reducer managing pagination, given the action types to handle,
 // and a function telling how to extract the key from an action.
 
@@ -32,7 +31,7 @@ const paginate = ({ types, mapActionToKey }) => {
           ...state,
           isFetching: false,
           ids: union(state.ids, action.response.result),
-          nextPage: action.response.nextPage,
+          nextPage: action.pageNumber + 1,
           pageCount: state.pageCount + 1
         }
       case failureType:

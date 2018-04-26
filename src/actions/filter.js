@@ -1,6 +1,6 @@
 import { CALL_API, Schemas } from '../middleware/api'
 import { decamelizeKeys, camelize } from 'humps'
-import values from 'lodash/values'
+import {values, keys} from 'lodash'
 
 export const FETCH_TUTOR_ACCOUNTS_REQUEST = 'FETCH_TUTOR_ACCOUNTS'
 export const FETCH_TUTOR_ACCOUNTS_SUCCESS = 'FETCH_TUTOR_ACCOUNTS_SUCCESS'
@@ -14,7 +14,7 @@ export const REMOVE_FILTER_FAILURE = 'REMOVE_FILTER_FAILURE'
 
 const fetchTutorAccounts = (pageNumber, filters) => ({
   pageNumber,
-  filterKey: filters ? camelize(values(filters).join('')) : 'All',
+  filterKey: filters ? camelize(values(keys(filters).sort().reduce((r, k) => (r[k] = filters[k], r), {})).join('')) : 'All',
   [CALL_API]: {
     types: [FETCH_TUTOR_ACCOUNTS_REQUEST, FETCH_TUTOR_ACCOUNTS_SUCCESS, FETCH_TUTOR_ACCOUNTS_SUCCESS],
     endpoint: `tutor_accounts`,
@@ -25,10 +25,15 @@ const fetchTutorAccounts = (pageNumber, filters) => ({
 
 export const loadTutorAccounts = (filters = null, pageNumber = 1) => (dispatch, getState) => {
   const {
-    tutorAccounts
+    filter
   } = getState()
-  console.log('ACCOUNTS', tutorAccounts)
-  dispatch(fetchTutorAccounts(pageNumber, filters))
+
+  dispatch({
+    type: SET_FILTERS,
+    filters: filters ? filters : {}
+  })
+  
+  dispatch(fetchTutorAccounts(filter.nextPage, filters))
 }
 
 export const clearFilters = () => (dispatch) => {
@@ -40,6 +45,6 @@ export const clearFilters = () => (dispatch) => {
 export const setFilters = (filters) => (dispatch, getState) => {
   dispatch({
     type: SET_FILTERS,
-    filters
+    filters: filters ? filters : {}
   })
 }

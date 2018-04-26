@@ -5,10 +5,10 @@ import SelectfieldGroup from '../components/SelectfieldGroup'
 import validateTutorAccountInput from '../validations/tutorAccountValidations'
 import PropTypes from 'prop-types'
 import AvatarInputView from './AvatarInputView'
-import omit from 'lodash/omit'
-import merge from 'lodash/merge'
+import { merge, lowerCase, omit, isEmpty, findLast, values, flattenDeep} from 'lodash'
 import * as moment from 'moment'
 import 'moment/locale/zh-cn'
+import chinaDistricts from '../chinaCities'
 const countries = require("country-list")()
 
 class TutorAccountForm extends Component {
@@ -26,6 +26,7 @@ class TutorAccountForm extends Component {
       regionId: '',
       occupation: '',
       createdAt: '',
+      district: '',
       errors: {},
       saving: false
     }
@@ -53,10 +54,6 @@ class TutorAccountForm extends Component {
     this.setupLocale()
   }
 
-  componentWillReceiveProps() {
-    this.setupLocale()
-  }
-
   onSubmit = (e) => {
     e.preventDefault()
     const { updateUserAccount, user} = this.props
@@ -68,6 +65,7 @@ class TutorAccountForm extends Component {
   }
 
   componentWillReceiveProps() {
+    this.setupLocale()
     const { saving } = this.state
     const { hasUpdated } = this.props
     if (hasUpdated && saving) {
@@ -77,11 +75,14 @@ class TutorAccountForm extends Component {
 
   render() {
     const { translate, currentLanguage, isUpdating, hasUpdated, serverErrors, regions, resetAccount } = this.props
-    const { firstName, lastName, email, introduction, phoneNumber, weiboUrl, wechatId, regionId, countryOfOrigin, occupation, errors, saving } = this.state
+    const { firstName, lastName, email, introduction, phoneNumber, weiboUrl, wechatId, regionId, countryOfOrigin, district, occupation, errors, saving } = this.state
+
     const combinedErrors = merge(errors, serverErrors)
     const countryNames = countries.getNames()
+    const region = findLast(regions, (n) => n.value === regionId)
+    const districtList = typeof (region) !== 'undefined' ? chinaDistricts[region.name] : flattenDeep(values(chinaDistricts))
+ 
     const createdAt = moment(this.state.createdAt).format('LL')
-
     if (hasUpdated && saving) {
       this.props.history.push({ pathname: '/setup-courses', state: {} })
       resetAccount()
@@ -156,12 +157,12 @@ class TutorAccountForm extends Component {
               <div className="col-12 px-3 mt-md-5">
                 <TextfieldGroup
                   error={this.getTranslation(combinedErrors.weibo)}
-                  value={weiboUrl}
+                  value={weiboUrl} 
                   onChange={this.onChange}
                   field='weiboUrl'
                   type='text'
                   label={translate('userFields.weibo')}
-                />
+                /> 
                 <TextfieldGroup
                   error={this.getTranslation(combinedErrors.wechatId)}
                   value={wechatId}
@@ -178,6 +179,15 @@ class TutorAccountForm extends Component {
                   options={regions}
                   type='text'
                   label={translate('userFields.region')}
+                />
+                <SelectfieldGroup
+                  error={this.getTranslation(combinedErrors.district)}
+                  value={district}
+                  onChange={this.onChange}
+                  field='district'
+                  options={districtList}
+                  type='text'
+                  label={translate('userFields.district')}
                 />
                 <SelectfieldGroup
                   error={this.getTranslation(combinedErrors.countryOfOrigin)}

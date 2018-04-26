@@ -1,0 +1,62 @@
+{
+  "Shanghai, China": [
+    "Yangpu",
+    "Pudong",
+    "Minhang",
+    "Baoshan",
+    "Jiading",
+    "Jinshan",
+    "Songjiang",
+    "Qingpu",
+    "Fengxian",
+    "Huangpu",
+    "Xuhui",
+    "Changning",
+    "Jing'an",
+    "Putuo",
+    "Zhabei"
+  ],
+  "Nanjing, China": [
+    "Xuanwu",
+    "Qinhuai",
+    "Jianye",
+    "Gulou",
+    "Pukou",
+    "Qixia",
+    "Yuhuatai",
+    "Jiangning",
+    "Luhe",
+    "Lishui"
+  ],
+  "Beijing, China": [
+    "Dongcheng",
+    "Xicheng",
+    "Chaoyang",
+    "Haidian",
+    "Fengtai",
+    "Shijingshan",
+    "Tongzhou",
+    "Shunyi",
+    "Changping",
+    "Daxing",
+    "Mentougou",
+    "Fangshan",
+    "Pinggu",
+    "Huairo"
+  ],
+  "Wuhan, China": [
+    "Jiang'an",
+    "Jianghan",
+    "Hanyang",
+    "Wuchang",
+    "Qingshan",
+    "Hongshan",
+    "Dongxihu",
+    "Hannan",
+    "Caidian",
+    "Jiangxia",
+    "Huangpi",
+    "Xinzhou",
+    "Qiaokou"
+  ]
+}

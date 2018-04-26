@@ -1,5 +1,6 @@
 import { CALL_API, Schemas } from '../middleware/api'
 import { decamelizeKeys } from 'humps'
+import { setActiveLanguage } from 'react-localize-redux'
 
 export * from './filter'
 export * from './navigation'
@@ -289,4 +290,11 @@ const destroyCourse = (courseForm) => ({
 
 export const deleteCourse = (courseForm) => (dispatch) => {
   dispatch(destroyCourse(courseForm))
+}
+
+export const SET_LOCALE = 'SET_LOCALE'
+
+export const setActiveLocale = (locale) => (dispatch) => {
+  localStorage.setItem('locale', locale)
+  dispatch(setActiveLanguage(locale))
 }

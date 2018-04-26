@@ -32,6 +32,4 @@ DatePickerTextField.prototypes = {
   locale: PropTypes.string
 }
 
-
-
 export default DatePickerTextField

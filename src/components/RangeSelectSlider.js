@@ -8,28 +8,40 @@ class RangeSelectSlider extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: { min: 2, max: 10 },
+      value: {min: 51, max: 999}
     }
+    super(props)
   }
 
   onChange = (value) => {
     const { handleFilter } = this.props
-    this.setState({ value })
+    this.setState({value})
+  }
+  onChangeComplete = (value) => {
+    const { handleFilter } = this.props
     handleFilter({priceRange: values(value)})
+  }
+
+  componentDidMount() {
+    const { selectedPriceRange = [51, 999]  } = this.props
+    this.setState({ 'min': selectedPriceRange[0], max: selectedPriceRange[1] })
   }
   
   render () {
-    const { title } = this.props
+    const { title, selectedPriceRange = [51,999] } = this.props
     const header = title ? <NavHeader title={title} /> : null
+    const value = { 'min': selectedPriceRange[0], max: selectedPriceRange[1]}
     return (
       <div>
         {header}
-        <div className='filter-group' style={{ position: 'relative', padding: '35px 15px'}}>
+        <div className='filter-group' style={{ position: 'relative', padding: '35px 22px'}}>
           <InputRange
-            maxValue={20}
-            minValue={0}
+            maxValue={1000}
+            minValue={50}
+            formatLabel={(value) => `${value}¥`}
             value={this.state.value}
-            onChange={this.onChange} />
+            onChangeComplete={this.onChangeComplete}
+            onChange={this.onChange}/>
         </div>
       </div>
     )
@@ -38,6 +50,7 @@ class RangeSelectSlider extends Component {
 
 RangeSelectSlider.prototypes = {
   label: PropTypes.string,
+  selectedPriceRange: PropTypes.array,
   handleFilter: PropTypes.func,
 }
 
