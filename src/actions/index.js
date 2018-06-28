@@ -4,6 +4,11 @@ import { setActiveLanguage } from 'react-localize-redux'
 
 export * from './filter'
 export * from './navigation'
+export * from './modals'
+export * from './menus'
+export * from './emails'
+export * from './bookings'
+export * from './passwords'
 
 export const USERS_REQUEST = 'USERS_REQUEST'
 export const USERS_SUCCESS = 'USERS_SUCCESS'
@@ -37,7 +42,7 @@ const postSignUp = (signUpForm) => ({
     types: [CREATE_USER_REQUEST, CREATE_USER_SUCCESS, CREATE_USER_FAILURE],
     endpoint: 'users',
     method: 'POST',
-    schema: Schemas.ACCOUNT,
+    schema: Schemas.USER,
     data: decamelizeKeys(signUpForm)
   }
 })
@@ -47,6 +52,7 @@ export const signUpUser = (signUpForm) => (dispatch, getState) => {
 }
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
+export const LOGOUT_USER = 'LOGOUT_USER'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
@@ -61,11 +67,26 @@ const postLogin = (loginForm) => ({
   }
 })
 
+export const loginUser = (loginForm) => (dispatch, getState) => {
+  dispatch(postLogin(loginForm))
+}
+
 export const setCurrentUser = user => {
   return {
     type: SET_CURRENT_USER,
     data: user
   }
+}
+
+export const logoutUser = () => {
+  return {
+    type: LOGOUT_USER,
+  }
+}
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('jwtToken') 
+  dispatch(logoutUser())
 }
 
 export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'
@@ -297,4 +318,130 @@ export const SET_LOCALE = 'SET_LOCALE'
 export const setActiveLocale = (locale) => (dispatch) => {
   localStorage.setItem('locale', locale)
   dispatch(setActiveLanguage(locale))
+}
+
+export const CREATE_STUDENT_REQUEST = 'CREATE_STUDENT_REQUEST'
+export const CREATE_STUDENT_SUCCESS = 'CREATE_STUDENT_SUCCESS'
+export const CREATE_STUDENT_FAILURE = 'CREATE_STUDENT_FAILURE'
+
+const postStudent = (data) => ({
+  [CALL_API]: {
+    types: [CREATE_STUDENT_REQUEST, CREATE_STUDENT_SUCCESS, CREATE_STUDENT_FAILURE],
+    endpoint: 'students',
+    method: 'POST',
+    schema: Schemas.STUDENT,
+    data: decamelizeKeys(data),
+  }
+})
+
+export const createStudent = (data) => (dispatch) => {
+  dispatch(postStudent(data))
+}
+
+export const REVIEWS_REQUEST = 'REVIEWS_REQUEST'
+export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS'
+export const REVIEWS_FAILURE = 'REVIEWS_FAILURE'
+
+const fetchReviews = (tutorAccountId, pageNumber) => ({
+  tutorAccountId,
+  pageNumber,
+  [CALL_API]: {
+    types: [REVIEWS_REQUEST, REVIEWS_SUCCESS, REVIEWS_FAILURE],
+    endpoint: `reviews/tutor/${tutorAccountId}`,
+    schema: Schemas.REVIEW_ARRAY,
+    data: decamelizeKeys({pageNumber, pageSize: 10})
+  }
+})
+
+export const loadReviewsForAccount = (tutorAccountId, pageNumber = 1) => (dispatch, getState) => {
+  const {
+    nextPage = 1,
+    pageCount = 0
+  } = getState().pagination.paginatedReviews[tutorAccountId] || {}
+  if ((pageCount > 0 && !nextPage) || pageNumber < nextPage ) {
+    return null
+  }
+
+  dispatch(fetchReviews(tutorAccountId, nextPage))
+}
+
+export const CREATE_RATING_REQUEST = 'CREATE_RATING_REQUEST'
+export const CREATE_RATING_SUCCESS = 'CREATE_RATING_SUCCESS'
+export const CREATE_RATING_FAILURE = 'CREATE_RATING_FAILURE'
+
+const postRating = (ratingForm) => ({
+  [CALL_API]: {
+    types: [CREATE_RATING_REQUEST, CREATE_RATING_SUCCESS, CREATE_RATING_FAILURE],
+    endpoint: 'ratings',
+    method: 'POST',
+    schema: Schemas.RATING,
+    data: decamelizeKeys(ratingForm)
+  }
+})
+
+export const createRating = (ratingForm) => (dispatch) => {
+  dispatch(postRating(ratingForm))
+}
+
+export const TUTOR_ACCOUNT_REQUEST = 'TUTOR_ACCOUNT_REQUEST'
+export const TUTOR_ACCOUNT_SUCCESS = 'TUTOR_ACCOUNT_SUCCESS'
+export const TUTOR_ACCOUNT_FAILURE = 'TUTOR_ACCOUNT_FAILURE'
+
+/*
+  TutorAccount
+*/
+
+const fetchTutorAccount = (tutorAccountId) => ({
+  [CALL_API]: {
+    types: [TUTOR_ACCOUNT_REQUEST, TUTOR_ACCOUNT_SUCCESS, TUTOR_ACCOUNT_FAILURE],
+    endpoint: `tutor_accounts/${tutorAccountId}`,
+    schema: Schemas.TUTOR_ACCOUNT
+  }
+})
+
+export const loadTutorAccount = (tutorAccountId) => (dispatch, getState) => {
+  // if (typeof(getState().entities.tutorAccounts[`${tutorAccountId}`]) !== 'undefined') {
+  //   return null
+  // }
+  dispatch(fetchTutorAccount(tutorAccountId))
+}
+
+
+export const  STUDENTS_REQUEST = 'STUDENTS_REQUEST'
+export const  STUDENTS_SUCCESS = 'STUDENTS_SUCCESS'
+export const  STUDENTS_FAILURE = 'STUDENTS_FAILURE'
+
+const fetchStudents = (userId) => ({
+  [CALL_API]: {
+    types: [STUDENTS_REQUEST, STUDENTS_SUCCESS, STUDENTS_FAILURE],
+    endpoint: `students/user/${userId}`,
+    schema: Schemas.STUDENT_ARRAY
+  }
+})
+
+export const loadStudentsForUser = (userId) => (dispatch) => {
+  dispatch(fetchStudents(userId))
+}
+
+export const  STUDENT_REQUEST = 'STUDENT_REQUEST'
+export const  STUDENT_SUCCESS = 'STUDENT_SUCCESS'
+export const  STUDENT_FAILURE = 'STUDENT_FAILURE'
+
+const fetchStudent = (studentId) => ({
+  [CALL_API]: {
+    types: [STUDENT_REQUEST, STUDENT_SUCCESS, STUDENT_FAILURE],
+    endpoint: `students/${studentId}`,
+    schema: Schemas.STUDENT
+  }
+})
+
+export const loadStudent = (studentId) => (dispatch, getState) => {
+  // const {
+  //   entities: { students }
+  // } = getState()
+  // const student = students[studentId] || null
+  // if (student) {
+  //   return null
+  // }
+  dispatch(fetchStudent(studentId))
 }

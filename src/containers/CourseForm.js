@@ -159,7 +159,7 @@ class CourseForm extends Component {
               value={subject}
               onChange={this.onChange}
               field='subject'
-                options={subjectOptions}
+              options={subjectOptions}
               type='text'
               label={translate('courseFields.language')}
             />

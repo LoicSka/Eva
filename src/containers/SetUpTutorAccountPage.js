@@ -6,10 +6,10 @@ import { loadRegions, updateUserAccount, resetAccount } from '../actions'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import TutorAccountForm from './TutorAccountForm'
 import values from 'lodash/values'
+import ThumbnailAvatar from '../components/ThumbnailAvatar'
 
 class SetUpTutorAccountPage extends Component {
-  
-  componentDidMount() {
+  componentDidMount = () => {
     const { loadRegions } = this.props
     loadRegions()
   }
@@ -30,9 +30,32 @@ class SetUpTutorAccountPage extends Component {
     }
 
     return (
-      <div className="container" style={{ 'padding': 0 }}>
-        <div className={`row panel-ctn py-3 justify-content-center align-items-center ${currentLanguage}`}>
-          <div className="panel col-11 col-md-9">
+      <div className="container my-4">
+        <div className={`row ${currentLanguage}`}>
+          <div className="col-12 col-md-3 my-4 ">
+          <div className="d-flex flex-row mb-2">
+              <div>
+                <ThumbnailAvatar imageSrc={user.avatarUrl} width={45} height={45}/>
+              </div>
+              <div className="ml-2 px-0">
+                <div className="user-details py-1">
+                  <h5 className='m-0'>{user.fullName}</h5>
+                  <p style={{fontSize: '.9rem'}} className='m-0'>{translate('account.edit')}</p>
+                </div>
+              </div>
+            </div>
+            <div className="card bordered">
+              <div className="card-body">
+                <nav className="nav flex-column">
+                  <a className="nav-link active" href="#">Profile</a>
+                  <a className="nav-link disabled" href="#">Passwords</a>
+                  <a className="nav-link disabled" href="#">Link</a>
+                  <a className="nav-link disabled" href="#">Disabled</a>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-md-9 my-4 pl-4">
             <TutorAccountForm resetAccount={resetAccount} history={history} serverErrors={errors} hasUpdated={hasUpdated} isUpdating={isUpdating} regions={regions} currentLanguage={currentLanguage} user={user} updateUserAccount={updateUserAccount} translate={translate}/>
           </div>
         </div>

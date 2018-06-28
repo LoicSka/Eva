@@ -22,6 +22,10 @@ export default function validateTutorAccountInput(data) {
   if (validator.isEmpty(data.introduction)) {
     errors.introduction = 'errors.user.introduction.empty';
   }
+
+  if (validator.isEmpty(data.gender)) {
+    errors.gender = 'errors.user.gender.empty';
+  }
   
   if (data.introduction.length > 500) {
     errors.introduction = 'errors.user.introduction.invalid';
@@ -31,8 +35,12 @@ export default function validateTutorAccountInput(data) {
     errors.phoneNumber = 'errors.user.phoneNumber.empty';
   }
 
-  if (validator.isEmpty(data.occupation)) {
-    errors.occupation = 'errors.user.occupation.empty';
+  if (validator.isEmpty(data.password)) {
+    errors.phoneNumber = 'errors.user.password.empty';
+  }
+
+  if (validator.isEmpty(data.countryOfOrigin)) {
+    errors.countryOfOrigin = 'errors.user.countryOfOrigin.empty';
   }
 
   if (validator.isEmpty(data.regionId)) {

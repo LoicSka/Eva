@@ -19,7 +19,7 @@ class SelectfieldGroup extends Component {
       )
     })
 
-    optionValues.splice(0, 0, <option onChange={onChange} value={defaultValue.value}>{defaultValue.name}</option>)
+    optionValues.splice(0, 0, <option key={defaultValue.value} onChange={onChange} value={defaultValue.value}>{defaultValue.name}</option>)
     const labelView = label ? <label>{label}</label> : null
     const subLabelView = subLabel ? <p className='sub-label'>{subLabel}</p> : null
     return (
@@ -51,10 +51,7 @@ SelectfieldGroup.propTypes = {
   label: PropTypes.string,
   subLabel: PropTypes.string,
   layout: PropTypes.number,
-  value: 
-    PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number]),
+  value: PropTypes.any,
   error: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,

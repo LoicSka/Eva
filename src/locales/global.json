@@ -5,12 +5,12 @@
       "立即注册并开始使用!"
     ],
     "introTitle": [
-      "Find the best language tutors in your area for one on one lessons.",
-      "Find the best language tutors in your area for one on one lessons."
+      "Find the best tutors in your area for one on one lessons.",
+      "Find the best tutors in your area for one on one lessons."
     ],
     "introSubtitle": [
-      "Browse the best language tutors in your area and get paired with the best match.",
-      "Browse the best language tutors in your area and get paired with the best match."
+      "We match you with tutors in your area who are best suited for your tutoring needs.",
+      "We match you with tutors in your area who are best suited for your tutoring needs."
     ],
     "startTitle": [
       "Let's get started!",
@@ -21,13 +21,105 @@
       "Help us select the best tutor for you"
     ],
     "joiningAs": [
-      "I'm joiing Eva 妈妈 as a:",
-      "I'm joiing Eva 妈妈 as a:"
+      "I'm joigning Eva 妈妈 as a:",
+      "I'm joigning Eva 妈妈 as a:"
+    ],
+    "buttonTitle": [
+      "Get started",
+      "Get started"
+    ],
+    "tutorIntro": {
+      "1": [
+        "I've been in Shanghai for 3 years and tutoring for the past 5 years. I've always had a passion for kids and education in general so when I got rhe opportunity to teach I took it right away it's always very rewarding for me to take a student from 0 to 1.",
+        "I've been in Shanghai for 3 years and tutoring for the past 5 years. I've always had a passion for kids and education in general so when I got rhe opportunity to teach I took it right away it's always very rewarding for me to take a student from 0 to 1."
+      ],
+      "2": [
+        "I recently started tutoring my friends to help them pass their Toefl and got a few more people interested so I started doing it as a part time job/hobby EvaMAMA is a way for me to focus on the teaching and not so much on the rest, and it's been amazing so far.",
+        "I recently started tutoring my friends to help them pass their Toefl and got a few more people interested so I started doing it as a part time job/hobby EvaMAMA is a way for me to focus on the teaching and not so much on the rest, and it's been amazing so far."
+      ],
+      "4": [
+        "I've been in Shanghai for 3 years and tutoring for the past 5 years. I've always had a passion for kids and education in general so when I got rhe opportunity to teach I took it right away it's always very rewarding for me to take a student from 0 to 1.",
+        "I've been in Shanghai for 3 years and tutoring for the past 5 years. I've always had a passion for kids and education in general so when I got rhe opportunity to teach I took it right away it's always very rewarding for me to take a student from 0 to 1."
+      ],
+      "3": [
+        "I recently started tutoring my friends to help them pass their Toefl and got a few more people interested so I started doing it as a part time job/hobby EvaMAMA is a way for me to focus on the teaching and not so much on the rest, and it's been amazing so far.",
+        "I recently started tutoring my friends to help them pass their Toefl and got a few more people interested so I started doing it as a part time job/hobby EvaMAMA is a way for me to focus on the teaching and not so much on the rest, and it's been amazing so far."
+      ]
+    }
+
+    
+  },
+  "footer": {
+    "slogan": [
+      "Find the right tutor for you anywhere",
+      "Find the right tutor for you anywhere"
+    ],
+    "copyright": [
+      "Copyright ©2018 721 Ltd. All rights reserved.",
+      "Copyright ©2018 721 Ltd. All rights reserved."
+    ],
+    "features": [
+      "Features",
+      "Features"
+    ],
+    "findATutor": [
+      "Find a tutor",
+      "Find a tutor"
+    ],
+    "becomeATutor": [
+      "Become a tutor",
+      "Become a tutor"
+    ],
+    "aboutUs": [
+      "About us",
+      "About us"
+    ],
+    "pricing": [
+      "Pricing",
+      "Pricing"
+    ],
+    "help": [
+      "Help",
+      "Help"
+    ],
+    "emailUs": [
+      "Email us",
+      "Email us"
+    ],
+    "privacy": [
+      "Privacy",
+      "Privacy"
+    ],
+    "terms": [
+      "Terms",
+      "Terms"
+    ],
+    "company": [
+      "Company",
+      "Company"
+    ]
+  },
+  "state": {
+    "pending": [
+      "pending",
+      "pending"
+    ],
+    "confirmed": [
+      "confirmed",
+      "confirmed"
+    ],
+    "canceled": [
+      "canceled",
+      "canceled"
+    ],
+    "declined": [
+      "declined",
+      "declined"
     ]
   },
   "userFields": {
     "email": [
-      "Email",
+      "Email address",
       "电子邮件"
     ],
     "firstName": [
@@ -38,6 +130,10 @@
       "Last name",
       "姓氏"
     ],
+    "fullName": [
+      "Enter full name",
+      "Enter full name"
+    ],
     "phoneNumber": [
       "Phone number",
       "Phone number"
@@ -46,17 +142,21 @@
       "Short intro",
       "Short intro"
     ],
+    "teachingExperience": [
+      "Teaching experience",
+      "Teaching experience"
+    ],
     "subIntro": [
       "Write a short introduction of yourself, your background etc…",
       "Write a short introduction of yourself, your background etc…"
     ],
     "weibo": [
-      "Your Weibo link",
-      "Your Weibo link"
+      "Weibo url",
+      "Weibo url"
     ],
     "wechatId": [
-      "Your Wechat Id",
-      "Your Wechat Id"
+      "Wechat Id",
+      "Wechat Id"
     ],
     "region": [
       "Where do you live?",
@@ -66,22 +166,167 @@
       "Where are you from?",
       "Where are you from?"
     ],
+    "gender": [
+      "Gender",
+      "Gender"
+    ],
+    "male": [
+      "Male",
+      "Male"
+    ],
+    "female": [
+      "Female",
+      "Female"
+    ],
     "district": [
       "Which district?",
       "Which district?"
+    ],
+    "studentName": [
+      "Student name",
+      "Student name"
+    ],
+    "age":[
+      "Age",
+      "Age"
+    ],
+    "cost":[
+      "Cost",
+      "Cost"
+    ],
+    "address":[
+      "Address",
+      "Address"
+    ],
+    "ageGroup":[
+      "Age group",
+      "Age group"
+    ],
+    "duration": [
+      "Duration",
+      "Duration"
+    ],
+    "hourlyRate": [
+      "Hourly rate",
+      "Hourly rate"
     ],
     "occupation": [
       "Occupation",
       "Occupation"
     ],
     "createPassword": [
-      "Create password",
-      "选择一个密码"
+      "Password",
+      "密码"
     ],
     "passwordDesc": [
       "Passwords should be at least 6 characters long and should contain a mixture of letters, numbers, and other characters.",
       "密码至少应为8个字符，并且应包含字母，数字和其他字符的混合。"
+    ],
+    "password": [
+      "Password",
+      "Password"
+    ],
+    "passwordConfirm": [
+      "Confirm password",
+      "Confirm password"
+    ],
+    "countryOfOrigin": [
+      "Country of origin",
+      "Country of origin"
+    ],
+    "avatar": [
+      "Upload new image",
+      "Upload new image"
+    ],
+    "subject": [
+      "Tutoring subject",
+      "Tutoring subject"
     ]
+  },
+  "bookingFields": {
+    "address": [
+      "Meeting Address",
+      "Meeting Address"
+    ],
+    "phoneNumber": [
+      "Phone number",
+      "Phone number"
+    ],
+    "date": [
+      "Select Date",
+      "Select Date"
+    ],
+    "weekdays": [
+      "Select week days",
+      "Select week days"
+    ],
+    "from": [
+      "From",
+      "From"
+    ],
+    "to": [
+      "To",
+      "To"
+    ]
+  },
+  "steps": {
+    "step1": {
+      "title": [
+        "Create an account",
+        "Create an account"
+      ],
+      "content": [
+        "It only takes a few seconds to setup your account.",
+        "It only takes a few seconds to setup your account."
+      ],
+      "link": [
+        "Sign up now",
+        "Sign up now"
+      ]
+    },
+    "step2": {
+      "title": [
+        "Answer our survey",
+        "Answer our survey"
+      ],
+      "content": [
+        "Answer a few questions to help us find the right tutor for your needs",
+        "Answer a few questions to help us find the right tutor for your needs"
+      ],
+      "link": [
+        "Answer the survey",
+        "Answer the survey"
+      ]
+    },
+    "step3": {
+      "title": [
+        "Get matched",
+        "Get matched"
+      ],
+      "content": [
+        "We match you with a the best tutor for you near you.",
+        "We match you with a the best tutor for you near you."
+      ],
+      "link": [
+        "Find your match",
+        "Find your match"
+      ]
+    },
+    "step4": {
+      "title": [
+        "Book a class",
+        "Book a class"
+      ],
+      "content": [
+        "Schedule your first class and start learning as soon as you want.",
+        "Schedule your first class and start learning as soon as you want."
+      ],
+      "link": [
+        "Book a class now",
+        "Book a class now"
+      ]
+    }
+
   },
   "courseFields": {
     "title": [
@@ -194,212 +439,339 @@
     }
   },
   "userActions": {
-    "signUp": [
+    "signup": [
       "Sign up",
-      "注册。"
+      "注册"
+    ],
+    "forgotPassword": [
+      "Forgot your password?",
+      "Forgot your password?"
+    ],
+    "clickHere": [
+      "Click here to reset it.",
+      "Click here to reset it."
+    ],
+    "resetPassword": [
+      "Reset password",
+      "Reset password"
+    ],
+    "login": [
+      "Log in",
+      "Log in"
     ],
     "signingUp": [
       "Signing up ...",
       "Signing up ..."
     ],
+    "logingIn": [
+      "Loging in ...",
+      "Loging in ..."
+    ],
     "agreed": [
       "You are agreeing to our.",
       "You are agreeing to our"
+    ],
+    "loadMore": [
+      "Load more",
+      "Load more"
     ],
     "edit": [
       "Edit",
       "Edit"
     ],
+    "done": [
+      "Done",
+      "Done"
+    ],
     "save": [
       "Save",
       "Save"
+    ],
+    "continue": [
+      "Continue",
+      "Continue"
+    ],
+    "submitSurvey": [
+      "Submit survey",
+      "Submit survey"
     ],
     "saving": [
       "Saving...",
       "Saving..."
     ],
     "terms": [
-      "Terms and Services.",
+      "Terms and services.",
       "条款和服务。"
+    ],
+    "confirm": [
+      "Confirm",
+      "Confirm"
+    ],
+    "decline": [
+      "Decline",
+      "Decline"
+    ],
+    "cancel": [
+      "Cancel",
+      "Cancel"
     ]
   },
   "navbar": {
-    "searchPlaceholder": [
-      "Search tutors",
-      "Search tutors"
-    ]
-  },
-  "errors": {
-    "server": {
-      "general": [
-        "Something went horribly wrong.",
-        "Something went horribly wrong."
+    "links": {
+      "dashboard": [
+        "My dashboard",
+        "My dashboard"
       ],
-      "isAlreadyTaken": [
-        "It seems someone is already using this email.",
-        "It seems someone is already using this email."
+      "find": [
+        "Find a tutor",
+        "Find a tutor"
+      ],
+      "language": [
+        "Switch to 中文  🇨🇳",
+        "Switch to 🇬🇧 "
+      ],
+      "profile": [
+        "Profile settings",
+        "Profile settings"
+      ],
+      "logout": [
+        "Log out",
+        "Log out"
+      ],
+      "bookings": [
+        "All bookings",
+        "All bookings"
+      ],
+      "addStudent": [
+        "Add a student",
+        "Add a student"
       ]
-    },
-    "file": {
-      "rejected": [
-        "This file is invalid, please check its format and size",
-        "This file is invalid, please check its format and size"
-      ]
-    },
-    "oops": [
-      "Oops",
-      "Oops"
-    ],
-    "failedToFetch": [
-      "Something went horribly wrong.",
-      "Something went horribly wrong."
-    ],
-    "badResponse": [
-      "Something Bad happened! try again.",
-      "Something Bad happened! try again."
-    ],
-    "course": {
-      "title": {
-        "empty": [
-          "Please provide a valid title.",
-          "Please provide a valid title."
-        ]
-      },
-      "subjectId": {
-        "empty": [
-          "Please select a valid languages.",
-          "Please select a valid languages."
-        ]
-      },
-      "ageGroup": {
-        "empty": [
-          "Please select a valid age group.",
-          "Please select a valid age group."
-        ]
-      },
-      "expertise": {
-        "empty": [
-          "Please select a valid expertise.",
-          "Please select a valid expertise."
-        ]
-      },
-      "teachingExperience": {
-        "empty": [
-          "Please select a time period.",
-          "Please select a time period."
-        ]
-      },
-      "hourlyRate": {
-        "empty": [
-          "Please specify an hourly rate.",
-          "Please specify an hourly rate."
-        ]
-      }
-    },
-    "user": {
-      "email": {
-        "invalid": [
-          "This doesn't look like an email.",
-          "错误的电子邮件。"
-        ],
-        "empty": [
-          "Please provide a valid email.",
-          "请提供有效的电子邮件。"
-        ]
-      },
-      "firstName": {
-        "empty": [
-          "Please provide a valid first name.",
-          "请提供有效的名字。"
-        ]
-      },
-      "lastName": {
-        "empty": [
-          "Please provide a valid last name.",
-          "请提供有效的姓氏。"
-        ]
-      }
-      ,
-      "password": {
-        "empty": [
-          "Please provide a valid password.",
-          "请提供有效的姓氏。"
-        ],
-        "invalid": [
-          "Your password needs to be at least 6 characters long.",
-          "您的密码至少需要6个字符。"
-        ]
-      },
-      "introduction": {
-        "empty": [
-          "You have to provide a short introduction",
-          "You have to provide a short introduction"
-        ],
-        "invalid": [
-          "Your intoduction should be less than 500 charachters",
-          "Your intoduction should be less than 500 charachters"
-        ]
-      },
-      "phoneNumber": {
-        "empty": [ 
-        "You have to provide a valid phone number",
-        "You have to provide a valid phone number"
-        ]
-      },
-      "occupation": {
-        "empty": [
-          "Please select one of the options",
-          "Please select one of the options"
-        ]
-      },
-      "region": {
-        "empty": [
-          "Please select one of the regions",
-          "Please select one of the regions"
-        ]
-      }
     }
   },
-  "filterNav": {
-    "availability": [
-      "AVAILABITILTY",
-      "AVAILABITILTY"
+  "notes": {
+    "titles": {
+      "done": [
+        "Done",
+        "Done"
+      ],
+      "yay": [
+        "Yay",
+        "Yay"
+      ]
+    },
+    "welcomeEmailSuccess": [
+      "We've sent you your verification email",
+      "We've sent you your verification email"
     ],
-    "priceRange": [
-      "💴 Price range (Rmb/Hour)",
-      "💴 Price range (Rmb/Hour)"
+    "verifyEmailSuccess": [
+      "You've verified your email successfully",
+      "You've verified your email successfully"
     ],
-    "priceRangeSelect": [
-      "Rmb/Hour",
-      "Rmb/Hour"
+    "userUpdateSuccess": [
+      "Your account has been updated.",
+      "Your account has been updated."
     ],
-    "dateFilterLabel": [
-      "📆 Select a day",
-      "📆 Select a day"
+    "bookingUpdateSuccess": [
+      "Your booking has been updated.",
+      "Your booking has been updated."
     ],
-    "subjectFilterLabel": [
-      "🇬🇧 Select a language 🇩🇪",
-      "🇬🇧 Select a language 🇩🇪"
+    "confirmAction": [
+      "Are you sure you want to continue?",
+      "Are you sure you want to continue?"
     ],
-    "regionFilterLabel": [
-      "🌏 Select a city",
-      "🌏 Select a city"
+    "resetPasswordSuccess": [
+      "We've sent you an email with instructions to reset your password.",
+      "We've sent you an email with instructions to reset your password."
     ],
-    "ageGroup": [
-      "🎂 Age group",
-      "🎂 Age group"
+    "22001": [
+      "Something went wrong",
+      "Something went wrong"
+    ]
+},
+"errors": {
+  "server": {
+    "general": [
+      "Something went wrong.",
+      "Something went wrong."
     ],
-    "sortBy": [
-      "👋 Sort by",
-      "👋 Sort by"
+    "isAlreadyTaken": [
+      "It seems someone is already using this email.",
+      "It seems someone is already using this email."
+    ],
+    "noMatch": [
+      "Please check your email and password!",
+      "Please check your email and password!"
     ]
   },
-  "subNav": {
-    "clear": [
-      "clear",
-      "clear"
+  "file": {
+    "rejected": [
+      "This file is invalid, please check its format and size",
+      "This file is invalid, please check its format and size"
     ]
   },
+  "oops": [
+    "Oops",
+    "Oops"
+  ],
+  "failedToFetch": [
+    "It seems you are not conected to the internet.",
+    "It seems you are not conected to the internet."
+  ],
+  "badResponse": [
+    "Something Bad happened! try again.",
+    "Something Bad happened! try again."
+  ],
+  "booking": {
+    "address": {
+      "empty": [
+        "Please provide a valid address",
+        "Please provide a valid address"
+      ]
+    },
+    "phoneNumber": {
+      "empty": [
+        "Please provide a valid phone number",
+        "Please provide a valid phone number"
+      ]
+    },
+    "time": {
+      "empty": [
+        "Please select a time",
+        "Please select a time"
+      ],
+      "invalid": [
+        "The time you provided is invalid",
+        "The time you provided is invalid"
+      ]
+    },
+    "date": {
+      "past": [
+        "Please select a valid time",
+        "Please select a valid time"
+      ]
+    }
+  },
+  "course": {
+    "title": {
+      "empty": [
+        "Please provide a valid title.",
+        "Please provide a valid title."
+      ]
+    },
+    "subjectId": {
+      "empty": [
+        "Please select a valid languages.",
+        "Please select a valid languages."
+      ]
+    },
+    "ageGroup": {
+      "empty": [
+        "Please select a valid age group.",
+        "Please select a valid age group."
+      ]
+    },
+    "expertise": {
+      "empty": [
+        "Please select a valid expertise.",
+        "Please select a valid expertise."
+      ]
+    },
+    "teachingExperience": {
+      "empty": [
+        "Please select a time period.",
+        "Please select a time period."
+      ]
+    },
+    "hourlyRate": {
+      "empty": [
+        "Please specify an hourly rate.",
+        "Please specify an hourly rate."
+      ]
+    }
+  },
+  "user": {
+    "email": {
+      "invalid": [
+        "This doesn't look like an email.",
+        "错误的电子邮件。"
+      ],
+      "empty": [
+        "Please provide a valid email.",
+        "请提供有效的电子邮件。"
+      ]
+    },
+    "firstName": {
+      "empty": [
+        "Please provide a valid first name.",
+        "请提供有效的名字。"
+      ]
+    },
+    "lastName": {
+      "empty": [
+        "Please provide a valid last name.",
+        "请提供有效的姓氏。"
+      ]
+    },
+    "countryOfOrigin": {
+      "empty": [
+        "Please provide a country name.",
+        "Please provide a country name."
+      ]
+    },
+    "password": {
+      "empty": [
+        "Please provide a valid password.",
+        "请提供有效的姓氏。"
+      ],
+      "invalid": [
+        "Your password needs to be at least 6 characters long.",
+        "您的密码至少需要6个字符。"
+      ],
+      "notEqual": [
+        "The passwords provided are not matching.",
+        "The passwords provided are not matching."
+      ]
+    },
+    "passwordConfirm": {
+      "empty": [
+        "Please provide a valid password.",
+        "请提供有效的姓氏。"
+      ],
+      "notEqual": [
+        "The passwords provided are not matching.",
+        "The passwords provided are not matching."
+      ]
+    },
+    "introduction": {
+      "empty": [
+        "You have to provide a short introduction",
+        "You have to provide a short introduction"
+      ],
+      "invalid": [
+        "Your intoduction should be less than 500 charachters",
+        "Your intoduction should be less than 500 charachters"
+      ]
+    },
+    "phoneNumber": {
+      "empty": [ 
+      "You have to provide a valid phone number",
+      "You have to provide a valid phone number"
+      ]
+    },
+    "occupation": {
+      "empty": [
+        "Please select one of the options",
+        "Please select one of the options"
+      ]
+    },
+    "region": {
+      "empty": [
+        "Please select one of the regions",
+        "Please select one of the regions"
+      ]
+    }
+  }
+},
   "tutorAccounts": {
     "classes": [
       "classes",
@@ -417,9 +789,32 @@
       "courses",
       "courses"
     ],
+    "reviews": [
+      "reviews",
+      "reviews"
+    ],
     "bookMe": [
       "BOOK ME",
       "BOOK ME"
+    ],
+    "students": [
+      "students",
+      "students"
+    ],
+    "aboutMe": [
+      "About me",
+      "About me"
+    ],
+    "calendar": [
+      "My calendar",
+      "My calendar"
+    ]
+  },
+
+  "rating": {
+    "comment": [
+      "Leave a review",
+      "Leave a review"
     ]
   },
 
@@ -440,6 +835,540 @@
       "Wuhan",
       "武汉"
     ]
+  },
+  "joinEva": [
+    "Join Eva妈妈 today",
+    "Join Eva妈妈 today"
+  ],
+  "EvaIntro": [
+    "is a platform that matches parents and students to language tutors in their area according to their level and specific needs.",
+    "is a platform that matches parents and students to language tutors in their area according to their level and specific needs."
+  ],
+  "resetYourPassword": [
+    "Reset your password",
+    "Reset your password"
+  ],
+  "LoginToJoinEva": [
+    "Login to join Eva妈妈",
+    "Login to join Eva妈妈"
+  ],
+  "emailConfirm": {
+    "title": [
+      "Confirm your email!",
+      "Confirm your email!"
+    ],
+    "subTitle": [
+      "Your account has been successfully registered. To complete the process please check your email for validation request.",
+      "Your account has been successfully registered. To complete the process please check your email for validation request."
+    ],
+    "buttonTitle": [
+      "Resend email",
+      "Resend email"
+    ]
+  },
+  "accountTypeSelect": {
+    "title": [
+      "I'm joining Eva妈妈 as a...",
+      "I'm joining Eva妈妈 as a..."
+    ],
+    "parent": [
+      "A parent",
+      "A parent"
+    ],
+    "student": [
+      "A student",
+      "A student"
+    ],
+    "tutor": [
+      "A tutor",
+      "A tutor"
+    ],
+    "action": [
+      "Continue",
+      "Continue"
+    ]
+  },
+  "survey": {
+    "introduction": {
+      "question": [
+        "Give a short intro about yourself",
+        "Give a short intro about yourself"
+      ]
+    },
+    "countryOfOrigin": {
+      "question": [
+        "Where are you from (Country name)",
+        "Where are you from (Country name)"
+      ]
+    },
+    "hourlyRate": {
+      "question": [
+        "How much do you charge per hour",
+        "How much do you charge per hour"
+      ]
+    },
+    "phoneNumber": {
+      "question":[
+          "What is your phone number",
+          "What is your phone number"
+        ]
+    },
+    "gender": {
+      "question": {
+          "parent": [
+            "I'm looking for a tutor for my...",
+            "I'm looking for a tutor for my..."
+          ],
+          "student": [
+            "I am a...",
+            "I am a..."
+          ]
+        },
+      "answer": {
+        "parent": {
+          "1": [
+            "Son",
+            "Son" 
+          ],
+          "2": [
+            "Daughter",
+            "Daughter"
+          ]
+        },
+        "student": {
+          "1": [
+            "Male",
+            "Male" 
+          ],
+          "2": [
+            "Female",
+            "Female"
+          ]
+        }
+      }
+    },
+    "ageGroup": {
+      "question": {
+          "parent": [
+            "Which group best fits the students's age?",
+            "Which group best fits the students's age?"
+          ],
+          "student": [
+            "Which group best fits your age?",
+            "Which group best fits your age?"
+          ]
+        },  
+      "answer": {
+        "1": [
+          "Below 3",
+          "Below 3" 
+        ],
+        "2": [
+          "3-5 years old",
+          "3-5 years old"
+        ],
+        "3": [
+          "5-7 years old",
+          "5-7 years old"
+        ],
+        "4": [
+          "7-10 years old",
+          "7-10 years old"
+        ],
+        "5": [
+          "10-13 years old",
+          "10-13 years old"
+        ],
+        "6": [
+          "13-16 years old",
+          "13-16 years old"
+        ],
+        "7": [
+          "Above 16",
+          "Above 16"
+        ],
+        "8": [
+          "Other",
+          "Other"
+        ]
+      }
+    },
+    "weakPoints": {
+      "question": [
+        "What are you looking to improve?",
+        "What are you looking to improve?"
+      ],
+      "answer": {
+        "1": [
+          "Speaking",
+          "Speaking" 
+        ],
+        "2": [
+          "Reading",
+          "Reading "
+        ],
+        "3": [
+          "Writing",
+          "Writing"
+        ],
+        "4": [
+          "Exam practise",
+          "Exam practise"
+        ],
+        "5": [
+          "Interview Preparation",
+          "Interview Preparation"
+        ],
+        "6": [
+          "Other",
+          "Other"
+        ]
+      }
+    },
+    "currentLevel": {
+      "question": {
+        "parent": [
+          "What is their current level?",
+          "What is their current level?"
+        ],
+        "student": [
+          "What is your current level?",
+          "What is your current level?"
+        ]
+      },
+      "answer": {
+        "1": [
+          "Beginner",
+          "Beginner" 
+        ],
+        "2": [
+          "Average",
+          "Average "
+        ],
+        "3": [
+          "Good",
+          "Good"
+        ],
+        "4": [
+          "Excellent",
+          "Excellent"
+        ]
+      }
+    },
+    "fullName": {
+      "question": {
+        "parent": [
+          "What is your son's/daughter's name",
+          "What is your son's/daughter's name"
+        ],
+        "student": [
+          "What is your name",
+          "What is your name"
+        ]
+      }
+    },
+    "region": {
+      "question": [
+        "In which city do you live in?",
+        "In which city do you live in?"
+      ]
+    },
+    "district": {
+      "question": [
+        "In which disctict do you live in?",
+        "In which disctict do you live in?"
+      ]
+    },
+    "tutorGender": {
+      "question": [
+        "The tutor needs to be...",
+        "The tutor needs to be..."
+      ],
+      "answer": {
+        "1": [
+          "Male",
+          "Male" 
+        ],
+        "2": [
+          "Female",
+          "Female "
+        ],
+        "3": [
+          "I don't mind",
+          "I don't mind"
+        ]
+      }
+    },
+    "daysAvailable": {
+      "question": {
+        "parent": [
+          "When is the student free for a lesson?",
+          "When is the student free for a lesson?"
+        ],
+        "student": [
+          "When are you free for a lesson?",
+          "When are you free for a lesson?"
+        ],
+        "tutor": [
+          "When are you available to tutor?",
+          "When are you available to tutor?"
+        ]
+      }
+    },
+    "subject": {
+      "question": {
+        "parent": [
+          "I want my son/daugther to learn...",
+          "I want my son/daugther to learn..."
+        ],
+        "student": [
+          "I want to learn...",
+          "I want to learn..."
+        ],
+        "tutor": [
+          "I am looking to tutor.."
+        ]
+      }
+    },
+    "occupation": {
+      "question": [
+        "Are you tutoring professionally?",
+        "Are you tutoring professionally?"
+      ],
+      "answer": {
+        "1": [
+          "Yes, I do this full time",
+          "Yes, I do this full time" 
+        ],
+        "2": [
+          "No, only part-time",
+          "No, only part-time"
+        ]
+      }
+    },
+    "teachingExperience": {
+      "question": [
+        "Have you tutored before? if so for how long?",
+        "Have you tutored before? if so for how long?"
+      ],
+      "answer": {
+        "1": [
+          "None",
+          "None"
+        ],
+        "2": [
+          "Less than a year",
+          "Less than a year"
+        ],
+        "3": [
+          "1-3 years",
+          "1-3 years"
+        ],
+        "4": [
+          "3-5 years",
+          "3-5 years"
+        ],
+        "5": [
+          "5-10 years",
+          "5-10 years"
+        ],
+        "6": [
+          "10+ years",
+          "10+ years"
+        ]
+      }
+    },
+    "wechatId": {
+      "question": [
+        "Please enter your wechat Id",
+        "Please enter your wechat Id"
+      ]
+    },
+    "levels": {
+      "question": [
+        "What age groups are you comfortable to teach?",
+        "What age groups are you comfortable to teach?"
+      ],
+      "answer": {
+        "1": [
+          "Below 3",
+          "Below 3" 
+        ],
+        "2": [
+          "3-7 years old",
+          "3-7 years old"
+        ],
+        "3": [
+          "7-13 years old",
+          "7-13 years old"
+        ],
+        "4": [
+          "13-17 years old",
+          "13-17 years old"
+        ],
+        "5": [
+          "College/university",
+          "College/university"
+        ],
+        "6": [
+          "Adults",
+          "Adults"
+        ],
+        "7": [
+          "All the above",
+          "All the above"
+        ]
+      }
+    },
+    "weiboUrl": {
+      "question": [
+        "Are you on weibo? if so enter your account url",
+        "Are you on weibo? if so enter your account url"
+      ]
+    },
+    "certifications": {
+      "question": [
+        "Do you have any certificates/degree relevant to tutoring?",
+        "Do you have any certificates/degree relevant to tutoring?"
+      ],
+      "answer": {
+        "1": [
+          "I have a certificate (TOEFL/CELTA/...)",
+          "I have a certificate (TOEFL/CELTA/...)" 
+        ],
+        "2": [
+          "I have a relevant degree",
+          "I have a relevant degree"
+        ],
+        "3": [
+          "I am a native speaker",
+          "I am a native speaker"
+        ],
+        "4": [
+          "It's my second language",
+          "It's my second language"
+        ],
+        "5": [
+          "None of the above",
+          "None of the above"
+        ]
+      }
+    }
+  },
+
+  "account": {
+    "profile": [
+      "Profile",
+      "Profile"
+    ],
+    "passwords": [
+      "Passwords",
+      "Passwords"
+    ],
+    "edit": [
+      "Edit your name, avatar, etc.",
+      "Edit your name, avatar, etc."
+    ]
+  },
+  "dashboard": {
+    "noReviews": [
+      "No reviews yet.",
+      "No reviews yet."
+    ],
+    "noBookings": [
+      "No bookings yet.",
+      "No bookings yet."
+    ],
+    "reviews": [
+      "Reviews",
+      "Reviews"
+    ],
+    "bookings": [
+      "Bookings",
+      "Bookings"
+    ],
+    "me": [
+      "Me",
+      "Me"
+    ],
+    "account": [
+      "Account",
+      "Account"
+    ],
+    "new": [
+      "New",
+      "New"
+    ],
+    "past": [
+      "Past",
+      "Past"
+    ],
+    "canceled": [
+      "Canceled",
+      "Canceled"
+    ],
+    "upcomming": [
+      "Up comming",
+      "Up comming"
+    ],
+    "hours": [
+      "Hours",
+      "Hours"
+    ]
+  },
+  "match": {
+    "titleText": [
+      "Here's Who we found!",
+      "Here's Who we found!"
+    ],
+    "noMatchTitle": [
+      "Sorry, We could not find a match.",
+      "Sorry, We could not find a match!"
+    ],
+    "showMore": [
+      "Show more tutors",
+      "Show more tutors"
+    ],
+    "createNew": [
+      "Create new profile",
+      "Create new profile"
+    ],
+    "noMatchSubTitle": [
+      "We could not find suitable tutors in your area.",
+      "We could not find suitable tutors in your area."
+    ]
+  },
+  "weekDays": {
+    "1": [
+      "Mondays",
+      "Mondays"
+    ],
+    "2": [
+      "Tuesdays",
+      "Tuesdays"
+    ],
+    "3": [
+      "Wednesday",
+      "Wednesday"
+    ],
+    "4": [
+      "Thursdays",
+      "Thursdays"
+    ],
+    "5": [
+      "Fridays",
+      "Fridays"
+    ],
+    "6": [
+      "Saturdays",
+      "Saturdays"
+    ],
+    "7": [
+      "Sundays",
+      "Sundays"
+    ]
+
   }
+
 
 }

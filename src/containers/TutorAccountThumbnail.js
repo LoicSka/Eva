@@ -1,49 +1,47 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import image from '../styles/images/IMG_0296.jpg'
 import { times, constant } from 'lodash'
+import { Link } from 'react-router-dom'
+import Overdrive from 'react-overdrive'
+import * as qs from 'query-string'
+
 import ThumbnailAvatar from '../components/ThumbnailAvatar'
+import RateTutorView from './RateTutorView'
+import NumbersBox from '../components/NumbersBox'
 
 class TutorAccountThumbnail extends Component {
+  handleShowBookingForm = () => {
+    const { tutorAccount: { id, daysAvailable, bookedDays }, studentId, navigateTo } = this.props
+    navigateTo('/match/' + studentId + '?' + qs.stringify({turorAccountId: id, studentId, enabledDays: daysAvailable, bookedDays}))
+  }
+
+  handleShowCalendar = () => {
+    const { tutorAccount: { daysAvailable, bookedDays }, studentId, navigateTo } = this.props
+    navigateTo(`/match/${studentId}?${qs.stringify({calendar: true, enabledDays: daysAvailable, bookedDays})}` )
+  }
 
   render() {
-    const { avatar = image, fullName, age, location, rating, classesCount, experience, coursesCount, isPro, translate } = this.props
-    const stars = times(Number(rating), constant('⭐'))
-    
+    const { tutorAccount: { id, avatarUrl, fullName, district, rating, reviewCount, studentCount, confirmedBookingCount , isPro }, translate, currentLanguage, regions, showTutorView, showTutorCalendar } = this.props
+    const region = regions[this.props.tutorAccount.region]
+    const { cityName } = region
+    const regionName = `${district}, ${cityName[ currentLanguage === 'en' ? 0 : 1 ]}`
     return (
-      <div className='panel thumbnail-ctn'>
-        <div className='thumbnail-bg'></div>
-        <div className='thumbnail-curve'></div>
-        <div className='avatar-ctn'>
-          <ThumbnailAvatar imageSrc={avatar} showProBadge={true} />
-          <div>
-            <p className='text-ctn'><strong>{`${fullName}, ${age}`}</strong></p>
+      <div onClick={showTutorView} className='card thumbnail-ctn'>
+        <div className='card-body avatar-ctn'>
+          <Overdrive id='avatar'>
+            <ThumbnailAvatar width={95} imageSrc={avatarUrl} showProBadge={isPro}/>
+          </Overdrive>
+          <div className='user-dets d-flex flex-column align-items-center justify-content-center mt-2'>
+            <h3 style={{fontSize: '1.4rem'}}>{fullName}</h3>
+            <h4 className='mb-0'>{regionName}</h4>
           </div>
-          <div>
-            <p className='text-ctn'>{location ? `📍${location}` : null}</p>
+          <RateTutorView tutorAccountId={id} rating={rating} currentLanguage={currentLanguage} translate={translate}  />
+          <div className='d-flex flex-row align-items-center justify-content-center mb-4'>
+            <button onClick={this.handleShowBookingForm} className='btn btn-success'>{translate('tutorAccounts.bookMe')}</button>
+            <button onClick={this.handleShowCalendar} style={{fontSize: '1.3rem', paddingLeft: '12px', paddingRight: '12px', paddingTop: '3px', paddingBottom: '1px' }} className='btn btn-default bordered ml-2'>📆</button>
           </div>
-          <div>
-            <p className='text-ctn'>{stars}</p>
-          </div>
-          <div>
-            <button className='btn btn-sm btn-success'>{translate('tutorAccounts.bookMe')}</button>
-          </div>
-          <div className='thumbnail-numbers-ctn'>
-            <div className='thumbnail-number'>
-              <h4>{classesCount}</h4>
-              <p>{coursesCount === 1 ? translate('tutorAccounts.class') : translate('tutorAccounts.classes')}</p>
-            </div>
-            <div className='thumbnail-number'>
-              <h4>{`${experience ? experience : '0-1'}Y`}</h4>
-              <p>{translate('tutorAccounts.experience')}</p>
-            </div>
-            <div className='thumbnail-number'>
-              <h4>{coursesCount}</h4>
-              <p>{coursesCount === 1 ? translate('tutorAccounts.course') : translate('tutorAccounts.courses')}</p>
-            </div>
-          </div>
+          <NumbersBox reviewCount={reviewCount} bookingCount={confirmedBookingCount} studentCount={studentCount} translate={translate} currentLanguage={currentLanguage} size='lg' />
         </div>
       </div>
     )
@@ -51,23 +49,20 @@ class TutorAccountThumbnail extends Component {
 }
 
 TutorAccountThumbnail.propTypes = {
-  avatar: PropTypes.string,
-  fullName: PropTypes.string,
-  age: PropTypes.string,
-  rating: PropTypes.string,
-  classesCount: PropTypes.string,
-  experience: PropTypes.string,
-  coursesCount: PropTypes.string,
-  location: PropTypes.string,
-  isPro: PropTypes.bool,
-  translate: PropTypes.func
+  tutorAccount: PropTypes.object,
+  translate: PropTypes.func,
+  currentLanguage: PropTypes.string,
+  regions: PropTypes.object,
+  navigateTo: PropTypes.func,
+  showTutorView: PropTypes.func
 }
 
-const mapSateToProps = (state) => {
+
+const mapStateToProps = (state, ownProps) => {
+  const { entities: { regions } } = state
   return {
-    translate: getTranslate(state.locale),
-    currentLanguage: getActiveLanguage(state.locale).code
+      regions
   }
 }
 
-export default connect(mapSateToProps)(TutorAccountThumbnail);
+export default connect(mapStateToProps)(TutorAccountThumbnail)

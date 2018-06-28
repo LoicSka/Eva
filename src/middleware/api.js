@@ -2,10 +2,9 @@ import { normalize, schema } from 'normalizr'
 import { camelizeKeys, decamelizeKeys, camelize } from 'humps'
 import forEach from 'lodash/forEach'
 import axios from 'axios'
+import * as qs from 'query-string'
 
-const queryString = require('query-string')
-
-const API_ROOT = 'http://localhost:3000/api/v1/'
+const API_ROOT = `${process.env.REACT_APP_API_URL}/api/v${process.env.REACT_APP_API_VERSION}/`
 const getNextPage = response => {
   const next = response.headers.get('Next')
   if (!next) {
@@ -30,6 +29,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
         body,
         headers,
       }).then(response => response.json().then(json => {
+        console.log('RESPONSE', json);
         if (!response.ok) {
           return Promise.reject({ message: 'server.general'})
         }
@@ -63,7 +63,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
       }))
     default:
       if (data) {
-        let query = queryString.stringify(decamelizeKeys(data))
+        let query = qs.stringify(decamelizeKeys(data))
         fullUrl = `${fullUrl}/?${query}`
       }
       return fetch(fullUrl, {
@@ -111,6 +111,7 @@ const uploadFile = (endpoint, data, method = 'PUT', onUploadProgress, schema) =>
 
   return axios(config).then( response => {
     const { data } = response
+    console.log('DATA', data )
     if (data.status !== '22000') {
       const { validations } = data
       forEach(validations, (value, key) => {
@@ -141,6 +142,14 @@ const tagSchema = new schema.Entity('tags', {}, {
   idAttribute: tag => tag.id
 })
 
+const reviewSchema = new schema.Entity('reviews', {}, {
+  idAttribute: review => review.id
+})
+
+const bookingSchema = new schema.Entity('bookings', {}, {
+  idAttribute: booking => booking.id
+})
+
 const courseSchema = new schema.Entity('courses', {
   tags: [tagSchema],
   subject: subjectSchema
@@ -150,9 +159,34 @@ const courseSchema = new schema.Entity('courses', {
 
 const tutorAccountSchema = new schema.Entity('tutorAccounts', {
   region: regionSchema,
-  courses: [courseSchema]
+  bookings: [bookingSchema]
 }, {
   idAttribute: tutorAccount => tutorAccount.id
+})
+
+const ratingSchema = new schema.Entity('ratings', {
+  tutorAccount: tutorAccountSchema,
+  review: reviewSchema
+}, {
+  idAttribute: rating => rating.id
+})
+
+const studentMatchSchema = new schema.Entity('studentMatches', { 
+  tutorAccount: tutorAccountSchema
+}, {
+  idAttribute: match => match.id
+})
+
+const studentSchema = new schema.Entity('students', {
+  matches: [studentMatchSchema]
+}, {
+  idAttribute: student => student.id
+})
+
+const tutorMatchSchema = new schema.Entity('tutorMatches', { 
+  student: studentSchema
+}, {
+  idAttribute: match => match.id
 })
 
 const userSchema = new schema.Entity('users', {
@@ -175,7 +209,15 @@ export const Schemas = {
   SUBJECT: subjectSchema,
   SUBJECT_ARRAY: [subjectSchema],
   COURSE: courseSchema,
-  COURSE_ARRAY: [courseSchema]
+  COURSE_ARRAY: [courseSchema],
+  STUDENT: studentSchema,
+  STUDENT_ARRAY: [studentSchema],
+  REVIEW: reviewSchema,
+  REVIEW_ARRAY: [reviewSchema],
+  RATING: ratingSchema,
+  RATING_ARRAY: [ratingSchema],
+  BOOKING: bookingSchema,
+  BOOKING_ARRAY: [bookingSchema]
 }
 
 // Action key that carries API call info interpreted by this Redux middleware.
@@ -241,11 +283,6 @@ export default store => next => action => {
       })),
       error => next(actionWith({
         type: failureType,
-        message: {
-          type: 'error',
-          title: 'errors.oops',
-          content: `errors.${camelize(error.message)}` || 'errors.badResponse'
-        },
         errors: error.validations
       }))
     )

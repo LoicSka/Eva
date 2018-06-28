@@ -12,7 +12,8 @@ const accountState = {
 
 const auth = (state = accountState, action) => {
   switch (action.type) {
-    case ActionTypes.LOGIN_REQUEST:
+    case ActionTypes.LOGIN_REQUEST: 
+    case ActionTypes.CREATE_USER_REQUEST:
       return {
         ...state,
         authenticating: true
@@ -22,9 +23,16 @@ const auth = (state = accountState, action) => {
         ...state,
         isUpdating: true
       }
-    case ActionTypes.LOGIN_SUCCESS:
     case ActionTypes.CREATE_USER_SUCCESS:
-      localStorage.setItem('jwtToken', action.response.resu)
+      return {
+        ...state,
+        authenticating: false,
+        isAuthenticated: false,
+        user: camelizeKeys(action.response.result || {})
+      }
+    case ActionTypes.LOGIN_SUCCESS:
+    case ActionTypes.VERIFY_EMAIL_SUCCESS:
+      localStorage.setItem('jwtToken', action.response.result)
       return {
         ...state,
         authenticating: false,
@@ -46,6 +54,7 @@ const auth = (state = accountState, action) => {
         hasUpdated: false,
       }
     case ActionTypes.LOGIN_FAILURE:
+    case ActionTypes.CREATE_USER_FAILURE:
       return {
         ...state,
         authenticating: false,
@@ -64,6 +73,12 @@ const auth = (state = accountState, action) => {
         authenticating: false,
         isUpdating: false,
         hasUpdated: false,
+      }
+    case ActionTypes.LOGOUT_USER:
+      return {
+        ... state,
+        isAuthenticated: false,
+        user: {}
       }
     default: return state
   }

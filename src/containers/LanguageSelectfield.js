@@ -9,7 +9,6 @@ import { filter, find } from 'lodash'
 class LanguageSelectfield extends Component {
   onChange = (e) => {
     const { setActiveLocale } = this.props
-      console.log('LANGUAGES', e.target.value)
     setActiveLocale(e.target.value)
   }
 
@@ -19,10 +18,9 @@ class LanguageSelectfield extends Component {
       const options = filter(localesArray, (locale) => locale.value !== currentLanguage)
       const value = find(localesArray, { value: currentLanguage })
     return (
-      <div className='sort-form-ctn'>
-        <div style={{ marginTop: '17px' }}>
+        <div className='locale-select-ctn'>
           <SelectfieldGroup
-            classNames='sort-form'
+            classNames='locale-select'
             value={value}
             field='value'
             defaultValue={value}
@@ -31,7 +29,6 @@ class LanguageSelectfield extends Component {
             type='text'
           />
         </div>
-      </div>
     )
   }
 }

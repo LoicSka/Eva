@@ -56,9 +56,9 @@ class HomeTutorListView extends Component {
     })
     
     return (
-      <div className="container" onClick={hideFilterNav} style={{padding: 0, marginTop: '15px'}}>
-        <div className="row justify-content-center">
-          <div className="col-md-10" style={{ padding: 0, height: '200px'}}>
+      <div className='container' onClick={hideFilterNav} style={{padding: 0, marginTop: '15px'}}>
+        <div className='row justify-content-center'>
+          <div className='col-md-10' style={{ padding: 0, height: '200px'}}>
             { rows }
           </div>
         </div>

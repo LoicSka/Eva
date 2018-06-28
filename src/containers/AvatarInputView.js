@@ -47,33 +47,51 @@ class AvatarInputView extends Component {
 
   render() {
     const { 
-      user: { avatarUrl },
-      translate
+      user: { avatarUrl  },
+      translate,
+      isDisabled = false
      } = this.props
     const { isUploading, uploadProgress } = this.state
     return (
-      <div className={classnames('avatar-container', )}>
+      <div className='d-flex flex-row align-items-center'>
+        <div className={classnames('avatar-container', )}>
+          <Dropzone
+            accept="image/jpeg, image/png, image/jpg"
+            onDropAccepted={this.onDropAccepted.bind(this)}
+            multiple={false}
+            maxSize={6000000}
+            disabled={isUploading || isDisabled}
+            activeClassName="active"
+            disabledClassName="disabled"
+            className="avatar-dropzone"
+          >
+            <svg className="outer-container">
+              <g className="outer success" style={{ 'strokeDashoffset': 255 - uploadProgress}}>
+                <circle cx="0" cy="0" r="40"></circle>
+              </g>
+            </svg>
+            <div className="image-container">
+              <img alt="" src={avatarUrl ? avatarUrl : ''} />
+              <p>{isUploading ? '' : translate('userActions.edit')}</p>
+            </div>
+          </Dropzone>
+        </div>
+        <div className='mx-4'>
         <Dropzone
-          accept="image/jpeg, image/png, image/jpg"
-          onDropAccepted={this.onDropAccepted.bind(this)}
-          multiple={false}
-          maxSize={6000000}
-          disabled={isUploading}
-          activeClassName="active"
-          disabledClassName="disabled"
-          className="avatar-dropzone"
-        >
-          <svg className="outer-container">
-            <g className="outer success" style={{ 'strokeDashoffset': 255 - uploadProgress}}>
-              <circle cx="0" cy="0" r="40"></circle>
-            </g>
-          </svg>
-          <div className="image-container">
-            <img alt="" src={avatarUrl ? avatarUrl : ''} />
-            <p>{isUploading ? '' : translate('userActions.edit')}</p>
-          </div>
-        </Dropzone>
+            accept="image/jpeg, image/png, image/jpg"
+            onDropAccepted={this.onDropAccepted.bind(this)}
+            multiple={false}
+            maxSize={6000000}
+            disabled={isUploading || isDisabled}
+            activeClassName="active"
+            disabledClassName="disabled"
+            className="btn btn-primary"
+          >
+          Upload new image
+          </Dropzone>
+        </div>
       </div>
+      
     )
   }
 }
@@ -81,10 +99,11 @@ class AvatarInputView extends Component {
 AvatarInputView.prototypes = {
   user: PropTypes.object,
   translate: PropTypes.func,
-  currentLanguage: PropTypes.string
+  currentLanguage: PropTypes.string,
+  isDisabled: PropTypes.bool
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const { user } = state.account
   return {
     user,

@@ -2,21 +2,27 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-const TextareaGroup = ({ field, value, error, type, onChange, label, subLabel, layout }) => {
+const TextareaGroup = ({ field, value, error = null, type, onChange, label = null, subLabel = null, layout, placeholder = null }) => {
+  const labelView = label ? <label>{label}</label> : null
+  const subLabelView = subLabel ? <p className='sub-label'>{subLabel}</p> : null
+  const errorView = error ? (
+    <div className="invalid-feedback">
+      {error}
+    </div>
+  ) : null
   return (
     <div className={classnames('form-group', { [`col-md-${12 / layout}`]: typeof (layout) !== 'undefined' })}>
-      <label>{label}</label>
-      <p className='sub-label'>{subLabel}</p>
+      {labelView}
+      {subLabelView}
       <textarea
         type={type}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         className={classnames('form-control', { 'is-invalid': error })}
         name={field}
       ></textarea>
-      <div className="invalid-feedback">
-        {error}
-      </div>
+      {errorView}
     </div>
   )
 }

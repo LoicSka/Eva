@@ -5,10 +5,11 @@ import SelectfieldGroup from '../components/SelectfieldGroup'
 import validateTutorAccountInput from '../validations/tutorAccountValidations'
 import PropTypes from 'prop-types'
 import AvatarInputView from './AvatarInputView'
-import { merge, lowerCase, omit, isEmpty, findLast, values, flattenDeep} from 'lodash'
+import { merge, lowerCase, omit, isEmpty, findLast, keys, values, flattenDeep} from 'lodash'
 import * as moment from 'moment'
 import 'moment/locale/zh-cn'
-import chinaDistricts from '../chinaCities'
+
+var china = require('china-province-city-district');
 const countries = require("country-list")()
 
 class TutorAccountForm extends Component {
@@ -18,16 +19,19 @@ class TutorAccountForm extends Component {
       firstName: '',
       lastName: '',
       email: '',
+      gender: '',
+      occupation: '',
       introduction: '',
       phoneNumber: '',
-      weiboUrl: '',
-      wechatId: '',
+      hourlyRate: null,
       countryOfOrigin: '',
       regionId: '',
-      occupation: '',
-      createdAt: '',
       district: '',
+      createdAt: '',
       errors: {},
+      levels: [],
+      subjectIds: [],
+      teachingExperience: '',
       saving: false
     }
   }
@@ -41,7 +45,6 @@ class TutorAccountForm extends Component {
 
   isValid() {
     const { errors, isValid } = validateTutorAccountInput(this.state)
-    console.log(errors)
     if (!isValid) {
       this.setState({ errors })
     }
@@ -64,112 +67,111 @@ class TutorAccountForm extends Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps = (newProps) => {
+    const { regions } = newProps
+    const regionIds = keys(regions)
     this.setupLocale()
-    const { saving } = this.state
-    const { hasUpdated } = this.props
-    if (hasUpdated && saving) {
-      this.props.history.push({ pathname: '/', state: {} })
+    if (this.state.regionId.length === 0 && regionIds.length > 0) {
+        this.setState({regionId: regionIds[0]});
     }
   }
 
   render() {
     const { translate, currentLanguage, isUpdating, hasUpdated, serverErrors, regions, resetAccount } = this.props
-    const { firstName, lastName, email, introduction, phoneNumber, weiboUrl, wechatId, regionId, countryOfOrigin, district, occupation, errors, saving } = this.state
+    const { firstName, lastName, email, gender, introduction, phoneNumber, weiboUrl, wechatId, regionId, countryOfOrigin, district, occupation, errors, saving, hourlyRate } = this.state
 
     const combinedErrors = merge(errors, serverErrors)
     const countryNames = countries.getNames()
     const region = findLast(regions, (n) => n.value === regionId)
-    const districtList = typeof (region) !== 'undefined' ? chinaDistricts[region.name] : flattenDeep(values(chinaDistricts))
- 
+    const districtList = typeof (region) !== 'undefined' ? china.query(region.symbol) : []
     const createdAt = moment(this.state.createdAt).format('LL')
-    if (hasUpdated && saving) {
-      this.props.history.push({ pathname: '/setup-courses', state: {} })
-      resetAccount()
-    }
+
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <div className="row">
-              <div className="col-4 col-md-3">
-                <AvatarInputView />
-              </div>
-              <div className="col-8 col-md-9 px-0">
-                <div className="user-details py-1">
-                  <h5>{`${firstName} ${lastName}`}</h5>
-                  <p><strong>{`Member since ${createdAt}`}</strong></p>
-                  <p>{email}</p>
-                </div>
-              </div>
+      <div className="row">
+        <div className="col-12">
+          <div className="d-flex flex-row">
+            <div>
+              <AvatarInputView />
             </div>
-              <div className="row">
-                <div className="col-12 px-3 mt-2">
-                  <TextfieldGroup
-                    error={this.getTranslation(combinedErrors.firstName)}
-                    value={firstName}
-                    onChange={this.onChange}
-                    field='firstName'
-                    type='text'
-                    label={`${translate('userFields.firstName')} *`}
-                  />
-                  <TextfieldGroup
-                    error={this.getTranslation(combinedErrors.lastName)}
-                    value={lastName}
-                    onChange={this.onChange}
-                    field='lastName'
-                    type='text'
-                    label={`${translate('userFields.lastName')} *`}
-                  />
-                  <TextfieldGroup
-                    error={this.getTranslation(combinedErrors.email)}
-                    value={email}
-                    placeholder='123@example.com'
-                    onChange={this.onChange}
-                    field='email'
-                    type='email'
-                    label={`${translate('userFields.email')} *`}
-                  />
-                  <TextareaGroup
-                    error={this.getTranslation(combinedErrors.introduction)}
-                    value={introduction}
-                    onChange={this.onChange}
-                    field='introduction'
-                    type='text'
-                    subLabel={translate('userFields.subIntro')}
-                    label={`${translate('userFields.intro')} *`}
-                  />
-                  <TextfieldGroup
-                    error={this.getTranslation(combinedErrors.phoneNumber)}
-                    value={phoneNumber}
-                    onChange={this.onChange}
-                    field='phoneNumber'
-                    type='number'
-                    label={`${translate('userFields.phoneNumber')} *`}
-                  />
-                </div>
-              </div>
           </div>
-          <div className="col-12 col-md-6">
-            <div className="row sep-right">
-              <div className="vertical-divider"></div>
-              <div className="col-12 px-3 mt-md-5">
+          <div className="row">
+            <div className="col-12 px-3 mt-2">
+              <form onSubmit={this.onSubmit}>
                 <TextfieldGroup
-                  error={this.getTranslation(combinedErrors.weibo)}
-                  value={weiboUrl} 
+                  error={this.getTranslation(combinedErrors.firstName)}
+                  value={firstName}
                   onChange={this.onChange}
-                  field='weiboUrl'
+                  field='firstName'
                   type='text'
-                  label={translate('userFields.weibo')}
-                /> 
+                  label={`${translate('userFields.firstName')} *`}
+                />
+                <TextfieldGroup
+                  error={this.getTranslation(combinedErrors.lastName)}
+                  value={lastName}
+                  onChange={this.onChange}
+                  field='lastName'
+                  type='text'
+                  label={`${translate('userFields.lastName')} *`}
+                />
+                <TextfieldGroup
+                  error={this.getTranslation(combinedErrors.email)}
+                  value={email}
+                  placeholder='123@example.com'
+                  onChange={this.onChange}
+                  field='email'
+                  type='email'
+                  label={`${translate('userFields.email')} *`}
+                />
                 <TextfieldGroup
                   error={this.getTranslation(combinedErrors.wechatId)}
                   value={wechatId}
                   onChange={this.onChange}
                   field='wechatId'
                   type='text'
-                  label={translate('userFields.wechatId')}
+                  label={`${translate('userFields.wechatId')} *`}
+                />
+                <TextfieldGroup
+                  error={this.getTranslation(combinedErrors.weiboUrl)}
+                  value={weiboUrl}
+                  onChange={this.onChange}
+                  field='weiboUrl'
+                  type='text'
+                  label={`${translate('userFields.weibo')} *`}
+                />
+                <SelectfieldGroup
+                  error={this.getTranslation(combinedErrors.gender)}
+                  value={gender}
+                  onChange={this.onChange}
+                  field='gender'
+                  options={[{ value: 'male', name: translate('userFields.male') }, { value: 'female', name: translate('userFields.female') }]}
+                  type='text'
+                  label={`${translate('userFields.gender')} *`}
+                />
+                <TextareaGroup
+                  error={this.getTranslation(combinedErrors.introduction)}
+                  value={introduction}
+                  onChange={this.onChange}
+                  field='introduction'
+                  type='text'
+                  subLabel={translate('userFields.subIntro')}
+                  label={`${translate('userFields.intro')} *`}
+                />
+                <TextfieldGroup
+                  error={this.getTranslation(combinedErrors.hourlyRate)}
+                  value={hourlyRate}
+                  onChange={this.onChange}
+                  field='hourlyRate'
+                  type='number'
+                  label={`${translate('userFields.hourlyRate')} *`}
+                />
+                <TextfieldGroup
+                  error={this.getTranslation(combinedErrors.phoneNumber)}
+                  value={phoneNumber}
+                  onChange={this.onChange}
+                  field='phoneNumber'
+                  type='number'
+                  label={`${translate('userFields.phoneNumber')} *`}
                 />
                 <SelectfieldGroup
                   error={this.getTranslation(combinedErrors.region)}
@@ -198,25 +200,16 @@ class TutorAccountForm extends Component {
                   type='text'
                   label={translate('userFields.country')}
                 />
-                <SelectfieldGroup
-                  error={this.getTranslation(combinedErrors.occupation)}
-                  value={occupation}
-                  onChange={this.onChange}
-                  field='occupation'
-                  options={['Full-time tutor', 'Part-time tutor']}
-                  type='text'
-                  label={translate('userFields.occupation')}
-                />
                 <button
                   type='submit'
-                  className='btn btn-success btn-block'
-                  disabled={isUpdating}>{isUpdating ? translate('userActions.saving') : translate('userActions.save') }
+                  className='btn btn-success btn-block mt-4'
+                  disabled={isUpdating}>{isUpdating ? translate('userActions.saving') : translate('userActions.continue') }
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
-      </form>
+      </div>
     )
   }
 }

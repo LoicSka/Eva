@@ -1,7 +1,7 @@
 @mixin box-shadow {
-  -webkit-box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24) !important;
-  -moz-box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24) !important;
-  box-shadow: 0px 3px 0px 0px rgba(78,91,107,0.24) !important;
+  -webkit-box-shadow: 0px 0px 37px -7px rgba(153,153,153,1);
+  -moz-box-shadow: 0px 0px 37px -7px rgba(153,153,153,1);
+  box-shadow: 0px 0px 37px -7px rgba(153,153,153,1);  
 }
 
 @mixin box-shadow-colored($color) {
@@ -21,6 +21,37 @@
 @mixin font-size($size) {
   font-size: $size;
   font-size: calculateRem($size);
+}
+
+@mixin scale-transition($duration) {
+  -webkit-transition: all $duration ease-in-out;
+  -moz-transition: all $duration ease-in-out;
+  -o-transition: all $duration ease-in-out;
+  transition: all $duration ease-in-out;
+}
+
+@mixin rotate-transform($angle) {
+  -webkit-transform: rotate($angle); 
+  -ms-transform: rotate($angle); 
+  -moz-transform: rotate($angle);
+}
+
+@mixin scale-transform($number) {
+  -webkit-transform: scale($number, $number); 
+  -ms-transform: scale($number, $number); 
+  -moz-transform: scale($number, $number);
+}
+
+@mixin scale-transform-x($number) {
+  -webkit-transform: scaleX($number); 
+  -ms-transform: scaleX($number); 
+  -moz-transform: scaleX($number);
+}
+
+@mixin scale-transform-y($number) {
+  -webkit-transform: scaleY($number); 
+  -ms-transform: scaleY($number); 
+  -moz-transform: scaleY($number);
 }
 
 @mixin center($xy:xy) {

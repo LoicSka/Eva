@@ -2,11 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-const TextfieldGroup = ({ field, value, error, placeholder, type, onChange, label, subLabel, layout }) => {
+const TextfieldGroup = ({ field, value, error = null, placeholder = null, type, onChange, label = null, subLabel, layout }) => {
+  const labelView = label ? <label>{label}</label> : null
+  const subLabelView = subLabel ? <p className='sub-label'>{subLabel}</p> : null
+  const errorView = error ? (
+    <div className="invalid-feedback">
+      {error}
+    </div>
+  ) : null
   return (
     <div className={classnames('form-group', {[`col-md-${12/layout}`]: typeof(layout) !== 'undefined'})}>
-      <label>{label}</label>
-      <p className='sub-label'>{subLabel}</p>
+      {labelView}
+      {subLabelView}
       <input
         type={type}
         value={value}
@@ -15,9 +22,7 @@ const TextfieldGroup = ({ field, value, error, placeholder, type, onChange, labe
         name={field}
         placeholder={placeholder}
       />
-      <div className="invalid-feedback">
-        {error}
-      </div>
+      {errorView}
     </div>
   )
 }

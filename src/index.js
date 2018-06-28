@@ -3,11 +3,12 @@ import { render } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Root from './containers/Root'
 import configureStore from './store/configureStore'
-import { setCurrentUser } from'./actions'
+import { setCurrentUser, setActiveLocale } from'./actions'
 import jwtDecode from 'jwt-decode'
 import './styles/styles.css'
 import { initialize } from 'react-localize-redux'
 import { addTranslation, setActiveLanguage } from 'react-localize-redux'
+import getBrowserLanguage from 'get-browser-language'
 import { camelizeKeys } from 'humps'
 
 const languages = [
@@ -16,17 +17,22 @@ const languages = [
 ];
 const locales = require('./locales/global.json')
 const store = configureStore()
-// localization
+
 store.dispatch(initialize(languages, { defaultLanguage: 'en' }))
+
+// localization
+const { locale = null } = localStorage
+if (locale) {
+  store.dispatch(setActiveLanguage(localStorage.locale))
+} else {
+  store.dispatch(setActiveLocale(getBrowserLanguage().indexOf('zh-') === -1 ? 'en' : 'cn'))
+}
+
 store.dispatch(addTranslation(locales))
 
 // authorization
 if (localStorage.jwtToken) {
   store.dispatch(setCurrentUser(camelizeKeys(jwtDecode(localStorage.jwtToken))))
-}
-
-if (localStorage.locale) {
-  store.dispatch(setActiveLanguage(localStorage.locale))
 }
 
 render(

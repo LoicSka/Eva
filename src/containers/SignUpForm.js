@@ -1,6 +1,7 @@
 import React from 'react'
 import TextfieldGroup from '../components/TextfieldGroup'
 import validateSignUpInput from '../validations/signUpValidations'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import omit from 'lodash/omit'
 import merge from 'lodash/merge'
@@ -13,6 +14,7 @@ export default class SignUpForm extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
+      locale: props.currentLanguage,
       errors: {}
     }
 
@@ -32,12 +34,18 @@ export default class SignUpForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault()
-    const { submitUserForm } = this.props
-    // this.setState({errors: {}})
+    const { submitUserForm, currentLanguage } = this.props
+    this.setState({locale: currentLanguage})
     let valid = this.isValid()
-    console.log('VALID', valid)
     if (this.isValid()) {
       submitUserForm(omit(this.state,['errors']))
+    }
+  }
+
+  componentWillReceiveProps = (newProps) => {
+    const { currentLanguage } = newProps
+    if (currentLanguage !== this.state.currentLanguage) {
+      this.setState({locale: currentLanguage})
     }
   }
 
@@ -90,9 +98,9 @@ export default class SignUpForm extends React.Component {
         <button
           type='submit'
           className='btn btn-success btn-block'
-          disabled={authenticating}>{authenticating ? translate('userActions.signingUp') : translate('userActions.signUp')}
+          disabled={authenticating}>{authenticating ? translate('userActions.signingUp') : translate('userActions.signup')}
         </button>
-        <span className="small" id="terms">You are agreeing to our <a href="https://google.com">Terms of Services</a></span>
+        <span className="small" id="terms">{translate('userActions.agreed')} <Link to='/signup'>{translate('userActions.terms')}</Link></span>
       </form>
     )
   }
