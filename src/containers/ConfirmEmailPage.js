@@ -10,8 +10,8 @@ import mailIcon from '../styles/images/mail.svg'
 
 class ConfirmEmailPage extends Component {
     handleSendWelcomeEmail = () => {
-        const { sendWelcomeEmail, user: { id } } = this.props
-        sendWelcomeEmail(id)
+        const { sendWelcomeEmail, user: { id }, userId } = this.props
+        sendWelcomeEmail(userId || id)
     }
 
     render() {
@@ -54,11 +54,12 @@ ConfirmEmailPage.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-    const { account: { isAuthenticated = false, user = '' }, entities: { users } } = state
+    const { account: { isAuthenticated = false, user = '', user: { id } }, entities: { users } } = state
     return {
         isAuthenticated,
         isAuthorized: !isEmpty(user),
         user: users[user] || {},
+        userId: id,
         translate: getTranslate(state.locale),
         currentLanguage: getActiveLanguage(state.locale).code
     }

@@ -16,16 +16,19 @@ import SecondaryLayoutContainer from './SecondaryLayoutContainer'
 import SetupLayoutContainer from './SetupLayoutContainer'
 import PrimaryLayoutContainer from './PrimaryLayoutContainer'
 import SetupCoursesPage from './SetupCoursesPage'
-import HomeTutorListView from './HomeTutorListView'
+import PasswordResetPage from './PasswordResetPage'
 import TutorDashboardPage from './TutorDashboardPage'
 import StudentBookingsPage from './StudentBookingsPage'
+import UpdatePasswordPage from './UpdatePasswordPage';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <div>
-    <SecondaryLayoutContainer exact path="/get-started" component={GetStarted} />
+      <SecondaryLayoutContainer exact path="/get-started" component={GetStarted} />
       <SecondaryLayoutContainer exact path="/signup" component={SignUpPage} />
       <SecondaryLayoutContainer exact path="/login" component={LoginPage} />
+      <SecondaryLayoutContainer exact path="/recoveries/new" component={PasswordResetPage} />
+      <SecondaryLayoutContainer exact path="/passwords/new/:userId" component={UpdatePasswordPage} />
       <SetupLayoutContainer exact path="/setup/confirm" component={ConfirmEmailPage} />
       <SetupLayoutContainer path="/users/:id/verify/:token" component={EmailVerificationPage} />
       <SetupLayoutContainer path="/setup/type" component={SelectAccountTypePage} />
@@ -33,6 +36,7 @@ const Root = ({ store }) => (
       <SetupLayoutContainer path="/match/:studentId" component={MatchPage} />
       <SetupLayoutContainer exact path="/bookings/:bookingCount/:studentId" component={StudentBookingsPage} />
       <SetupLayoutContainer exact path="/bookings/:bookingCount/" component={StudentBookingsPage} />
+      <SetupLayoutContainer exact path="/bookings/" component={StudentBookingsPage} />
       <SetupLayoutContainer path="/tutor/:tutorAccountId" component={TutorAccountPage} />
       <SecondaryLayoutContainer exact path="/setup/tutor" component={SetUpTutorAccountPage} />
       <PrimaryLayoutContainer exact path="/account/:page" component={AccountPage} />

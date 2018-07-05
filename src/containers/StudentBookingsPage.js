@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/zh-cn'
-import { filter, values } from 'lodash'
+import { filter, values, isEmpty } from 'lodash'
 import Separator from '../components/Separator'
 import StudentBooking from '../components/StudentBooking'
 import Loader from '../components/Loader'
@@ -26,10 +26,16 @@ class StudentBookingsPage extends Component {
     }
 
     componentWillReceiveProps = (newProps) => {
-        const { loadBookingsForStudent, loadBookingsForUser, match: { params: { studentId = null, bookingCount = 0 } } } = newProps
+        const { loadBookingsForStudent, isAuthenticated, bookings = [], isFetching, loadBookingsForUser, match: { params: { studentId = null, bookingCount = 0 } } } = newProps
         this.setupLocale()
-        if ( bookingCount !== this.props.match.params.bookingCount ) {
-            studentId ? loadBookingsForStudent(studentId) : loadBookingsForUser()
+        if (isAuthenticated) {
+            if (typeof(this.props.match.params.bookingCount) === 'undefined' && !isFetching && isEmpty(bookings)) {
+                loadBookingsForUser()
+                return
+            }
+            if ( typeof(this.props.match.params.bookingCount) !== 'undefined' && bookingCount !== this.props.match.params.bookingCount ) {
+                studentId ? loadBookingsForStudent(studentId) : loadBookingsForUser()
+            }
         }
     }
 
@@ -65,12 +71,12 @@ class StudentBookingsPage extends Component {
     render() {
         const { bookings = [], isFetching = false, currentLanguage, translate, match: { params: { studentId = null, bookingCount = 0 } }} = this.props
         const loader = isFetching ? <Loader/> : null
-        const moreButton = isFetching || Number(bookingCount) === 0 ? null : (
+        const moreButton = isFetching || bookings.length === 0 ? null : (
             <div className='d-flex flex-row justify-content-center align-items-center'>
                 <button onClick={this.handleLoadBookings} className="btn btn-link btn-sm">{translate('userActions.loadMore')}</button>
             </div>
         )
-        const emptyView = (isFetching === false && Number(bookingCount) === 0) ? (
+        const emptyView = (isFetching === false && bookings.length === 0) ? (
             <EmptyView message={translate('dashboard.noBookings')}/>
         ) : null
         const oldBookings = filter(bookings, (booking) => {
@@ -124,7 +130,7 @@ class StudentBookingsPage extends Component {
                         <div className="card">
                             <div className="card-body">
                                 <div style={{width: '100%'}} className='d-flex flex-column booking-list'>
-                                    {Number(bookingCount) > 0 ? <h3 style={{fontSize: '1.3rem'}} className='mt-2 mx-lg-2' >{`${translate('dashboard.bookings')} (${ bookingCount })`}</h3> : null}
+                                    {Number(bookingCount) > 0 && typeof(this.props.match.bookingCount) !== 'undefined'  ? <h3 style={{fontSize: '1.3rem'}} className='mt-2 mx-lg-2' >{`${translate('dashboard.bookings')} (${ bookingCount })`}</h3> : null}
                                     {newBookingList}
                                     {upcommingBookingList}
                                     {canceledBookingList}
@@ -154,7 +160,7 @@ StudentBookingsPage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
     const { match: { params: { studentId = null, bookingCount } } }= ownProps
-    const { account: { user: { id } }, entities: { bookings }, pagination: { paginatedStudentBookings, paginatedUserBookings } } = state
+    const { account: { isAuthenticated = true, user: { id } }, entities: { bookings }, pagination: { paginatedStudentBookings, paginatedUserBookings } } = state
     const pagination = studentId ? (typeof(paginatedStudentBookings[studentId]) === 'undefined' ? {} : paginatedStudentBookings[studentId]) : (typeof(paginatedUserBookings[id]) === 'undefined' ? {} : paginatedUserBookings[id])
     const { ids = [], isFetching, nextPage } = pagination
     return {
@@ -162,6 +168,7 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         nextPage,
         bookingCount,
+        isAuthenticated,
         translate: getTranslate(state.locale),
         currentLanguage: getActiveLanguage(state.locale).code,
         translate: getTranslate(state.locale),

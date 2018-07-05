@@ -65,8 +65,8 @@ class GetStarted extends Component {
                                 <p>{translate('getStarted.introSubtitle')}</p>
                                 <Link to='/signup' className='btn btn-success'>{translate('getStarted.buttonTitle')}</Link>
                             </div>
-                            <div className="col-6 d-none d-sm-flex justify-content-center align-items-center">
-                                <img onLoad={this.handleImageLoaded.bind(this)} style={{width: '550px', height: 'auto'}} src={tutoring} alt="tutoring"/>
+                            <div className="col-6 d-none d-sm-flex justify-content-end align-items-center">
+                                <img onLoad={this.handleImageLoaded.bind(this)} style={{width: '70%', height: 'auto'}} src={tutoring} alt="tutoring"/>
                             </div>
                         </div>  
                     </div>

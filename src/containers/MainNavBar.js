@@ -60,7 +60,7 @@ class MainNavBar extends Component {
         label: translate('navbar.links.bookings'),
         notificationCount: notificationCount, 
         onClick: () => { 
-          history.push(`/bookings/${id}`)
+          history.push(`/bookings`)
          }
       },
       {

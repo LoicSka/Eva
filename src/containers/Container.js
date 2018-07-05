@@ -20,7 +20,7 @@ class Container extends Component {
         }
 
         if (verifiedRestrict && !isVerified ) {
-            history.goBack()
+            return <Redirect to='/setup/confirm' />
         }
 
         return (

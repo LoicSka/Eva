@@ -37,6 +37,7 @@ const Root = ({ store }) => (
       <SetupLayoutContainer path="/match/:studentId" component={MatchPage} />
       <SetupLayoutContainer exact path="/bookings/:bookingCount/:studentId" component={StudentBookingsPage} />
       <SetupLayoutContainer exact path="/bookings/:bookingCount/" component={StudentBookingsPage} />
+      <SetupLayoutContainer exact path="/bookings/" component={StudentBookingsPage} />
       <SetupLayoutContainer path="/tutor/:tutorAccountId" component={TutorAccountPage} />
       <SecondaryLayoutContainer exact path="/setup/tutor" component={SetUpTutorAccountPage} />
       <PrimaryLayoutContainer exact path="/account/:page" component={AccountPage} />
