@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { StyleSheet, css } from 'aphrodite'
 import Overdrive from 'react-overdrive'
 import * as qs from 'query-string'
-import { Link } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import ThumbnailAvatar from '../components/ThumbnailAvatar'
@@ -14,8 +13,6 @@ import AboutTutorView from '../components/AboutTutorView'
 import NumbersBox from '../components/NumbersBox'
 import ReviewList from './ReviewList'
 import TutorCalendar from '../components/TutorCalendar'
-import userImage from '../styles/images/start-tutor-01.png'
-import CommentForm from '../components/CommentForm';
 
 class TutorAccountDetailsView extends Component {
 

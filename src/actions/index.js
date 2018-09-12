@@ -9,6 +9,7 @@ export * from './menus'
 export * from './emails'
 export * from './bookings'
 export * from './passwords'
+export * from './walkthrough'
 
 export const USERS_REQUEST = 'USERS_REQUEST'
 export const USERS_SUCCESS = 'USERS_SUCCESS'
@@ -85,7 +86,7 @@ export const logoutUser = () => {
 }
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('jwtToken') 
+  localStorage.removeItem('jwtToken')
   dispatch(logoutUser())
 }
 

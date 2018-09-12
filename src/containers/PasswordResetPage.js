@@ -29,8 +29,6 @@ class PasswordResetPage extends Component {
 }
 
 PasswordResetPage.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  authenticating: PropTypes.bool,
   translate: PropTypes.func,
   currentLanguage: PropTypes.string,
   errors: PropTypes.object

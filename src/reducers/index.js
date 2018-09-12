@@ -5,6 +5,8 @@ import filter from './filter'
 import account from './account'
 import { localeReducer } from 'react-localize-redux'
 import { combineReducers } from 'redux'
+import jwtDecode from 'jwt-decode'
+import { camelizeKeys } from 'humps'
 
 // Updates an entity cache in response to any action with response.entities.
 const entities = (state = { isLoading: {}, users: {}, tutorAccounts: {}, regions: {}, tags: {}, subjects: {}, courses: {}, students: {}, reviews: {}, ratings: {}, bookings: {}, studentMatches: {}, tutorMatches: {} }, action) => {
@@ -68,6 +70,63 @@ const errors = (state = {}, action) => {
   }
 }
 
+const walkthrough = (state = {activeStep: 0, isDone: false}, action) => {
+  const { type, data } = action
+  switch (type) {
+    case ActionTypes.SET_WALKTHROUGH_STEP:
+    return {
+      ...state,
+      activeStep: Number(data.activeStep),
+      isDone: data.activeStep == 3
+    }
+    case ActionTypes.CREATE_USER_SUCCESS:
+    return {
+      ...state,
+      activeStep: 0,
+      isDone: false
+    }
+    case ActionTypes.VERIFY_EMAIL_SUCCESS:
+    localStorage.setItem('walkthrough', 1)
+    return {
+      ...state,
+      activeStep: 1,
+      isDone: false
+    }
+    case ActionTypes.CREATE_STUDENT_SUCCESS:
+    localStorage.setItem('walkthrough', 2)
+    return {
+      ...state,
+      activeStep: 2
+    }
+    case ActionTypes.CREATE_BOOKING_SUCCESS:
+    localStorage.setItem('walkthrough', 3)
+    return {
+      ...state,
+      activeStep: 3,
+      isDone: true
+    }
+    case ActionTypes.UPDATE_USER_SUCCESS:
+    localStorage.setItem('walkthrough', 3)
+    return {
+      ...state,
+      activeStep: 3,
+      isDone: true
+    }
+    case ActionTypes.LOGIN_SUCCESS:
+    const user = camelizeKeys(jwtDecode(action.response.result))
+    if (user.verified === true) {
+      localStorage.setItem('walkthrough', 3)
+    }
+    return {
+      ...state,
+      activeStep: 3,
+      isDone: user.verified === true
+    }
+    default:
+    return state
+  }
+}
+
 const modal = (state = {isVisible: false}, action) => {
   const { type, payload } = action
   switch (type) {
@@ -109,6 +168,12 @@ const modal = (state = {isVisible: false}, action) => {
         modalType: ActionTypes.STUDENT_BOOKING_LIST_MODAL,
         studentId: payload.studentId,
         bookingCount: payload.bookingCount
+      }
+    case ActionTypes.SHOW_DESC_MODAL:
+      return {
+        ...state,
+        isVisible: true,
+        modalType: ActionTypes.DESC_MODAL
       }
     case ActionTypes.HIDE_VISIBLE_MODAL:
       return {
@@ -292,6 +357,7 @@ const rootReducer = combineReducers({
   courseState,
   navigation,
   message,
+  walkthrough,
   errors
 })
 

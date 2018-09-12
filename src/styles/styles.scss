@@ -56,8 +56,16 @@ body {
     @include media-breakpoint-down(sm) {
       font-size: .87rem;
       padding-left: 12px;
-      padding-right: 12px
+      padding-right: 12px;
     }
+  }
+
+  .btn-transparent {
+    color: white;
+    padding-left: 0;
+    font-size: 1.3rem;
+    background: transparent;
+    height: 70px;
   }
 
   .card {
@@ -996,7 +1004,7 @@ nav.navbar {
                 walkthrough section
 ---------------------------------------------------*/
 
-section.walkthrough {
+section.walkthrough-sec {
   background: darken($color: $white, $amount: 4%);
   h4 {
     font-size: 1.3rem;
@@ -1100,7 +1108,7 @@ section.walkthrough {
   padding-bottom: 70px;
 }
 
-.walkthrough {
+.walkthrough-item {
   span {
     position: relative;
     background-color: $primary;
@@ -1674,4 +1682,185 @@ p, a, label, button, span {
   &.cn-bd {
     font-family: $reiji!important;
   }
+}
+
+.walkthrough {
+  background: lighten($primary, 34%);
+  height: 190px;
+  overflow-y: visible;
+  overflow-x: hidden;
+  padding-top: 100px;
+  h3 {
+    margin: 0;
+  }
+
+  .walkthrough-steps {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .walkthrough-bar {
+    position: absolute;
+    @include center(y);
+    left: 20px;
+    right: 20px;
+    bottom: 40px;
+    height: 4px;
+    margin: 0 20px;
+    border-radius: 2px;
+    background: lighten(#D2DAE3, 3%);
+  }
+
+  .walkthrough-bar-inner {
+    left: 20px;
+    background: $primary;
+    z-index: 5px;
+    @include scale-transition(.2s);
+  }
+
+  .walkthrough-step {
+    position: relative;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    border: 4px solid lighten(#D2DAE3, 3%);
+    background-color: lighten($primary, 34%);
+    z-index: 10;
+
+    &:hover {
+      .speech-bubble {
+        opacity: 1!important;
+      }
+    }
+
+    &.walkthrough-step__current {
+      -webkit-box-shadow: 0px 0px 4px -1px rgba(66,66,66,1);
+      -moz-box-shadow: 0px 0px 4px -1px rgba(66,66,66,1);
+      box-shadow: 0px 0px 4px -1px rgba(66,66,66,1);
+      border: 10px solid white;
+      background-color: $primary;
+      .speech-bubble {
+        opacity: 1!important;
+      }
+    }
+
+    &.walkthrough-step__done {
+      -webkit-box-shadow: 0px 0px 4px -1px $primary;
+      -moz-box-shadow: 0px 0px 4px -1px $primary;
+      box-shadow: 0px 0px 4px -1px $primary;
+      border: none;
+      background-color: $primary;
+    }
+
+    .checkmark {
+      position: absolute;
+      @include center(xy);
+      height: 10px;
+      width: auto;
+    }
+  }
+
+  .speech-bubble {
+    color: $primary;
+    opacity: 0;
+    position: absolute;
+    @include center(x);
+    bottom: 40px;
+    background: #ffffff;
+    border-radius: .4em;
+    padding: 14px;
+    transition: $transition-fade;
+    -webkit-box-shadow: 0px 0px 4px -1px rgb(185, 185, 185);
+    -moz-box-shadow: 0px 0px 4px -1px rgb(185, 185, 185);
+    box-shadow: 0px 0px 4px -1px rgb(185, 185, 185);
+    z-index: 10;
+    min-width: 180px;
+    .walkthrough-step__title {
+      margin: 0;
+      white-space: nowrap;
+      color: $mate-dark-gray;
+      font-size: 1.02rem;
+      font-family: $gotham-round-med;
+      text-align: center;
+    }
+    .walkthrough-step__subtitle {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      color: lighten($mate-dark-gray, $amount: 20%);
+      font-size: .9rem;
+    }
+
+    &.arrow-left {
+      @include media-breakpoint-down(sm) {
+        left: 0!important;
+        transform: translateX(-10px);
+        &:after {
+          left: 17px!important;
+        }
+      }
+    }
+
+    &.arrow-right {
+      @include media-breakpoint-down(sm) {
+        right: 0!important;
+        left: auto;
+        bottom: 30px;
+        transform: translateX(20px);
+        &:after {
+          right: 17px!important;
+          left: auto;
+        }
+      }
+    }
+  }
+  
+  .speech-bubble:after {
+    content: "";
+    position: absolute;
+    box-shadow: rgba(185, 185, 185, .2) 2px 2px 2px;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #FFF #FFF transparent;
+  }
+  
+}
+
+.description {
+  position: absolute;
+  right: 0;
+  top: 0px;
+  z-index: 50;
+  .description-settings__text {
+    a, p {
+      font-family: $gotham-round-med;
+      font-size: 1.3rem;
+      color: white;
+      margin-bottom: '0'
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+.desc-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 45;
+  background: black;
+  opacity: .6;
+  cursor: pointer;
 }

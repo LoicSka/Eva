@@ -11,8 +11,8 @@ export const resetBookingsAction = () => ({
 })
 
 export const resetBookings = () => (dispatch) => {
-    dispatch(resetBookingsAction())
-  }
+  dispatch(resetBookingsAction())
+}
 
 const postBooking = (bookingData) => ({
   [CALL_API]: {

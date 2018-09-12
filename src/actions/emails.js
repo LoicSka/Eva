@@ -17,7 +17,7 @@ const welcomeEmailRequest = (userId) => ({
     }
 })
 
-export const sendWelcomeEmail = (id) => (dispatch, getState) => {
+export const sendWelcomeEmail = (id) => (dispatch) => {
     dispatch(welcomeEmailRequest(id))
 }
 

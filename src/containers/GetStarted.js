@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Redirect, Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import classnames from 'classnames'
 import Stars from '../components/Stars'
@@ -71,7 +71,7 @@ class GetStarted extends Component {
                         </div>  
                     </div>
                 </section>
-                <section className="walkthrough">
+                <section className="walkthrough-sec">
                     <div className={`container ${currentLanguage}`}>
                         <div className="row pt-4 align-items-center justify-content-center">
                             <div style={{textAlign: 'center'}} className="col-11 col-md-6 my-4">
@@ -80,8 +80,8 @@ class GetStarted extends Component {
                                 <Link to='/signup' style={{color: 'white'}} className="btn btn-primary">Discover tutors near you</Link>
                             </div>       
                         </div>
-                        <div className="row walktrhough-ctn">
-                            <div className="col-12 col-md-5 py-4 walkthrough">
+                        <div className="row walktrhough-sec__ctn">
+                            <div className="col-12 col-md-5 py-4 walkthrough-item">
                                 <div className="d-flex">
                                     <div className="illustration">
                                         <div className="icon-ctn d-flex justify-content-center">
@@ -99,7 +99,7 @@ class GetStarted extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-5 py-4 offset-md-1 walkthrough">
+                            <div className="col-12 col-md-5 py-4 offset-md-1 walkthrough-item">
                                 <div className="d-flex">
                                     <div className="illustration">
                                         <div className="icon-ctn d-flex justify-content-center">
@@ -117,7 +117,7 @@ class GetStarted extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-5 py-4 walkthrough">
+                            <div className="col-12 col-md-5 py-4 walkthrough-item">
                                 <div className="d-flex">
                                     <div className="illustration">
                                         <div className="icon-ctn d-flex justify-content-center">
@@ -135,7 +135,7 @@ class GetStarted extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-5 py-4 offset-md-1 walkthrough">
+                            <div className="col-12 col-md-5 py-4 offset-md-1 walkthrough-item">
                                 <div className="d-flex">
                                     <div className="illustration">
                                         <div className="icon-ctn d-flex justify-content-center">

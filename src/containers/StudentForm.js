@@ -17,6 +17,8 @@ import validateParentSurveyInput from '../validations/parentSurveyValidations'
 import 'moment/locale/zh-cn'
 import Loader from '../components/Loader';
 
+import leftArrow from '../styles/images/left-arrow.svg'
+
 var china = require('china-province-city-district');
 
 class StudentForm extends Component {
@@ -171,7 +173,7 @@ class StudentForm extends Component {
     }
 
     render() {
-        const { translate, currentLanguage, isLoading, isParent = false } = this.props
+        const { translate, currentLanguage, isLoading, isParent = false, history } = this.props
         const regions = values(this.props.regions).map((region) => {
             return (
                 {
@@ -207,7 +209,7 @@ class StudentForm extends Component {
         })
         const loaderView = (
             <div style={{height: '100vh'}} className={`row align-items-center justify-content-center py-4`}>
-                <div className="col-4 col-md-1 my-0 my-sm-4">
+                <div className='col-4 col-md-1 my-0 my-sm-4'>
                     <Overdrive id='card-ctn'>
                         <div className='card my-0 my-sm-4'> 
                             <div className='card-body'>
@@ -220,20 +222,24 @@ class StudentForm extends Component {
         )
 
         const surveyView = (
-            <div className={`row align-items-center justify-content-center py-4 ${currentLanguage}`}>
-                <div className="col-12 col-md-8 my-0 my-sm-4">
+            <div className={`row align-items-center justify-content-center py-0 ${currentLanguage}`}>
+                <div className='col-12 col-md-8 my-0 my-sm-4'>
+                    <button onClick={() => { history.goBack() }} className='btn btn-transparent btn-lg'>
+                        <img style={{width: '20px', height: 'auto', marginRight: '5px', marginTop: '-3px'}} src={leftArrow} alt='left-arrow'/>
+                        <span>{translate('goBack')}</span>
+                    </button>
                     <Overdrive id='card-ctn'>
                         <div className='card my-0 my-sm-4'>
                             <div className='card-body p-4'>
-                                <div className="row">
-                                    <div ref={(field) => { this.fullName = field }} className="col-12">
+                                <div className='row'>
+                                    <div ref={(field) => { this.fullName = field }} className='col-12'>
                                         <div className='row pl-2'>
                                             <h4 className={classnames('radio-select-question', {'error': this.state.errors.fullName})}>
                                                 <strong>1. {translate(isParent ? 'survey.fullName.question.parent' : 'survey.fullName.question.student')}</strong>
                                             </h4>
                                         </div>
-                                        <div className="row py-2">
-                                            <div className="col-12 col-sm-6 px-4 pb-4">
+                                        <div className='row py-2'>
+                                            <div className='col-12 col-sm-6 px-4 pb-4'>
                                                 <input
                                                 value={this.state.fullName}
                                                 onChange={this.onChange}
@@ -245,35 +251,36 @@ class StudentForm extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.gender = field }} number={2} question={translate(isParent ? 'survey.gender.question.parent' : 'survey.gender.question.student')} choices={genders} type='SINGLE' selected={[this.state.gender]} handleSelect={this.handleSelectGender} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.ageGroup = field }} number={3} question={translate(isParent ? 'survey.ageGroup.question.parent' : 'survey.ageGroup.question.student')} choices={ageGroups} type='SINGLE' selected={[this.state.ageGroup]} handleSelect={this.handleSelectAgeGroup} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.subjectId = field }} number={4} question={translate(isParent ? 'survey.subject.question.parent' : 'survey.subject.question.student')} choices={subjects} type='SINGLE' selected={[this.state.subjectId]} handleSelect={this.handleSelectSubject} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.currentLevel = field }} number={5} question={translate(isParent ? 'survey.currentLevel.question.parent' : 'survey.currentLevel.question.student')} choices={levels} type='SINGLE' selected={[this.state.currentLevel]} handleSelect={this.handleSelectLevel} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.weakPoints = field }} error={this.state.errors.weakPoints} number={6} question={translate('survey.weakPoints.question')} choices={weakPoints} type='MULTI' selected={this.state.weakPoints} handleSelect={this.handleSelectWeakPoints} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.tutorGender = field }} number={7} question={translate('survey.tutorGender.question')} choices={tutorGenders} type='SINGLE' selected={[this.state.tutorGender]} handleSelect={this.handleSelectTutorGender} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.daysAvailable = field }} error={this.state.errors.daysAvailable} number={8} question={translate(isParent ? 'survey.daysAvailable.question.parent' : 'survey.daysAvailable.question.student')} choices={days} type='MULTI' selected={this.state.daysAvailable} handleSelect={this.handleSelectDays} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.regionId = field }} error={this.state.errors.regionId} number={9} question={translate('survey.region.question')} choices={regions} type='SINGLE' selected={[this.state.regionId]} handleSelect={this.handleSelectRegion} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.district = field }} error={this.state.errors.district} number={10} question={translate('survey.district.question')} choices={districtList} type='SINGLE' selected={[this.state.district]} handleSelect={this.handleSelectDistrict} />
                                     </div>
-                                    <div className="col-12">
-                                        <button onClick={this.handleSubmit} className="btn btn-primary">{translate('userActions.submitSurvey')}</button>
+                                    <div className='d-flex flex-row align-items-center col-12'>
+                                        <button onClick={this.handleSubmit} className='btn btn-primary'>{translate('userActions.submitSurvey')}</button>
+                                        <p className='px-4 py-0 my-0'>({translate('answers')})</p>
                                     </div>
                                 </div>
                             </div>

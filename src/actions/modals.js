@@ -9,6 +9,9 @@ export const SHOW_TUTOR_ACCOUNT_MODAL = 'SHOW_TUTOR_ACCOUNT_MODAL'
 export const BOOKING_FORM_MODAL = 'BOOKING_FORM_MODAL'
 export const SHOW_BOOKING_FORM_MODAL = 'SHOW_BOOKING_FORM_MODAL'
 
+export const DESC_MODAL = 'DESC_MODAL'
+export const SHOW_DESC_MODAL = 'SHOW_DESC_MODAL'
+
 export const showSelectUserTypeModal = () => (dispatch) => {
     dispatch({
         type: SHOW_USER_TYPE_MODAL,
@@ -32,6 +35,12 @@ export const showBookingFormModal = (studentId, tutorAccountId, enabledDays, boo
 export const hideVisibleModal = () => (dispatch) => {
     dispatch({
         type: HIDE_VISIBLE_MODAL
+    })
+}
+
+export const showDescriptionModal = () => (dispatch) => {
+    dispatch({
+        type: SHOW_DESC_MODAL,
     })
 }
 

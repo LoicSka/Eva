@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Link } from "react-router-dom"
-import SearchTextForm from '../components/SearchTextForm'
 import evaLogo from '../styles/images/logo.svg'
 import NavbarItem from '../components/NavbarItem'
 import ThumbnailAvatar from '../components/ThumbnailAvatar'
@@ -13,11 +12,14 @@ import { showUserMenu, setActiveLocale, loadStudentsForUser, logout , showStuden
 import backpack from '../styles/images/backpack.svg'
 import cog from '../styles/images/cog.svg'
 import log from '../styles/images/logout.svg'
-import { isEmpty, values } from 'lodash'
+import { values } from 'lodash'
+import { DESC_MODAL, hideVisibleModal } from '../actions'
+
+import arrow from '../styles/images/description-arrow.svg'
 
 class MainNavBar extends Component {
   tutorActions = () => {
-    const { history, isTutor, notificationCount, currentLanguage, translate, setActiveLocale, logout } = this.props
+    const { history, notificationCount, currentLanguage, translate, setActiveLocale, logout } = this.props
     return [
       { 
         label: translate('navbar.links.dashboard'),
@@ -54,7 +56,7 @@ class MainNavBar extends Component {
   }
 
   userActions = () => {
-    const { history, isTutor, notificationCount, currentLanguage, translate, setActiveLocale, logout, user: {id} } = this.props
+    const { history, notificationCount, currentLanguage, translate, setActiveLocale, logout, user: {id} } = this.props
     return [
       { 
         label: translate('navbar.links.bookings'),
@@ -93,10 +95,10 @@ class MainNavBar extends Component {
   }
 
   handleShowMenu = () => {
-    const { showUserMenu, history, isTutor, notificationCount, currentLanguage, translate, setActiveLocale, showStudentBookingListModal, loadBookingsForStudent} = this.props
+    const { showUserMenu, history, isTutor, loadBookingsForStudent} = this.props
     const students = values(this.props.students).map((student) => { return {
-      id: student.id, 
-      fullName: student.fullName, 
+      id: student.id,
+      fullName: student.fullName,
       expand: () => {
         loadBookingsForStudent(student.id)
         history.push(`/bookings/${student.bookingCount}/${student.id}`)
@@ -125,7 +127,7 @@ class MainNavBar extends Component {
   }
   
   render() {
-    const { translate, avatarUrl, tutorAccountId, isAuthenticated, currentLanguage, isTutor, notificationCount, isVerified  } = this.props
+    const { translate, avatarUrl, isAuthenticated, currentLanguage, notificationCount, isVerified, isVisible, hideVisibleModal  } = this.props
     const rightNavBarItem = isAuthenticated ? ( isVerified ? <ThumbnailAvatar imageSrc={avatarUrl} notificationsCount={notificationCount} showNotificationCount={true} width={40} onClick={this.handleShowMenu} /> : null ) : <NavbarItem translate={translate}/>
     return (
       <nav className={`navbar navbar-expand-lg navbar-light bg-light ${currentLanguage}`}>
@@ -134,6 +136,16 @@ class MainNavBar extends Component {
             <img src={evaLogo} alt="Logo"/>
           </Link>
           {rightNavBarItem}
+          <div className={`description description-options flex-row ${isVisible ? 'd-flex' : 'd-none'}`}>
+            <div className='description-settings__text' style={{ width: '115px', marginTop: '50px'}}>
+              <p>{translate('description.options')}</p>
+              <a onClick={(e) => { 
+                e.preventDefault()
+                hideVisibleModal()
+                }} href='#'>{translate('description.okGotit')}</a>
+            </div>
+            <img style={{width: '70px', height: 'auto'}} src={arrow} alt='desc-arrow'/>
+          </div>
           <UserDropDown />
         </div>
       </nav>
@@ -155,9 +167,10 @@ const mapStateToProps = (state) => {
           unseenReviewCount = 0,
           verified = false 
         }, 
-        isAuthenticated, 
+        isAuthenticated,
       },
-    entities: { students }
+    entities: { students },
+    modal: { isVisible, modalType }
   } = state
 
   return {
@@ -170,8 +183,9 @@ const mapStateToProps = (state) => {
     tutorAccountId,
     isAuthenticated,
     students,
+    isVisible: isVisible && modalType === DESC_MODAL,
     isVerified: verified
   }
 }
 
-export default withRouter(connect(mapStateToProps, {showUserMenu, setActiveLocale, loadStudentsForUser, logout, showStudentBookingListModal, loadBookingsForStudent})(MainNavBar))
+export default withRouter(connect(mapStateToProps, {showUserMenu, setActiveLocale, loadStudentsForUser, logout, showStudentBookingListModal, loadBookingsForStudent, hideVisibleModal})(MainNavBar))

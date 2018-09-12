@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import RadioSelectfield from '../components/RadioSelectfield'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import Overdrive from 'react-overdrive'
-import { pull, findLast, values, keys, omit } from 'lodash'
-import TextfieldGroup from '../components/TextfieldGroup'
+import { pull, values, keys, omit } from 'lodash'
 import { loadRegions, loadSubjects, updateUserAccount } from '../actions'
-import chinaDistricts from '../chinaCities'
-import LanguageSelectfield from './LanguageSelectfield'
 import { locale, weekdays } from 'moment'
 import classnames from 'classnames'
 import scrollToComponent from 'react-scroll-to-component'
 import validateTutorSurveyInput from '../validations/tutorSurveyValidations'
 import 'moment/locale/zh-cn'
-import Loader from '../components/Loader';
+import Loader from '../components/Loader'
+import Container from './Container'
 
-var china = require('china-province-city-district');
+import leftArrow from '../styles/images/left-arrow.svg'
+
+var china = require('china-province-city-district')
 
 class TutorSurveyForm extends Component {
     constructor(props) {
@@ -171,7 +171,7 @@ class TutorSurveyForm extends Component {
     }
 
     render() {
-        const { user, translate, currentLanguage, isLoading } = this.props
+        const { translate, currentLanguage, isLoading, history } = this.props
         const subjects = values(this.props.subjects).map((subject) => {
             return (
                 {
@@ -192,7 +192,6 @@ class TutorSurveyForm extends Component {
         const genders = [{label: translate('survey.gender.answer.student.1'), value: 'male'}, {label: translate('survey.gender.answer.student.2'), value: 'female'}]
         const region = this.props.regions[`${this.state.regionId}`]
         const districtList = typeof (region) !== 'undefined' ? china.query(region.cityName[1]) : []
-        const ageGroups = [{label: translate('survey.ageGroup.answer.1'), value: 1}, {label: translate('survey.ageGroup.answer.2'), value: 2}, {label: translate('survey.ageGroup.answer.3'), value: 3}, {label: translate('survey.ageGroup.answer.4'), value: 4}, {label: translate('survey.ageGroup.answer.5'), value: 5}, {label: translate('survey.ageGroup.answer.6'), value: 6}, {label: translate('survey.ageGroup.answer.7'), value: 7}, {label: translate('survey.ageGroup.answer.8'), value: 8}]
         const days = weekdays().map((day, index) => {
             return {
                 label: day,
@@ -206,32 +205,36 @@ class TutorSurveyForm extends Component {
         const certifications = [{label: translate('survey.certifications.answer.1'), value: 1}, {label: translate('survey.certifications.answer.2'), value: 2}, {label: translate('survey.certifications.answer.3'), value: 3}, {label: translate('survey.certifications.answer.4'), value: 4}, {label: translate('survey.certifications.answer.5'), value: 5}]
 
         const loaderView = (
-            <div style={{height: '100vh'}} className={`row align-items-center justify-content-center py-4 ${currentLanguage}`}>
-                <div className="col-4 col-md-1 my-0 my-sm-4">
+            <Container style={{height: '100vh'}} className={`row align-items-center justify-content-center py-4 ${currentLanguage}`}>
+                <div className='col-4 col-md-1 my-0 my-sm-4'>
                     <Overdrive id='card-ctn'>
                         <div className='card my-0 my-sm-4'>
-                            <loader /> 
+                            <Loader /> 
                         </div>
                     </Overdrive>
                 </div>
-            </div>
+            </Container>
         )
 
         const surveyView = (
-            <div className={`row align-items-center justify-content-center py-4 ${currentLanguage}`}>
-                <div className="col-12 col-md-8 my-0 my-sm-4">
+            <Container className={`row align-items-center justify-content-center py-0 ${currentLanguage}`}>
+                <div className='col-12 col-md-8 my-0 my-sm-4'>
+                    <button onClick={() => { history.goBack() }} className="btn btn-transparent btn-lg">
+                        <img style={{width: '20px', height: 'auto', marginRight: '5px', marginTop: '-3px'}} src={leftArrow} alt='left-arrow'/>
+                        <span>{translate('goBack')}</span>
+                    </button>
                     <Overdrive id='card-ctn'>
                         <div className='card my-0 my-sm-4'>
                             <div className='card-body p-4'>
-                                <div className="row">
-                                    <div ref={(field) => { this.wechatId = field }} className="col-12">
+                                <div className='row'>
+                                    <div ref={(field) => { this.wechatId = field }} className='col-12'>
                                         <div className='row pl-2'>
                                             <h4 className={classnames('radio-select-question', {'error': this.state.errors.wechatId})}>
                                                 <strong>1. {translate('survey.wechatId.question')}</strong>
                                             </h4>
                                         </div>
-                                        <div className="row py-2">
-                                            <div className="col-12 col-md-6 px-4 pb-4">
+                                        <div className='row py-2'>
+                                            <div className='col-12 col-md-6 px-4 pb-4'>
                                                 <input
                                                 value={this.state.wechatId}
                                                 onChange={this.onChange}
@@ -243,14 +246,14 @@ class TutorSurveyForm extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div ref={(field) => { this.weiboUrl = field }} className="col-12">
+                                    <div ref={(field) => { this.weiboUrl = field }} className='col-12'>
                                         <div className='row pl-2'>
                                             <h4 className='radio-select-question'>
                                                 <strong>2. {translate('survey.weiboUrl.question')}</strong>
                                             </h4>
                                         </div>
-                                        <div className="row py-2">
-                                            <div className="col-12 col-md-6 px-4 pb-4">
+                                        <div className='row py-2'>
+                                            <div className='col-12 col-md-6 px-4 pb-4'>
                                                 <input
                                                 value={this.state.weiboUrl}
                                                 onChange={this.onChange}
@@ -262,14 +265,14 @@ class TutorSurveyForm extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div ref={(field) => { this.phoneNumber = field }} className="col-12">
+                                    <div ref={(field) => { this.phoneNumber = field }} className='col-12'>
                                         <div className='row pl-2'>
                                             <h4 className={classnames('radio-select-question', {'error': this.state.errors.phoneNumber})}>
                                                 <strong>3. {translate('survey.phoneNumber.question')}</strong>
                                             </h4>
                                         </div>
-                                        <div className="row py-2">
-                                            <div className="col-12 col-md-6 px-4 pb-4">
+                                        <div className='row py-2'>
+                                            <div className='col-12 col-md-6 px-4 pb-4'>
                                                 <input
                                                 value={this.state.phoneNumber}
                                                 onChange={this.onChange}
@@ -281,14 +284,14 @@ class TutorSurveyForm extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div ref={(field) => { this.hourlyRate = field }} className="col-12">
+                                    <div ref={(field) => { this.hourlyRate = field }} className='col-12'>
                                         <div className='row pl-2'>
                                             <h4 className={classnames('radio-select-question', {'error': this.state.errors.hourlyRate})}>
                                                 <strong>4. {translate('survey.hourlyRate.question')}</strong>
                                             </h4>
                                         </div>
-                                        <div className="row py-2">
-                                            <div className="col-12 col-md-6 px-4 pb-4">
+                                        <div className='row py-2'>
+                                            <div className='col-12 col-md-6 px-4 pb-4'>
                                                 <input
                                                 value={this.state.hourlyRate}
                                                 onChange={this.onChange}
@@ -300,14 +303,14 @@ class TutorSurveyForm extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div ref={(field) => { this.countryOfOrigin = field }} className="col-12">
+                                    <div ref={(field) => { this.countryOfOrigin = field }} className='col-12'>
                                         <div className='row pl-2'>
                                             <h4 className={classnames('radio-select-question', {'error': this.state.errors.countryOfOrigin})}>
                                                 <strong>5. {translate('survey.countryOfOrigin.question')}</strong>
                                             </h4>
                                         </div>
-                                        <div className="row py-2">
-                                            <div className="col-12 col-md-6 px-4 pb-4">
+                                        <div className='row py-2'>
+                                            <div className='col-12 col-md-6 px-4 pb-4'>
                                                 <input
                                                 value={this.state.countryOfOrigin}
                                                 onChange={this.onChange}
@@ -319,14 +322,14 @@ class TutorSurveyForm extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div ref={(field) => { this.introduction = field }} className="col-12">
+                                    <div ref={(field) => { this.introduction = field }} className='col-12'>
                                         <div className='row pl-2'>
                                             <h4 className={classnames('radio-select-question', {'error': this.state.errors.introduction})}>
                                                 <strong>6. {translate('survey.introduction.question')}</strong>
                                             </h4>
                                         </div>
-                                        <div className="row py-2">
-                                            <div className="col-12 col-md-11 px-4 pb-4">
+                                        <div className='row py-2'>
+                                            <div className='col-12 col-md-11 px-4 pb-4'>
                                                 <textarea
                                                 value={this.state.introduction}
                                                 onChange={this.onChange}
@@ -337,42 +340,43 @@ class TutorSurveyForm extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.gender = field }} number={7} question={translate('survey.gender.question.student')} choices={genders} type='SINGLE' selected={[this.state.gender]} handleSelect={this.handleSelectGender} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.subjectIds = field }} error={this.state.errors.subjectIds} number={8} question={translate('survey.subject.question.tutor')} choices={subjects} type='SINGLE' selected={this.state.subjectIds} handleSelect={this.handleSelectSubject} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.occupation = field }} error={this.state.errors.occupation} number={9} question={translate('survey.occupation.question')} choices={occupations} type='SINGLE' selected={[this.state.occupation]} handleSelect={this.handleSelectOccupation} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.daysAvailable = field }} error={this.state.errors.daysAvailable} number={10} question={translate('survey.daysAvailable.question.tutor')} choices={days} type='MULTI' selected={this.state.daysAvailable} handleSelect={this.handleSelectDays} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.levels = field }} error={this.state.errors.levels} number={11} question={translate('survey.levels.question')} choices={levels} type='MULTI' selected={this.state.levels} handleSelect={this.handleSelectLevels} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.teachingExperience = field }} error={this.state.errors.teachingExperience} number={12} question={translate('survey.teachingExperience.question')} choices={teachingExperiences} type='SINGLE' selected={[this.state.teachingExperience]} handleSelect={this.handleSelectTeachingExperience} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.certifications = field }} number={13} question={translate('survey.certifications.question')} choices={certifications} type='MULTI' selected={this.state.certifications} handleSelect={this.handleSelectCertifications} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.regionId = field }} error={this.state.errors.regionId} number={14} question={translate('survey.region.question')} choices={regions} type='SINGLE' selected={[this.state.regionId]} handleSelect={this.handleSelectRegion} />
                                     </div>
-                                    <div className="col-12 mb-4">
+                                    <div className='col-12 mb-4'>
                                         <RadioSelectfield ref={(field) => { this.district = field }} error={this.state.errors.district} number={15} question={translate('survey.district.question')} choices={districtList} type='SINGLE' selected={[this.state.district]} handleSelect={this.handleSelectDistrict} />
                                     </div>
-                                    <div className="col-12">
-                                        <button onClick={this.handleSubmit} className="btn btn-primary">{translate('userActions.submitSurvey')}</button>
+                                    <div className='d-flex flex-row align-items-center col-12'>
+                                        <button onClick={this.handleSubmit} className='btn btn-primary'>{translate('userActions.submitSurvey')}</button>
+                                        <p className='px-4 py-0 my-0'>({translate('answers')})</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </Overdrive>
                 </div>
-            </div>
+            </Container>
         )
 
         return ( isLoading ? loaderView : surveyView )

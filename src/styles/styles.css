@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: 'gotham-rounded-regular';
-  font-weight: regular;
+  font-weight: normal;
   src: local("☺"), url("./fonts/GothamRoundedBook.ttf") format("truetype"); }
 
 @font-face {
@@ -4985,6 +4985,12 @@ body {
         font-size: .87rem;
         padding-left: 12px;
         padding-right: 12px; } }
+  body .btn-transparent {
+    color: white;
+    padding-left: 0;
+    font-size: 1.3rem;
+    background: transparent;
+    height: 70px; }
   body .card {
     border: none; }
   body .bordered {
@@ -5708,27 +5714,27 @@ nav.navbar {
 /*-------------------------------------------------
                 walkthrough section
 ---------------------------------------------------*/
-section.walkthrough {
+section.walkthrough-sec {
   background: whitesmoke; }
-  section.walkthrough h4 {
+  section.walkthrough-sec h4 {
     font-size: 1.3rem;
     color: #38424e;
     font-family: "gotham-rounded-medium", sans-serif; }
-  section.walkthrough a {
+  section.walkthrough-sec a {
     color: #4F87F5;
     font-family: "gotham-rounded-medium", sans-serif; }
-  section.walkthrough h3.intro-text {
+  section.walkthrough-sec h3.intro-text {
     font-size: 1.6rem; }
-  section.walkthrough p.sub-intro-text {
+  section.walkthrough-sec p.sub-intro-text {
     font-size: 1.15rem; }
-  section.walkthrough p.content {
+  section.walkthrough-sec p.content {
     font-size: 1rem; }
   @media (max-width: 767.98px) {
-    section.walkthrough h4 {
+    section.walkthrough-sec h4 {
       font-size: 1.2rem; }
-    section.walkthrough h3.intro-text {
+    section.walkthrough-sec h3.intro-text {
       font-size: 1.3rem; }
-    section.walkthrough p.sub-intro-text, section.walkthrough p.content {
+    section.walkthrough-sec p.sub-intro-text, section.walkthrough-sec p.content {
       font-size: 1rem; } }
 
 /*-------------------------------------------------
@@ -5782,32 +5788,32 @@ section.walkthrough {
   padding-top: 40px;
   padding-bottom: 70px; }
 
-.walkthrough span {
+.walkthrough-item span {
   position: relative;
   background-color: #4F87F5; }
 
 @media (max-width: 991.98px) {
-  .walkthrough .container {
+  .walkthrough-item .container {
     padding: .5rem 1.3rem; } }
 
-.walkthrough p.number {
+.walkthrough-item p.number {
   width: 25px;
   text-align: center;
   color: white;
   padding-top: 1px;
   font-family: "gotham-rounded-medium", sans-serif; }
   @media (max-width: 767.98px) {
-    .walkthrough p.number {
+    .walkthrough-item p.number {
       font-size: .8rem;
       width: 20px; } }
 
-.walkthrough .icon-ctn {
+.walkthrough-item .icon-ctn {
   background-color: white;
   height: 110px;
   width: 110px;
   border-radius: 50%; }
   @media (max-width: 991.98px) {
-    .walkthrough .icon-ctn {
+    .walkthrough-item .icon-ctn {
       height: 90px;
       width: 90px; } }
 
@@ -6229,3 +6235,152 @@ p.cn, a.cn, label.cn, button.cn, span.cn {
 
 p.cn-bd, a.cn-bd, label.cn-bd, button.cn-bd, span.cn-bd {
   font-family: "reiji-cloud", sans-serif !important; }
+
+.walkthrough {
+  background: #f3f7fe;
+  height: 190px;
+  overflow-y: visible;
+  overflow-x: hidden;
+  padding-top: 100px; }
+  .walkthrough h3 {
+    margin: 0; }
+  .walkthrough .walkthrough-steps {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    padding-left: 20px;
+    padding-right: 20px; }
+  .walkthrough .walkthrough-bar {
+    position: absolute;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 20px;
+    right: 20px;
+    bottom: 40px;
+    height: 4px;
+    margin: 0 20px;
+    border-radius: 2px;
+    background: #dbe2e9; }
+  .walkthrough .walkthrough-bar-inner {
+    left: 20px;
+    background: #4F87F5;
+    z-index: 5px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+  .walkthrough .walkthrough-step {
+    position: relative;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    border: 4px solid #dbe2e9;
+    background-color: #f3f7fe;
+    z-index: 10; }
+    .walkthrough .walkthrough-step:hover .speech-bubble {
+      opacity: 1 !important; }
+    .walkthrough .walkthrough-step.walkthrough-step__current {
+      -webkit-box-shadow: 0px 0px 4px -1px #424242;
+      -moz-box-shadow: 0px 0px 4px -1px #424242;
+      box-shadow: 0px 0px 4px -1px #424242;
+      border: 10px solid white;
+      background-color: #4F87F5; }
+      .walkthrough .walkthrough-step.walkthrough-step__current .speech-bubble {
+        opacity: 1 !important; }
+    .walkthrough .walkthrough-step.walkthrough-step__done {
+      -webkit-box-shadow: 0px 0px 4px -1px #4F87F5;
+      -moz-box-shadow: 0px 0px 4px -1px #4F87F5;
+      box-shadow: 0px 0px 4px -1px #4F87F5;
+      border: none;
+      background-color: #4F87F5; }
+    .walkthrough .walkthrough-step .checkmark {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      bottom: auto;
+      right: auto;
+      transform: translateX(-50%) translateY(-50%);
+      height: 10px;
+      width: auto; }
+  .walkthrough .speech-bubble {
+    color: #4F87F5;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 40px;
+    background: #ffffff;
+    border-radius: .4em;
+    padding: 14px;
+    transition: opacity 0.1s linear;
+    -webkit-box-shadow: 0px 0px 4px -1px #b9b9b9;
+    -moz-box-shadow: 0px 0px 4px -1px #b9b9b9;
+    box-shadow: 0px 0px 4px -1px #b9b9b9;
+    z-index: 10;
+    min-width: 180px; }
+    .walkthrough .speech-bubble .walkthrough-step__title {
+      margin: 0;
+      white-space: nowrap;
+      color: #4E5B6B;
+      font-size: 1.02rem;
+      font-family: "gotham-rounded-medium", sans-serif;
+      text-align: center; }
+    .walkthrough .speech-bubble .walkthrough-step__subtitle {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      color: #7e8ea1;
+      font-size: .9rem; }
+    @media (max-width: 767.98px) {
+      .walkthrough .speech-bubble.arrow-left {
+        left: 0 !important;
+        transform: translateX(-10px); }
+        .walkthrough .speech-bubble.arrow-left:after {
+          left: 17px !important; } }
+    @media (max-width: 767.98px) {
+      .walkthrough .speech-bubble.arrow-right {
+        right: 0 !important;
+        left: auto;
+        bottom: 30px;
+        transform: translateX(20px); }
+        .walkthrough .speech-bubble.arrow-right:after {
+          right: 17px !important;
+          left: auto; } }
+  .walkthrough .speech-bubble:after {
+    content: "";
+    position: absolute;
+    box-shadow: rgba(185, 185, 185, 0.2) 2px 2px 2px;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #FFF #FFF transparent; }
+
+.description {
+  position: absolute;
+  right: 0;
+  top: 0px;
+  z-index: 50; }
+  .description .description-settings__text a, .description .description-settings__text p {
+    font-family: "gotham-rounded-medium", sans-serif;
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: '0'; }
+  .description .description-settings__text a {
+    text-decoration: underline; }
+
+.desc-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 45;
+  background: black;
+  opacity: .6;
+  cursor: pointer; }

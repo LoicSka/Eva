@@ -77,7 +77,7 @@ class TutorDashboardPage extends Component {
                 <Tabs>
                     {dashboardNav(true)}
                     <div className='container my-4 dashboard-ctn'>
-                        <div className='d-flex dashboard-content-ctn '>
+                        <div className='d-flex dashboard-content-ctn'>
                             <div className='dashboard-side-nav'>
                                 <div className='card bordered mb-4'>
                                     <div className='card-body pb-0 pb-sm-4'>

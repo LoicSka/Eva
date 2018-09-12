@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Redirect, Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import Overdrive from 'react-overdrive'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import classnames from 'classnames'
-import { loadStudent, showBookingFormModal, showCalendarModal } from '../actions'
+import { loadStudent, showBookingFormModal, showCalendarModal, setActiveWalkthroughStep, showDescriptionModal } from '../actions'
 import { isEmpty, flattenDeep } from 'lodash'
 import * as qs from 'query-string'
 
@@ -13,9 +12,9 @@ import Loader from '../components/Loader'
 import ThumbnailAvatar from '../components/ThumbnailAvatar'
 import TutorAccountThumbnail from './TutorAccountThumbnail'
 import oopsEva from '../styles/images/evaoops.svg'
+import Container from './Container'
 
 class MatchPage extends Component {
-
     showBookingFormModal = (props) => {
         const { showBookingFormModal, location: { search } } = props
         const bookingData = qs.parse(search)
@@ -44,10 +43,14 @@ class MatchPage extends Component {
     }
 
     componentWillReceiveProps = (newProps) => {
-        const { location: { search } } = newProps
+        const { location: { search }, student, student: { matches = [] }, setActiveWalkthroughStep, isWalkthroughDone, showDescriptionModal } = newProps
         if (!isEmpty(search) && search !== this.props.location.search) {
             this.showBookingFormModal(newProps)
             this.showCalendarModal(newProps)
+        }
+        if (!isEmpty(student) && !isWalkthroughDone ) {
+            setActiveWalkthroughStep(3)
+            showDescriptionModal()
         }
     }
 
@@ -92,7 +95,7 @@ class MatchPage extends Component {
         })
 
         const noMatchesView = (
-            <div className='container'>
+            <Container className='container'>
                 <div className={`d-flex justify-content-center align-items-center flex-column py-4 ${currentLanguage}`}>
                     <ThumbnailAvatar width={80} />
                     <h4 style={{color: 'white', fontSize: '1.7rem'}} className='pt-4 text-center' >{student.fullName}</h4>
@@ -110,11 +113,11 @@ class MatchPage extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Container>
         )
 
         const matchView = isEmpty(student) ? loaderView : ( matches.length > 0 ? (
-                <div className='container'>
+                <Container  className='container'>
                     <div className={`d-flex justify-content-center align-items-center flex-column py-4 ${currentLanguage}`}>
                         <ThumbnailAvatar width={80} />
                         <h4 className='pt-4 match-student-text' >{student.fullName}</h4>
@@ -132,7 +135,7 @@ class MatchPage extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Container>
             ) : noMatchesView
         )
         
@@ -154,16 +157,17 @@ MatchPage.proptypes = {
 
 const mapStateToProps = (state, ownProps) => {
     const { match: { params: { studentId }} } = ownProps
-    const { account: { isAuthenticated, user }, entities: { students, tutorAccounts, studentMatches } } = state
+    const { account: { isAuthenticated, user }, entities: { students, tutorAccounts, studentMatches }, walkthrough: { isDone } } = state
     return {
         isAuthenticated,
         user,
         student: students[studentId] || {},
         tutorAccounts,
         studentMatches,
+        isWalkthroughDone: isDone,
         translate: getTranslate(state.locale),
         currentLanguage: getActiveLanguage(state.locale).code
     }
 }
 
-export default withRouter(connect(mapStateToProps, {loadStudent, showBookingFormModal, showCalendarModal})(MatchPage))
+export default withRouter(connect(mapStateToProps, {loadStudent, showBookingFormModal, showCalendarModal, setActiveWalkthroughStep, showDescriptionModal})(MatchPage))

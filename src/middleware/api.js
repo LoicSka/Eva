@@ -29,7 +29,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
         body,
         headers,
       }).then(response => response.json().then(json => {
-        // console.log('RESPONSE', json);
+        console.log('RESPONSE', json);
         if (!response.ok) {
           return Promise.reject({ message: 'server.general'})
         }
@@ -77,7 +77,7 @@ const callApi = (endpoint, schema, data = null, method = 'GET') => {
           const { result = null } = json
           const camelizedJson = camelizeKeys(result ? result : {})
           // const nextPage = getNextPage(response)
-          // console.log('RESPONSE', response)
+          console.log('RESPONSE', response)
           return Object.assign({},
             normalize(camelizedJson, schema),
             // { nextPage }

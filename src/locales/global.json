@@ -370,8 +370,8 @@
       "Tags make it easier for users to find your courses."
     ],
     "hourlyRate": [
-      "How much do you charge per hour?",
-      "How much do you charge per hour?"
+      "How much do you charge per hour? (we suggest 250¥/hour)",
+      "How much do you charge per hour? (we suggest 250¥/hour)"
     ]
   },
   "courses": {
@@ -903,8 +903,8 @@
     },
     "hourlyRate": {
       "question": [
-        "How much do you charge per hour",
-        "How much do you charge per hour"
+        "How much do you charge per hour? (we suggest 250¥/hour)",
+        "How much do yu charge per hour? (we suggest 250¥/hour)"
       ]
     },
     "phoneNumber": {
@@ -1368,7 +1368,27 @@
       "Sundays"
     ]
 
+  },
+  "goBack": [
+    "Go back",
+    "Go back"
+  ],
+  "answers": [
+    "All answers can be edited in the settings",
+    "All answers can be edited in the settings"
+  ],
+  "description": {
+    "options": [
+      "Click here to display options",
+      "Click here to display options"
+    ],
+    "settings": [
+      "Click here to access your profile settings",
+      "Click here to access your profile settings"
+    ],
+    "okGotit": [
+      "Ok, Got it",
+      "Ok, Got it"
+    ]
   }
-
-
 }
